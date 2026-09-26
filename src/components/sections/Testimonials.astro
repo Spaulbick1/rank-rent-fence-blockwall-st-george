@@ -1,0 +1,23 @@
+---
+// compliance.md rule 1: sample testimonials may be built, but must never
+// be imported on any page until real ones exist. Every entry below is
+// wrapped [SAMPLE -- REPLACE BEFORE LAUNCH]. Do not import this component
+// anywhere yet -- it stays quarantined until Phase 7's deployment checklist
+// clears it with real content.
+const samples = [
+  { quote: '[SAMPLE — REPLACE BEFORE LAUNCH] Matched with a fence company the same week after a windstorm took down two panels.', name: '[SAMPLE — REPLACE BEFORE LAUNCH]' },
+  { quote: '[SAMPLE — REPLACE BEFORE LAUNCH] The permit page told me my block wall needed a permit before I called anyone.', name: '[SAMPLE — REPLACE BEFORE LAUNCH]' },
+];
+---
+
+<section class="sgfw-testimonials section">
+  <h2 class="font-display text-fl-2xl font-bold text-ink">What Homeowners Say</h2>
+  <div class="mt-6 grid gap-6 sm:grid-cols-2">
+    {samples.map((t) => (
+      <blockquote class="card p-6">
+        <p class="text-fl-base text-ink">&ldquo;{t.quote}&rdquo;</p>
+        <footer class="mt-3 text-fl-sm text-muted">&mdash; {t.name}</footer>
+      </blockquote>
+    ))}
+  </div>
+</section>

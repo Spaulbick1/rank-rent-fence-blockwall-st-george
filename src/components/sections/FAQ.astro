@@ -1,0 +1,25 @@
+---
+// FAQ accordion, schema-ready -- the page assembling this component is
+// responsible for passing the same `items` into faqSchema() so the
+// rendered copy and the JSON-LD stay in sync.
+interface Props {
+  items: { question: string; answer: string }[];
+  heading?: string;
+}
+const { items, heading = 'Common Questions' } = Astro.props;
+---
+
+<section class="sgfw-faq section">
+  <h2 class="font-display text-fl-2xl font-bold text-ink">{heading}</h2>
+  <div class="mt-6 divide-y divide-tint-line rounded-blk border border-tint-line bg-white">
+    {items.map((item, i) => (
+      <details class="group p-5" open={i === 0}>
+        <summary class="flex cursor-pointer list-none items-center justify-between text-fl-lg font-semibold text-ink">
+          {item.question}
+          <span class="ml-4 flex-none text-river group-open:rotate-45 transition-transform" aria-hidden="true">+</span>
+        </summary>
+        <p class="mt-3 text-fl-base text-muted">{item.answer}</p>
+      </details>
+    ))}
+  </div>
+</section>

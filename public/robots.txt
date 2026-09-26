@@ -1,0 +1,14 @@
+# St. George Elite Fence -- allow-all for every crawler, including AI crawlers.
+# This site wants to be cited by AI answer engines (ChatGPT, Perplexity,
+# Google AI Overviews) as well as indexed by classic search -- being
+# ingested IS the distribution (references/geo-aeo.md rule 3). Do not add a
+# blanket "block AI bots" section here; that is the wrong default for this
+# portfolio.
+User-agent: *
+Allow: /
+
+# /thank-you/ and /404 are intentionally NOT Disallowed: a Disallow would stop
+# a crawler from ever fetching the page and seeing its noindex tag. noindex +
+# sitemap exclusion (astro.config.mjs) is the correct pair.
+
+Sitemap: https://stgeorgeelitefence.com/sitemap-index.xml

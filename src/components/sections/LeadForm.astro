@@ -1,0 +1,86 @@
+---
+// Phase 2: structure + consent copy only. Every field ships DISABLED and
+// the submit control reads "Form opens at launch" -- the deliberate,
+// accepted v1.32 tradeoff (site launches in Phase 7 with zero live
+// lead-capture surface). Phase 8 enables these fields and wires the real
+// submit handler (references/phase-8-forms-tracking.md); do not enable
+// anything here before then.
+//
+// The first branch mirrors the worksheet's Q1 (install / repair / block
+// wall / pool fence / HOA) so a lead's intent is captured the same way the
+// homepage routes it -- the brief's own form requirement ("install vs
+// repair vs block wall").
+import { site } from '../../lib/site-config';
+
+const serviceOptions = [
+  'New fence installation',
+  'Fence repair',
+  'Block wall or retaining wall',
+  'Pool fence or gate',
+  'HOA or new-construction requirement',
+  'Not sure — help me figure it out',
+];
+---
+
+<section id="lead-form" class="sgfw-lead-form section scroll-mt-24">
+  <div class="card mx-auto max-w-2xl p-6 sm:p-8">
+    <h2 class="font-display text-fl-2xl font-bold text-ink">Get Matched With a Local Fence or Wall Pro</h2>
+    <p class="mt-2 text-fl-base text-muted">
+      Tell us what you're building and your city — we'll connect you with an independent fence or
+      block-wall company that covers it.
+    </p>
+    <p class="sgfw-form-notice mt-2 inline-block rounded-blk border border-dashed border-tint-line px-3 py-1 text-fl-sm text-muted">
+      Form opens at launch — this preview shows the fields and consent language as built.
+    </p>
+
+    <form id="sgfw-lead-form-el" class="sgfw-form mt-6 grid gap-4" aria-describedby="sgfw-form-status">
+      <div class="grid gap-4 sm:grid-cols-2">
+        <label class="grid gap-1 text-fl-sm font-semibold text-ink">
+          Name
+          <input type="text" name="name" autocomplete="name" disabled class="rounded-blk border border-tint-line bg-tint px-3 py-2 text-fl-base text-muted" />
+        </label>
+        <label class="grid gap-1 text-fl-sm font-semibold text-ink">
+          Phone
+          <input type="tel" name="phone" autocomplete="tel" disabled class="rounded-blk border border-tint-line bg-tint px-3 py-2 text-fl-base text-muted" />
+        </label>
+      </div>
+
+      <label class="grid gap-1 text-fl-sm font-semibold text-ink">
+        City / ZIP
+        <input type="text" name="location" placeholder={site.serviceArea.cities.join(' / ')} disabled class="rounded-blk border border-tint-line bg-tint px-3 py-2 text-fl-base text-muted placeholder:text-muted/70" />
+      </label>
+
+      <label class="grid gap-1 text-fl-sm font-semibold text-ink">
+        What are you building or fixing?
+        <select name="service" disabled class="rounded-blk border border-tint-line bg-tint px-3 py-2 text-fl-base text-muted">
+          <option value="" selected>Select one</option>
+          {serviceOptions.map((opt) => <option value={opt}>{opt}</option>)}
+        </select>
+      </label>
+
+      <label class="grid gap-1 text-fl-sm font-semibold text-ink">
+        Anything else we should know? (slope, HOA, pool, timeline)
+        <textarea name="message" rows="3" disabled class="rounded-blk border border-tint-line bg-tint px-3 py-2 text-fl-base text-muted"></textarea>
+      </label>
+
+      <!-- A2P 10DLC consent language (compliance.md rule 9), built now so
+           Phase 8 only has to enable fields and wire the submit handler. -->
+      <label class="flex items-start gap-2 text-fl-sm text-muted">
+        <input type="checkbox" name="sms-consent" disabled class="mt-1" />
+        <span>
+          I agree to receive calls/texts from {site.brandName} and the independent provider I'm matched
+          with about my request. Msg &amp; data rates may apply. Msg frequency may vary. Reply STOP to
+          opt out, HELP for help. Consent is not required to submit this form.
+        </span>
+      </label>
+
+      <button type="button" disabled aria-disabled="true" class="btn-quote justify-self-start opacity-60 cursor-not-allowed">
+        Form Opens at Launch
+      </button>
+      <p id="sgfw-form-status" class="text-fl-sm text-muted">
+        We read every request and connect you with an independent local company — no cost, no
+        obligation. This form goes live shortly after launch.
+      </p>
+    </form>
+  </div>
+</section>

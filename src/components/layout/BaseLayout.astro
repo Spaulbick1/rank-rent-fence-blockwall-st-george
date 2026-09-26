@@ -1,0 +1,159 @@
+---
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import StickyCTA from '../sections/StickyCTA.astro';
+import { site } from '../../lib/site-config';
+import {
+  organizationSchema,
+  websiteSchema,
+  webPageSchema,
+  breadcrumbSchema,
+  schemaGraph,
+} from '../../lib/schema';
+import '../../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  quoteHref?: string;
+  /** Extra JSON-LD nodes for this page (e.g. serviceSchema(), faqSchema()) */
+  schemaNodes?: object[];
+  /** This page's own mainEntity (usually the homepage's Service @id) */
+  mainEntityId?: string;
+  /** thank-you / 404 / legal utility pages: noindex,follow (phase-3-4 reference) */
+  noindex?: boolean;
+  /** og:type -- 'article' for dated cost/diagnostic guides that carry Article schema */
+  ogType?: 'website' | 'article';
+  /** Path (not full URL) to the social preview image; defaults to the sitewide 1200x630 card */
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  path,
+  quoteHref = site.defaultQuoteHref,
+  schemaNodes = [],
+  mainEntityId,
+  noindex = false,
+  ogType = 'website',
+  ogImage = '/images/og-default.png',
+} = Astro.props;
+
+const canonical = new URL(path, site.url).toString();
+const ga4Id = import.meta.env.PUBLIC_GA4_ID;
+// Cloudflare Pages serves this same static 404.html for EVERY unmatched URL --
+// a self-referential canonical here would tell crawlers every missing URL's
+// "real" location is /404/. Skip it only here; every other noindex page
+// (thank-you) keeps a normal self-canonical.
+const skipCanonical = path === '/404/';
+const ogImageUrl = new URL(ogImage, site.url).toString();
+
+// Breadcrumbs. Home has nothing to be "under" so it's omitted; every other
+// page gets the same honest two-level trail computed once here rather than
+// per-page, so it can never drift from the visible nav below.
+const showBreadcrumb = path !== '/';
+const breadcrumbId = showBreadcrumb ? canonical + '#breadcrumb' : undefined;
+
+const graph = schemaGraph([
+  organizationSchema(),
+  websiteSchema(),
+  webPageSchema({ path, name: title, description, mainEntityId, breadcrumbId }),
+  ...(showBreadcrumb ? [breadcrumbSchema({ path, pageName: title })] : []),
+  ...schemaNodes,
+]);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | {site.brandName}</title>
+    <meta name="description" content={description} />
+    {!skipCanonical && <link rel="canonical" href={canonical} />}
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <meta name="theme-color" content="#0E5C7A" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:site_name" content={site.brandName} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={`${title} | ${site.brandName}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.brandName} — ${site.serviceArea.primary}`} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | ${site.brandName}`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+
+    <!-- GA4 -- silently no-ops without PUBLIC_GA4_ID. Do not remove this
+         guard: the site launches (Phase 7) before real analytics exist. -->
+    {ga4Id && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+        <script
+          define:vars={{
+            ga4Id,
+            phoneTrackingEnabled: !site.phoneIsPlaceholder,
+            aiReferrers: site.aiReferrers,
+          }}
+        >
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function gtag() { dataLayer.push(arguments); };
+          var gtag = window.gtag;
+          gtag('js', new Date());
+          gtag('config', ga4Id);
+
+          if (phoneTrackingEnabled) {
+            document.addEventListener('click', function (e) {
+              var el = e.target && e.target.closest ? e.target.closest('[data-analytics="phone_click"]') : null;
+              if (el) gtag('event', 'phone_click', { link_url: el.getAttribute('href') || '' });
+            });
+          }
+
+          try {
+            if (document.referrer) {
+              var refHost = new URL(document.referrer).hostname;
+              if (aiReferrers.indexOf(refHost) !== -1) {
+                gtag('event', 'ai_referral', { referrer_domain: refHost });
+              }
+            }
+          } catch (e) {}
+        </script>
+      </>
+    )}
+  </head>
+  <body>
+    <Header quoteHref={quoteHref} />
+    {
+      showBreadcrumb && (
+        <nav aria-label="Breadcrumb" class="border-b border-tint-line bg-tint">
+          <ol class="mx-auto flex max-w-content items-center gap-2 px-4 py-3 text-fl-sm text-muted sm:px-6">
+            <li>
+              <a href="/" class="hover:text-river hover:underline">
+                Home
+              </a>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" class="font-medium text-ink">
+              {title}
+            </li>
+          </ol>
+        </nav>
+      )
+    }
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <StickyCTA quoteHref={quoteHref} />
+  </body>
+</html>

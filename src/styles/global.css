@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-paper text-ink font-sans text-fl-base antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-variant-numeric: lining-nums;
+}
+
+/* Injected/markdown content (set:html) bypasses component classes on links
+   -- without this, a link inside body copy renders unstyled (phase-2-design.md). */
+main a:not([class]) {
+  @apply text-river underline underline-offset-2 hover:text-river-dark;
+}
+
+.section {
+  @apply mx-auto max-w-content px-4 py-12 sm:px-6 lg:py-16;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-blk px-5 py-3 text-fl-base font-semibold transition-colors;
+}
+
+/* Phone-first button hierarchy (v1.17): wherever a phone CTA and a
+   quote/form CTA appear as a pair, phone gets the filled/primary style and
+   quote gets the outlined/secondary style -- never the reverse. */
+.btn-phone {
+  @apply btn bg-river text-white shadow-block hover:bg-river-dark;
+}
+
+.btn-quote {
+  @apply btn border-2 border-river text-river hover:bg-river hover:text-white;
+}
+
+/* A standalone phone CTA (no paired quote button on the same surface)
+   still renders filled/primary. */
+.btn-phone-standalone {
+  @apply btn bg-river text-white shadow-block hover:bg-river-dark;
+}
+
+/* "Cap-stone" card: square corners, a 4px brass top rule like the cap course
+   on a block wall. This is the site's signature surface. */
+.card {
+  @apply rounded-blk border border-tint-line border-t-4 border-t-brass bg-white shadow-card;
+}
+
+.eyebrow {
+  @apply text-fl-sm font-semibold uppercase tracking-wide text-brass;
+}
+
+/* Long-form guide body (Phase 3). No typography plugin -- just the handful
+   of element styles the money pages need. Links inherit main a:not([class]). */
+.sgfw-prose > h2 {
+  @apply mt-10 font-display text-fl-2xl font-bold text-ink;
+}
+.sgfw-prose > h3 {
+  @apply mt-7 font-display text-fl-xl font-bold text-ink;
+}
+.sgfw-prose > p,
+.sgfw-prose > ul,
+.sgfw-prose > ol {
+  @apply mt-4 max-w-prose text-fl-base leading-relaxed text-ink;
+}
+.sgfw-prose > h2,
+.sgfw-prose > h3,
+.sgfw-prose .sgfw-callout {
+  @apply max-w-prose;
+}
+.sgfw-prose > ul {
+  @apply list-disc pl-6;
+}
+.sgfw-prose > ol {
+  @apply list-decimal pl-6;
+}
+.sgfw-prose li + li {
+  @apply mt-2;
+}
+.sgfw-prose .sgfw-callout {
+  @apply mt-6 rounded-blk border border-tint-line border-l-4 border-l-brass bg-tint p-5 text-fl-base;
+}
+/* Permit/hazard callout -- the only place `alert` appears outside form errors. */
+.sgfw-prose .sgfw-permit {
+  @apply mt-6 max-w-prose rounded-blk border border-tint-line border-l-4 border-l-alert bg-white p-5 text-fl-base;
+}
+.sgfw-prose .sgfw-note {
+  @apply mt-4 text-fl-sm text-muted;
+}
+.sgfw-prose .sgfw-cta {
+  @apply mt-8 flex flex-col gap-3 sm:flex-row;
+}

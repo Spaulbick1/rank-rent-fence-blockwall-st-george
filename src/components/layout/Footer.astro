@@ -1,0 +1,62 @@
+---
+// Third-party disclosure (compliance.md rule 3) rendered once, plainly, in
+// natural language -- never repeated elsewhere on the page, never in the
+// hero/trust bar/next to a CTA. Pulled from site-config.ts's single source
+// of truth. Links point at the planned Phase 3/4 routes (KEYWORD_RESEARCH.md
+// section 5) and resolve as those phases ship.
+import { site } from '../../lib/site-config';
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t-4 border-t-brass bg-river-dark text-paper">
+  <div class="section grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <div>
+      <p class="font-display text-fl-lg font-bold">{site.brandName}</p>
+      <p class="mt-2 text-fl-sm text-tint">{site.serviceArea.cities.join(', ')} &middot; {site.serviceArea.county}</p>
+      {site.phone.href ? (
+        <a href={site.phone.href} class="btn-phone-standalone mt-4">Call {site.phone.display}</a>
+      ) : (
+        <p class="mt-4 text-fl-sm text-tint">Phone line goes live at launch.</p>
+      )}
+    </div>
+
+    <div>
+      <h3 class="text-fl-sm font-semibold uppercase tracking-wide">Fences &amp; Walls</h3>
+      <ul class="mt-3 space-y-2 text-fl-sm">
+        <li><a href="/fence-installation-st-george-ut/" class="hover:underline">Fence Installation</a></li>
+        <li><a href="/fence-repair-st-george-ut/" class="hover:underline">Fence Repair</a></li>
+        <li><a href="/block-wall-installation-st-george-ut/" class="hover:underline">Block &amp; CMU Walls</a></li>
+        <li><a href="/retaining-wall-cost-st-george-ut/" class="hover:underline">Retaining Walls</a></li>
+        <li><a href="/pool-fence-and-gate-st-george-ut/" class="hover:underline">Pool Fences &amp; Gates</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-fl-sm font-semibold uppercase tracking-wide">Cost, Permits &amp; Guides</h3>
+      <ul class="mt-3 space-y-2 text-fl-sm">
+        <li><a href="/fence-and-block-wall-cost-st-george-ut/" class="hover:underline">Fence &amp; Block Wall Cost</a></li>
+        <li><a href="/fence-permit-st-george-ut/" class="hover:underline">Fence &amp; Wall Permits</a></li>
+        <li><a href="/hoa-fence-requirements-st-george-ut/" class="hover:underline">HOA Fence Requirements</a></li>
+        <li><a href="/best-fence-and-wall-companies-st-george-ut/" class="hover:underline">Best Fence &amp; Wall Companies</a></li>
+        <li><a href="/licensed-fence-contractor-compare-st-george-ut/" class="hover:underline">Check a Contractor's License</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-fl-sm font-semibold uppercase tracking-wide">Company</h3>
+      <ul class="mt-3 space-y-2 text-fl-sm">
+        <li><a href="/about/" class="hover:underline">About</a></li>
+        <li><a href="/how-fence-and-wall-matching-works/" class="hover:underline">How Matching Works</a></li>
+        <li><a href="/washington-county-fence-service-areas/" class="hover:underline">Service Area</a></li>
+        <li><a href="/contact/" class="hover:underline">Contact</a></li>
+        <li><a href="/terms-of-service/" class="hover:underline">Terms</a></li>
+        <li><a href="/privacy-policy/" class="hover:underline">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section border-t border-white/10 pt-6 text-fl-sm text-tint">
+    <p>{site.disclosure}</p>
+    <p class="mt-3">&copy; {year} {site.brandName}. All rights reserved. Operated by {site.legalEntity}.</p>
+  </div>
+</footer>

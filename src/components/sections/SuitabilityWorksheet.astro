@@ -1,0 +1,197 @@
+---
+// PRIMARY VISUAL UNIT -- archetype: Suitability Worksheet (registry:
+// "two-question, zero-JS numbered field-survey checklist that synthesizes
+// both answers into one 'Your Likely Path' recommendation box,
+// :has()-driven, not a branching router").
+//
+// Why this unit for this site: the brief's own form requirement -- "install
+// vs repair vs block wall" -- is a routing problem, and this niche has two
+// independent axes that both change the answer: WHAT is driving the project
+// (Q1: five paths, each landing on a different money page) and WHAT the lot
+// is like (Q2: slope / pool / new-construction change the permit, barrier,
+// and HOA questions regardless of Q1). A two-answer synthesis is a different
+// mechanism from a live cost calculator (Estimator: redding-fence-blockwall)
+// or a branching router (Decision Tree: kingman-fence).
+//
+// Mechanics: zero JS. Two radio groups; CSS `:has()` on the form shows the
+// matching path panel (from Q1) and the matching lot note (from Q2)
+// together inside one "Your Likely Path" box. Progressive enhancement: in a
+// browser without `:has()` support the @supports block never applies, so
+// every panel stays visible as a plain readable list -- nothing is hidden
+// that a non-supporting browser can't reveal.
+//
+// Copy discipline (compliance.md rules 4/6, UT-001): no claims about what
+// referred companies do or hold; the only hard facts are the St. George City
+// Code citations (sourced 2026-09-22, KEYWORD_RESEARCH.md section 4 --
+// pending push to claude_FACTS_ST_GEORGE as SG- entries). NO pool-barrier
+// height is stated anywhere -- that figure is an unverified known gap.
+import { icons } from '../../lib/icons';
+
+const q1 = [
+  { value: 'new', label: 'A new fence', icon: 'fence' },
+  { value: 'repair', label: 'Fence repair', icon: 'wrench' },
+  { value: 'wall', label: 'A block or retaining wall', icon: 'blocks' },
+  { value: 'pool', label: 'A pool fence or gate', icon: 'poolfence' },
+  { value: 'hoa', label: 'An HOA or new-build requirement', icon: 'house' },
+];
+
+const q2 = [
+  { value: 'flat', label: 'Flat, standard lot', icon: 'flat' },
+  { value: 'slope', label: 'Sloped or uneven lot', icon: 'slope' },
+  { value: 'pool', label: 'Pool on the property', icon: 'waves' },
+  { value: 'newlot', label: 'New-construction lot', icon: 'frame' },
+];
+
+const paths: Record<string, { title: string; body: string; href: string; cta: string }> = {
+  new: {
+    title: 'New fence installation',
+    body: 'Most new fences start with a material choice (vinyl, wood, chain-link, or ornamental iron) and a check of the city’s height limits. Under St. George City Code §10-18-1, front-yard fences top out at 4 feet and side or rear-yard fences at 6 feet 4 inches in most zones.',
+    href: '/fence-installation-st-george-ut/',
+    cta: 'Read the fence installation guide',
+  },
+  repair: {
+    title: 'Fence repair',
+    body: 'Leaning posts, sagging gates, and sun- or wind-damaged panels are the usual reasons homeowners call. The first decision is repair versus replace — the repair guide walks through how to tell before you collect quotes.',
+    href: '/fence-repair-st-george-ut/',
+    cta: 'Read the fence repair guide',
+  },
+  wall: {
+    title: 'Block or retaining wall',
+    body: 'St. George City Code §10-18-5 requires a permit for any fence or wall in a front setback regardless of height, and for CMU, segmental-block, or reinforced-concrete retaining walls 4 feet or taller wherever they sit. Sort out the permit first.',
+    href: '/block-wall-installation-st-george-ut/',
+    cta: 'Read the block wall guide',
+  },
+  pool: {
+    title: 'Pool fence or gate',
+    body: 'Pool barriers follow their own rules, separate from an ordinary yard fence. Exact height and gate-latch requirements depend on the residential code in force — confirm them with the St. George Building Division before you buy materials.',
+    href: '/pool-fence-and-gate-st-george-ut/',
+    cta: 'Read the pool fence guide',
+  },
+  hoa: {
+    title: 'HOA or new-construction requirement',
+    body: 'HOAs often set their own height, material, and color rules on top of the city’s. Those rules vary by community — check your CC&Rs and get the architectural committee’s approval in writing before anything is built.',
+    href: '/hoa-fence-requirements-st-george-ut/',
+    cta: 'Read the HOA fence guide',
+  },
+};
+
+const lots: Record<string, string> = {
+  flat: 'On a flat, standard lot, material and height usually matter more to the job than the terrain does.',
+  slope: 'A sloped or uneven lot changes how panels step, whether a wall has to hold back soil, and whether a permit applies — mention the grade when you talk to any company.',
+  pool: 'With a pool on the property, raise it up front: a pool barrier has its own requirements on top of any ordinary fence.',
+  newlot: 'On a new-construction lot, builder and HOA rules often come first — check your closing documents and CC&Rs before you order anything.',
+};
+---
+
+<section id="worksheet" class="sgfw-worksheet border-b border-tint-line bg-paper scroll-mt-24">
+  <div class="section">
+    <p class="eyebrow">Two-question field survey</p>
+    <h2 class="mt-2 font-display text-fl-2xl font-bold text-ink">Which path fits your project?</h2>
+    <p class="mt-2 max-w-prose text-fl-base text-muted">
+      Answer both and the box below tells you where to start. No sign-up, nothing to submit.
+    </p>
+
+    <form class="sgfw-ws mt-8" aria-label="Project suitability worksheet" onsubmit="return false">
+      <fieldset class="sgfw-q">
+        <legend class="flex items-baseline gap-3 font-display text-fl-xl font-bold text-ink">
+          <span class="text-brass" aria-hidden="true">01</span> What&rsquo;s driving the project?
+        </legend>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {q1.map((o) => (
+            <div>
+              <input class="peer sr-only" type="radio" name="q1" id={`q1-${o.value}`} value={o.value} />
+              <label
+                for={`q1-${o.value}`}
+                class="flex h-full cursor-pointer items-center gap-3 rounded-blk border border-tint-line border-b-4 bg-white p-3 text-fl-base font-semibold text-ink transition-colors hover:border-river peer-checked:border-river peer-checked:border-b-river peer-checked:bg-river-50 peer-focus-visible:ring-2 peer-focus-visible:ring-river peer-focus-visible:ring-offset-2"
+              >
+                <span class="flex h-9 w-9 flex-none items-center justify-center rounded-blk bg-brass-50" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5 text-brass" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d={icons[o.icon]} /></svg>
+                </span>
+                {o.label}
+              </label>
+            </div>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset class="sgfw-q mt-8">
+        <legend class="flex items-baseline gap-3 font-display text-fl-xl font-bold text-ink">
+          <span class="text-brass" aria-hidden="true">02</span> What&rsquo;s the lot like?
+        </legend>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {q2.map((o) => (
+            <div>
+              <input class="peer sr-only" type="radio" name="q2" id={`q2-${o.value}`} value={o.value} />
+              <label
+                for={`q2-${o.value}`}
+                class="flex h-full cursor-pointer items-center gap-3 rounded-blk border border-tint-line border-b-4 bg-white p-3 text-fl-base font-semibold text-ink transition-colors hover:border-river peer-checked:border-river peer-checked:border-b-river peer-checked:bg-river-50 peer-focus-visible:ring-2 peer-focus-visible:ring-river peer-focus-visible:ring-offset-2"
+              >
+                <span class="flex h-9 w-9 flex-none items-center justify-center rounded-blk bg-brass-50" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5 text-brass" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d={icons[o.icon]} /></svg>
+                </span>
+                {o.label}
+              </label>
+            </div>
+          ))}
+        </div>
+      </fieldset>
+
+      <div class="sgfw-result card mt-10 p-6 sm:p-8" aria-live="polite">
+        <p class="eyebrow">Your likely path</p>
+
+        <p class="sgfw-hint sgfw-hint-none mt-3 text-fl-base text-muted">
+          Pick an answer to each question above to see where to start.
+        </p>
+        <p class="sgfw-hint sgfw-hint-need-q2 mt-3 text-fl-sm text-muted">
+          Answer question 02 to see what your lot changes.
+        </p>
+        <p class="sgfw-hint sgfw-hint-need-q1 mt-3 text-fl-sm text-muted">
+          Answer question 01 to see your starting page.
+        </p>
+
+        {Object.entries(paths).map(([key, p]) => (
+          <div class="sgfw-path mt-3" data-path={key}>
+            <h3 class="font-display text-fl-xl font-bold text-ink">{p.title}</h3>
+            <p class="mt-2 max-w-prose text-fl-base text-ink">{p.body}</p>
+            <a href={p.href} class="btn-phone-standalone mt-4">{p.cta}</a>
+          </div>
+        ))}
+
+        {Object.entries(lots).map(([key, text]) => (
+          <p class="sgfw-lot mt-4 max-w-prose border-l-4 border-l-brass pl-4 text-fl-base text-muted" data-lot={key}>
+            <span class="font-semibold text-ink">What your lot changes: </span>{text}
+          </p>
+        ))}
+      </div>
+    </form>
+  </div>
+</section>
+
+<style is:global>
+  /* Without :has() support, every path panel and lot note simply stays
+     visible as a readable list, and the three prompts stay hidden. */
+  .sgfw-ws .sgfw-hint { display: none; }
+
+  @supports selector(:has(*)) {
+    .sgfw-ws .sgfw-path,
+    .sgfw-ws .sgfw-lot { display: none; }
+
+    /* Q1 -> which path panel */
+    .sgfw-ws:has(#q1-new:checked) .sgfw-path[data-path='new'],
+    .sgfw-ws:has(#q1-repair:checked) .sgfw-path[data-path='repair'],
+    .sgfw-ws:has(#q1-wall:checked) .sgfw-path[data-path='wall'],
+    .sgfw-ws:has(#q1-pool:checked) .sgfw-path[data-path='pool'],
+    .sgfw-ws:has(#q1-hoa:checked) .sgfw-path[data-path='hoa'] { display: block; }
+
+    /* Q2 -> which lot note */
+    .sgfw-ws:has(#q2-flat:checked) .sgfw-lot[data-lot='flat'],
+    .sgfw-ws:has(#q2-slope:checked) .sgfw-lot[data-lot='slope'],
+    .sgfw-ws:has(#q2-pool:checked) .sgfw-lot[data-lot='pool'],
+    .sgfw-ws:has(#q2-newlot:checked) .sgfw-lot[data-lot='newlot'] { display: block; }
+
+    /* Prompts for the unanswered question(s) */
+    .sgfw-ws:not(:has(input[name='q1']:checked)):not(:has(input[name='q2']:checked)) .sgfw-hint-none { display: block; }
+    .sgfw-ws:has(input[name='q1']:checked):not(:has(input[name='q2']:checked)) .sgfw-hint-need-q2 { display: block; }
+    .sgfw-ws:has(input[name='q2']:checked):not(:has(input[name='q1']:checked)) .sgfw-hint-need-q1 { display: block; }
+  }
+</style>

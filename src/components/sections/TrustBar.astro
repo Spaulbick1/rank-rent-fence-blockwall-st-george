@@ -1,0 +1,36 @@
+---
+// No unverified claims about renters (compliance.md rule 4) -- honest,
+// verifiable statements about the SITE's own content/process, not invented
+// review counts or "licensed & insured" claims about providers. "Guide"/
+// "independent publisher" framing stays out of this bar (v1.19) -- the
+// third item states the referral model plainly, once, in the same low-key
+// register as the hero lede.
+//
+// Icon accents (Operating Rule 16, v1.41): custom line-art SVG per item
+// from src/lib/icons.ts, tinted to this site's `brass` accent.
+import { icons } from '../../lib/icons';
+
+const items = [
+  { label: 'Sourced St. George cost ranges', detail: 'Dated, with the method shown', icon: 'tag' },
+  { label: 'City permit rules, cited', detail: 'Straight from St. George City Code', icon: 'scroll' },
+  { label: 'Independent referral service', detail: 'Not a fence company ourselves', icon: 'link' },
+];
+---
+
+<section class="sgfw-trustbar border-b border-tint-line bg-white">
+  <div class="section grid gap-6 sm:grid-cols-3">
+    {items.map((item) => (
+      <div class="flex items-start gap-3">
+        <span class="mt-0.5 flex h-9 w-9 flex-none items-center justify-center rounded-blk bg-brass-50" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 text-brass" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d={icons[item.icon]} />
+          </svg>
+        </span>
+        <div>
+          <p class="text-fl-base font-semibold text-ink">{item.label}</p>
+          <p class="text-fl-sm text-muted">{item.detail}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,50 @@
+---
+// Phase 2 smoke-test homepage: assembles the always-build shells + the
+// archetype-specific SuitabilityWorksheet to prove the design system
+// compiles and reads correctly together. FAQ copy is genuine Phase-2-era
+// content (not [SAMPLE] tagged -- none of it is a fabricated review, stat, or
+// testimonial per compliance.md rule 1). Phase 3 replaces this file with the
+// full homepage per CONTENT_PLAN.md Part A (services icon row, cost snapshot,
+// local-angle callout, service-area section).
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import SuitabilityWorksheet from '../components/sections/SuitabilityWorksheet.astro';
+import TrustBar from '../components/sections/TrustBar.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import LeadForm from '../components/sections/LeadForm.astro';
+import { umbrellaServiceSchema, faqSchema, abs, UMBRELLA_SERVICE_ID } from '../lib/schema';
+import { site } from '../lib/site-config';
+
+const faqItems = [
+  {
+    question: 'Is St. George Elite Fence a fence company?',
+    answer: `No. ${site.brandName} is a referral service — we connect you with independent, local fence and block-wall companies. We do not build fences or walls ourselves, and we are not a contractor.`,
+  },
+  {
+    question: 'Do I need a permit for a fence or block wall in St. George?',
+    answer: 'Often, yes for walls. St. George City Code §10-18-5 requires a permit for any fence or retaining wall built in a front setback regardless of height, and for CMU, segmental-block, or reinforced-concrete retaining walls 4 feet or taller wherever they are. Confirm your specific project with the city before you build.',
+  },
+  {
+    question: 'How tall can a fence be in St. George?',
+    answer: 'Under St. George City Code §10-18-1, front-yard fences are limited to 4 feet and side or rear-yard fences to 6 feet 4 inches in most zones, with some zones allowing taller open-style front fences. Your HOA may set stricter limits.',
+  },
+  {
+    question: 'How do I check that a fence or wall company is licensed in Utah?',
+    answer: 'Use the Utah Division of Professional Licensing’s public license lookup and search the company by name, then confirm insurance directly with the company. Verify license status yourself rather than relying on any website’s claim, including ours.',
+  },
+];
+---
+
+<BaseLayout
+  title="Fence & Block Wall in St. George, UT"
+  description="Get matched with an independent St. George fence or block-wall company. City permit rules, height limits, and HOA and pool-fence questions answered first."
+  path="/"
+  schemaNodes={[umbrellaServiceSchema(), faqSchema(faqItems)]}
+  mainEntityId={abs(UMBRELLA_SERVICE_ID)}
+>
+  <Hero />
+  <SuitabilityWorksheet />
+  <TrustBar />
+  <FAQ items={faqItems} />
+  <LeadForm />
+</BaseLayout>

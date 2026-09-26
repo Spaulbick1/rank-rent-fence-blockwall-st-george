@@ -1,0 +1,77 @@
+---
+// Sticky header standard (v1.33): position:sticky, visible border once
+// scrolled, mobile height capped ~64-72px (h-16 = 64px). Phone-primary /
+// quote-secondary button hierarchy (v1.17) in both the desktop bar and the
+// mobile island. Nav links point at the planned Phase 3 money-page routes
+// (KEYWORD_RESEARCH.md section 5); they resolve once Phase 3 ships.
+import { site } from '../../lib/site-config';
+
+interface Props {
+  quoteHref?: string;
+}
+const { quoteHref = site.defaultQuoteHref } = Astro.props;
+
+const nav = [
+  { href: '/fence-installation-st-george-ut/', label: 'Fences' },
+  { href: '/block-wall-installation-st-george-ut/', label: 'Block Walls' },
+  { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Cost Guide' },
+  { href: '/fence-permit-st-george-ut/', label: 'Permits & HOA' },
+  { href: '/contact/', label: 'Contact' },
+];
+---
+
+<header class="sgfw-header sticky top-0 z-50 border-b border-tint-line bg-paper/95 backdrop-blur">
+  <div class="mx-auto flex h-16 max-w-content items-center justify-between px-4 sm:px-6">
+    <a href="/" class="flex items-center gap-2 font-display text-fl-lg font-bold text-ink" aria-label={`${site.brandName} — home`}>
+      <!-- Header mark = the favicon: three pickets over two brass rails on a river-blue block. -->
+      <svg class="sgfw-mark h-8 w-8 flex-none" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="3" fill="#0E5C7A" />
+        <path d="M6 26V12l3-3 3 3v14M14.5 26V12l3-3 3 3v14M23 26V12l3-3v14" fill="none" stroke="#F5EDD8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+        <path d="M4 17h24M4 22h24" stroke="#C9A24A" stroke-width="2" />
+      </svg>
+      {site.brandName}
+    </a>
+
+    <nav class="hidden items-center gap-6 md:flex" aria-label="Primary">
+      {nav.map((l) => <a href={l.href} class="text-fl-base text-ink hover:text-river">{l.label}</a>)}
+    </nav>
+
+    <div class="flex items-center gap-2">
+      {site.phone.href ? (
+        <a href={site.phone.href} class="btn-phone hidden sm:inline-flex" data-analytics="phone_click">
+          Call {site.phone.display}
+        </a>
+      ) : (
+        <span class="hidden text-fl-sm text-muted sm:inline">Phone line live at launch</span>
+      )}
+      <a href={quoteHref} class="btn-quote">Get Matched</a>
+
+      <button
+        class="sgfw-hamburger inline-flex h-10 w-10 items-center justify-center rounded-blk border border-tint-line md:hidden"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="sgfw-mobile-nav"
+      >
+        <span class="sr-only">Menu</span>
+        &#9776;
+      </button>
+    </div>
+  </div>
+
+  <nav id="sgfw-mobile-nav" class="sgfw-mobile-nav hidden border-t border-tint-line bg-paper md:hidden" aria-label="Primary mobile">
+    <div class="section flex flex-col gap-3 py-4">
+      {nav.map((l) => <a href={l.href} class="text-fl-base">{l.label}</a>)}
+      {site.phone.href && <a href={site.phone.href} class="btn-phone">Call {site.phone.display}</a>}
+      <a href={quoteHref} class="btn-quote">Get Matched</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.querySelector('.sgfw-hamburger');
+  const nav = document.getElementById('sgfw-mobile-nav');
+  btn?.addEventListener('click', () => {
+    const open = nav?.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+</script>

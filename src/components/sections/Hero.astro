@@ -1,0 +1,64 @@
+---
+// v1.30 default: new builds ship a hero. Shape follows the st-george-hvac
+// reference: kicker -> headline -> byline/lede -> dual CTA -> service-area
+// line. The unit directly below it (SuitabilityWorksheet) carries the
+// structural differentiation, not this component.
+//
+// Photo: block-wall-split-face.webp, reused from the portfolio's shared
+// Site Photo Library (rank-rent-fence-blockwall-east-valley / Yuma fence
+// folders -- byte-identical file) per Scott's standing rule to check the
+// library before licensing from Adobe Stock. A close-up of split-face CMU
+// is deliberate: it shows the material, not a "finished job" we'd have to
+// claim as ours (compliance.md rule 6), and it reads for both halves of the
+// niche. FLAG: the same texture is also live on the Yuma and East Valley
+// fence sites -- replace with a licensed, St. George-region Adobe Stock
+// image in Phase 3/4's imagery pass. Alt text describes the scene only.
+import { site } from '../../lib/site-config';
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/images/block-wall-split-face.webp';
+
+interface Props {
+  quoteHref?: string;
+}
+const { quoteHref = site.defaultQuoteHref } = Astro.props;
+---
+
+<section class="sgfw-hero border-b border-tint-line bg-tint">
+  <div class="section grid items-center gap-8 lg:grid-cols-[3fr_2fr]">
+    <div>
+      <p class="eyebrow">Fence &amp; Block Wall &mdash; St. George &amp; Washington County</p>
+      <h1 class="mt-3 font-display text-fl-3xl font-bold tracking-tight text-ink">
+        Building a Fence or Block Wall in St. George? Start With the Permit, the HOA, and the Right Local Pro
+      </h1>
+      <p class="mt-4 max-w-prose text-fl-lg text-muted">
+        Cost ranges, city permit rules, and pool-fence and HOA questions answered first &mdash; then
+        we connect you with an independent local fence or block-wall company that handles your job.
+        No cost, no obligation.
+      </p>
+
+      <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+        {site.phone.href ? (
+          <a href={site.phone.href} class="btn-phone" data-analytics="phone_click">Call {site.phone.display}</a>
+        ) : (
+          <span class="btn border border-dashed border-tint-line text-muted">Phone line live at launch</span>
+        )}
+        <a href={quoteHref} class="btn-quote">Get Matched With a Pro</a>
+      </div>
+
+      <p class="mt-4 text-fl-sm text-muted">Serving {site.serviceArea.cities.join(', ')} &middot; {site.serviceArea.county}</p>
+    </div>
+
+    <!-- brass "cap course" rule + hard block shadow frame the photo like a wall cap -->
+    <div class="border-t-8 border-t-brass shadow-block">
+      <Image
+        src={heroImg}
+        alt="Close-up of a split-face concrete block (CMU) wall surface"
+        widths={[480, 800, 1200]}
+        sizes="(min-width: 1024px) 40vw, 100vw"
+        class="aspect-[4/3] w-full object-cover"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+  </div>
+</section>
