@@ -7,11 +7,9 @@ import sitemap from '@astrojs/sitemap';
 // (withastro/astro#15894). Do not widen that pin without checking upstream
 // first (references/phase-2-design.md, 2026-07-25).
 //
-// site URL: stgeorgeelitefence.com -- PURCHASE PENDING as of 2026-09-23
-// (Cloudflare checkout errored on payment; domain confirmed available at
-// $10.46/yr via Cloudflare Registrar). If a different domain is ever chosen,
-// update this value plus site.domain/site.url in src/lib/site-config.ts and
-// the Sitemap line in public/robots.txt -- nothing else hardcodes it.
+// site URL: stgeorgeelitefence.com -- PURCHASED (registrar: Namecheap, per Scott 2026-09-26).
+// If a different domain is ever chosen, update this value plus site.domain/site.url in
+// src/lib/site-config.ts and the Sitemap line in public/robots.txt -- nothing else hardcodes it.
 export default defineConfig({
   site: 'https://stgeorgeelitefence.com',
   output: 'static',

@@ -3,7 +3,7 @@
 Skill: rank-rent-build v1.41. Built 2026-09-26 in `$HOME/fb` (device Linux FS), synced to this repo.
 
 ## Domain status
-`stgeorgeelitefence.com` is NOT purchased (Cloudflare checkout failed 2026-09-23; no DNS record found 2026-09-26).
+`stgeorgeelitefence.com` was purchased at Namecheap (Scott, 2026-09-26; earlier Cloudflare checkout had failed). DNS/Cloudflare Pages setup is a Phase 7 step.
 Canonicals, sitemap, robots and schema `@id`s all derive from `site.url` in `src/lib/site-config.ts` and `site` in `astro.config.mjs` (plus the Sitemap line in `public/robots.txt`). If the domain changes, edit those three places only.
 
 ## Pages built (10)

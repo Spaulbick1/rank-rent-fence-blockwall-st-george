@@ -13,7 +13,7 @@ export const site = {
   // strength precisely because the name reads like a real contractor
   // (Rule 15's own condition).
   brandName: 'St. George Elite Fence',
-  domain: 'stgeorgeelitefence.com', // PURCHASE PENDING 2026-09-23
+  domain: 'stgeorgeelitefence.com', // purchased at Namecheap (Scott, 2026-09-26)
   url: 'https://stgeorgeelitefence.com',
 
   // Legal entity behind the site (mailing address only -- never a fabricated
