@@ -1,0 +1,186 @@
+---
+// Money page: Block Wall Installation hub (CMU / masonry / retaining).
+// Differentiator fact: City Code 10-18-5 permit-at-4-ft rule + how height
+// is measured + what the application needs (all re-verified 2026-09-26).
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import CostTable from '../components/sections/CostTable.astro';
+import img from '../assets/images/segmental-block-retaining-wall.webp';
+import { COST_AS_OF, blockWall, retainingWall } from '../lib/costs';
+
+const faq = [
+  {
+    question: 'How much does a block wall cost in St. George, UT?',
+    answer: `As of ${COST_AS_OF}, a concrete block (CMU) wall typically costs about ${blockWall.perSqFt} per square foot installed, which works out to roughly ${blockWall.perLinear6ft} per linear foot for a 6-foot wall. Retaining walls, tall walls, and difficult access cost more.`,
+  },
+  {
+    question: 'Do I need a permit for a block wall in St. George?',
+    answer: 'For retaining walls, yes at 4 feet or taller: St. George City Code §10-18-5 says rockery, segmental block, reinforced concrete, or CMU retaining walls of 4 feet or greater need a city permit unless shown in detail on an approved site development plan. Any fence or retaining wall in a front setback also needs a permit regardless of height.',
+  },
+  {
+    question: 'How is retaining wall height measured?',
+    answer: 'Under City Code §10-18-5, concrete and CMU retaining wall height is measured from the top of the footing to the top of the wall, while rockery and segmental block walls are measured from the exposed face to finished grade next to the base of the wall.',
+  },
+  {
+    question: 'What is the difference between a block wall and a retaining wall?',
+    answer: 'A freestanding block wall marks a boundary or gives privacy and holds back nothing. A retaining wall holds soil, so it carries constant sideways pressure and needs proper drainage and footing design. That is why the city treats retaining walls of 4 feet or more differently.',
+  },
+  {
+    question: 'How tall can a block wall be around my yard?',
+    answer: 'A block wall used as a fence follows the same St. George City Code §10-18-1 limits as other fences: generally 4 feet in the front yard and 6 feet 4 inches in side and rear yards. HOA rules may be stricter.',
+  },
+];
+---
+
+<GuideLayout
+  title="Block Walls in St. George, UT"
+  description="Block and CMU wall installation in St. George, UT: the 4-foot retaining wall permit rule, cost per square foot, drainage on slopes, and how to vet masons."
+  path="/block-wall-installation-st-george-ut/"
+  eyebrow="Block, CMU & retaining walls · St. George & Washington County"
+  h1="Block Wall Installation in St. George, UT: Permits, Costs, and Sloped-Lot Basics"
+  answer={`As of ${COST_AS_OF}, a concrete block (CMU) wall in St. George typically costs about ${blockWall.perSqFt} per square foot installed (roughly ${blockWall.perLinear6ft} per linear foot at 6 feet tall). Under St. George City Code §10-18-5, CMU, segmental block, rockery, and reinforced-concrete retaining walls of 4 feet or more need a city permit.`}
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  image={img}
+  imageAlt="Segmental block retaining wall in tan and gray tones with a flat capstone course and plants along its base"
+  service={{
+    name: 'St. George Elite Fence — Block Wall Referral',
+    serviceType: 'Block wall, CMU and retaining wall installation referral / contractor matching',
+    description: 'Connects St. George, UT homeowners planning a block, CMU, or retaining wall with independent, third-party masonry and wall companies. Does not build walls and is not a contractor.',
+  }}
+  faq={faq}
+  related={[
+    { href: '/fence-permit-st-george-ut/', label: 'Fence & wall permit rules', blurb: 'The 4-foot retaining wall rule and the front-setback rule, step by step.' },
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Cost guide', blurb: 'Block, retaining, and fence ranges from one dated source list.' },
+    { href: '/hoa-fence-requirements-st-george-ut/', label: 'HOA requirements', blurb: 'Why HOA approval comes before you order block.' },
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation', blurb: 'If a fence fits your goal better than a wall.' },
+  ]}
+>
+  <p>
+    Block walls are popular across Southern Utah for privacy, sound, and a solid, finished look. They are also the
+    project where St. George's rules bite hardest: a retaining wall of the right height can require a city permit,
+    and a wall on a slope has to handle water and soil pressure, not just look good. This guide explains the types,
+    the permit rule, what drives the price, and how to size up a mason.
+  </p>
+
+  <h2>Types of block walls</h2>
+  <ul>
+    <li><strong>Freestanding CMU wall.</strong> Concrete masonry units stacked and mortared into a privacy or boundary wall. Often finished with stucco, paint, or a cap.</li>
+    <li><strong>Decorative or split-face block.</strong> The same idea with a textured face that stays exposed. The face texture is the finish, so it needs less coating.</li>
+    <li><strong>Segmental (interlocking) block retaining wall.</strong> Dry-stacked units that hold soil, common in landscaping and terraces.</li>
+    <li><strong>Reinforced concrete or CMU retaining wall.</strong> Engineered walls with a footing, steel reinforcement, and grout for taller or heavily loaded conditions.</li>
+    <li><strong>Rockery.</strong> Large stacked boulders, often used as a natural-looking retaining wall on slopes.</li>
+  </ul>
+
+  <h2>The St. George permit rule for walls</h2>
+  <p>
+    St. George City Code §10-18-5 is the section most homeowners are surprised by. It says that rockery, segmental block,
+    reinforced concrete, or CMU retaining walls four feet or greater in height may not be built without first getting a
+    permit from the city, unless the wall is shown in detail on an approved site development plan. Separately, it requires
+    a permit before you construct any fence or retaining wall in a front setback, again unless shown on approved plans.
+  </p>
+  <div class="sgfw-permit">
+    <strong>How height is measured matters.</strong> For concrete and CMU retaining walls, the city measures from the top
+    of the footing to the top of the wall. For rockery and segmental block walls, it measures from the exposed face to
+    finished grade next to the base of the wall. A wall that looks like 3 feet above ground can measure differently once the footing is counted, so ask the
+    city, not just your contractor.
+  </div>
+  <p>
+    A permit application under §10-18-5 must include a site plan showing property lines, sidewalks, buildings, height,
+    and the location of all fences and retaining walls, plus a landscape and drainage plan for retaining walls. The
+    <a href="/fence-permit-st-george-ut/">permit guide</a> lays out the steps and where to apply.
+  </p>
+
+  <h2>Freestanding walls follow the fence height limits</h2>
+  <p>
+    A block wall built as a boundary or privacy wall is a fence under §10-18-1, so the same limits generally apply: 4 feet
+    in the front yard and 6 feet 4 inches in side and rear yards, with a decorative, at-least-50-percent-open requirement
+    within 10 feet behind the sidewalk. A solid block wall would not meet that open requirement, so front-yard walls near a sidewalk are a
+    question to settle with the city before you design anything.
+  </p>
+
+  <h2>Cost: what block walls run</h2>
+  <p>
+    Block is priced by the square foot of wall face rather than by the linear foot, because height changes the amount of
+    material and labor so much. The table shows dated planning ranges; the <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a>
+    lists every source and how the numbers were assembled.
+  </p>
+  <CostTable
+    caption={`Block and retaining wall cost, as of ${COST_AS_OF}`}
+    unit="per square foot of wall"
+    rows={[
+      { label: 'CMU / concrete block wall', range: blockWall.perSqFt, note: `About ${blockWall.perLinear6ft} per linear foot at 6 feet tall.` },
+      { label: 'Segmental block retaining wall', range: retainingWall.block, note: 'Drainage and base preparation are part of the job.' },
+      { label: 'Poured concrete retaining wall', range: retainingWall.poured, note: 'Formwork, steel, and engineering raise the price.' },
+    ]}
+  />
+
+  <h2>Sloped lots, drainage, and desert soil</h2>
+  <p>
+    A retaining wall is holding back soil, and soil pushes. The parts you cannot see are what keep a wall straight:
+    a properly prepared base or footing, reinforcement where the design calls for it, and drainage so water does not build up behind the wall. Poor drainage is a
+    common reason retaining walls fail. Because §10-18-5 asks for a landscape and drainage plan for retaining walls, the
+    city considers drainage part of the project, not an add-on.
+  </p>
+  <p>
+    Ask any company how they handle drainage behind the wall, what is under the first course, and whether the design was
+    engineered. On steeper sites or taller walls, ask whether an engineer is involved. Hard or rocky soil can also
+    add excavation labor, so a site visit before the quote is a good sign.
+  </p>
+
+  <h2>Block versus wood or vinyl</h2>
+  <p>
+    Block costs more up front than most fences, but it does not rot, does not need painting or sealing on a schedule,
+    and blocks noise and sight lines better. Fences are quicker to install and easier to change. If you are weighing the two, compare the total cost of
+    ownership rather than the installed price, and check your HOA's rules first because many limit wall materials or heights. Our
+    <a href="/fence-installation-st-george-ut/">fence installation guide</a> covers the alternatives.
+  </p>
+
+  <h2>Finishes and details that change the quote</h2>
+  <ul>
+    <li><strong>Cap style.</strong> A cap course finishes the top and sheds water. Ask what is included.</li>
+    <li><strong>Stucco, paint, or veneer.</strong> Coating a plain CMU wall adds material and labor beyond the block itself.</li>
+    <li><strong>Pilasters and columns.</strong> Decorative or structural columns add cost.</li>
+    <li><strong>Gates and openings.</strong> Cutting in a gate means header details and hardware.</li>
+    <li><strong>Demolition of an existing wall or fence</strong> and haul-away.</li>
+  </ul>
+
+  <h2>Planning a block wall, step by step</h2>
+  <ol>
+    <li><strong>Decide the job.</strong> Is it a boundary or privacy wall, or does it hold back soil? That single answer decides which rules and which kind of company apply.</li>
+    <li><strong>Measure and mark.</strong> Confirm your property lines, note any slope, and mark where the wall will run, including where it meets existing fences, gates, or the house.</li>
+    <li><strong>Check the height rules.</strong> Compare your planned height with the §10-18-1 fence limits for a freestanding wall, or the 4-foot trigger in §10-18-5 for a retaining wall, using the city's method of measuring.</li>
+    <li><strong>Get HOA approval,</strong> if you have one, before you order or contract.</li>
+    <li><strong>Get two or three written quotes</strong> for the same wall: length, height, block type, footing, reinforcement, drainage, finish, and cleanup.</li>
+    <li><strong>Sort out the permit and the plans.</strong> Ask who prepares the site plan and the drainage plan, who submits them, and how long the city review typically takes.</li>
+    <li><strong>Have utilities marked, then build.</strong> Footings and posts mean deep digging, so the 811 call comes before any excavation.</li>
+  </ol>
+
+  <h2>Care and maintenance</h2>
+  <p>
+    Block needs far less upkeep than wood, but not none. Look over the wall each year for new cracks, efflorescence (white mineral
+    staining), damaged coatings, and water pooling at the base. Keep irrigation heads from soaking the wall or the soil behind it, and clear weep holes and drains on retaining walls
+    so water can leave. A small crack caught early is a small repair.
+  </p>
+
+  <h2>Vetting a block wall company</h2>
+  <ul>
+    <li>Verify the company's license status yourself with the <a href="https://dopl.utah.gov/" rel="noopener">Utah Division of Professional Licensing</a>, and confirm insurance directly.</li>
+    <li>Ask who pulls the permit and whether the quote includes the site plan and drainage plan §10-18-5 requires for retaining walls.</li>
+    <li>Ask for a description of the footing, reinforcement, and drainage in writing.</li>
+    <li>Look at completed walls a few years old, not just fresh ones.</li>
+    <li>Call 811 (<a href="https://www.bluestakes.org/" rel="noopener">Blue Stakes of Utah</a>) before digging; the service asks for at least 3 business days of notice.</li>
+  </ul>
+
+  <h2>Red flags</h2>
+  <ul>
+    <li>A retaining wall quoted with no mention of drainage or a footing.</li>
+    <li>"You don't need a permit" said without measuring the wall or checking your setback.</li>
+    <li>A quote that is far below the others with a vague scope.</li>
+    <li>No written scope for what is finished, coated, or capped.</li>
+  </ul>
+
+  <p class="sgfw-note">
+    Permit and height rules come from St. George City Code §10-18-5 and §10-18-1, rechecked September 26, 2026. Confirm
+    current requirements with the city before you build. Price ranges are national and aggregator planning figures, not quotes.
+  </p>
+</GuideLayout>

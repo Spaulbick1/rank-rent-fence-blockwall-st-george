@@ -1,28 +1,45 @@
 ---
-// Phase 2 smoke-test homepage: assembles the always-build shells + the
-// archetype-specific SuitabilityWorksheet to prove the design system
-// compiles and reads correctly together. FAQ copy is genuine Phase-2-era
-// content (not [SAMPLE] tagged -- none of it is a fabricated review, stat, or
-// testimonial per compliance.md rule 1). Phase 3 replaces this file with the
-// full homepage per CONTENT_PLAN.md Part A (services icon row, cost snapshot,
-// local-angle callout, service-area section).
+// Phase 3 homepage per CONTENT_PLAN.md Part A: Hero -> SuitabilityWorksheet
+// (primary visual unit) -> TrustBar -> services overview (icon accents,
+// Rule 16) -> cost snapshot (figures from src/lib/costs.ts ONLY, so they
+// match the cost guide exactly) -> local-angle callout -> service area ->
+// FAQ -> lead form. Disclosure lives once, in the footer -- this page does
+// not repeat it (compliance.md rule 3). Umbrella Service + FAQPage schema.
 import BaseLayout from '../components/layout/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
 import SuitabilityWorksheet from '../components/sections/SuitabilityWorksheet.astro';
 import TrustBar from '../components/sections/TrustBar.astro';
 import FAQ from '../components/sections/FAQ.astro';
 import LeadForm from '../components/sections/LeadForm.astro';
+import CostTable from '../components/sections/CostTable.astro';
+import { icons } from '../lib/icons';
 import { umbrellaServiceSchema, faqSchema, abs, UMBRELLA_SERVICE_ID } from '../lib/schema';
 import { site } from '../lib/site-config';
+import { COST_AS_OF, fenceProject, perFoot, blockWall } from '../lib/costs';
+
+const quoteHref = '#lead-form';
+
+const services = [
+  { icon: 'fence', title: 'New fence installation', href: '/fence-installation-st-george-ut/', blurb: 'Wood, vinyl, chain-link, and ornamental iron: heights, materials for the desert, and what to check before you sign.' },
+  { icon: 'wrench', title: 'Fence repair', href: '/fence-repair-st-george-ut/', blurb: 'Leaning posts, wind damage, sagging gates, and cracked block, with repair-or-replace guidance.' },
+  { icon: 'blocks', title: 'Block & retaining walls', href: '/block-wall-installation-st-george-ut/', blurb: 'CMU and retaining walls, the 4-foot permit rule, and sloped-lot drainage basics.' },
+  { icon: 'poolfence', title: 'Pool fences & gates', href: '/pool-fence-and-gate-st-george-ut/', blurb: 'What we could and could not verify about local pool rules, and how to get the answer in one call.' },
+  { icon: 'house', title: 'HOA & new construction', href: '/hoa-fence-requirements-st-george-ut/', blurb: 'How HOA approval sits on top of city code, and what to check on a new-construction lot.' },
+];
+
+const snapshotRows = [
+  ...perFoot.map((r) => ({ label: r.label, range: `${r.range} per foot` })),
+  { label: 'CMU / concrete block wall', range: `${blockWall.perSqFt} per sq ft` },
+];
 
 const faqItems = [
   {
-    question: 'Is St. George Elite Fence a fence company?',
-    answer: `No. ${site.brandName} is a referral service — we connect you with independent, local fence and block-wall companies. We do not build fences or walls ourselves, and we are not a contractor.`,
+    question: 'How much does a fence cost in St. George?',
+    answer: `As of ${COST_AS_OF}, a standard residential fence project in St. George typically runs about ${fenceProject.low} to ${fenceProject.high} installed, with a median near ${fenceProject.median}. A concrete block wall runs about ${blockWall.perSqFt} per square foot. These are planning ranges, not quotes.`,
   },
   {
     question: 'Do I need a permit for a fence or block wall in St. George?',
-    answer: 'Often, yes for walls. St. George City Code §10-18-5 requires a permit for any fence or retaining wall built in a front setback regardless of height, and for CMU, segmental-block, or reinforced-concrete retaining walls 4 feet or taller wherever they are. Confirm your specific project with the city before you build.',
+    answer: 'Often, yes for walls. St. George City Code §10-18-5 requires a permit for any fence or retaining wall built in a front setback regardless of height, and for CMU, segmental-block, rockery, or reinforced-concrete retaining walls 4 feet or taller wherever they are. Confirm your specific project with the city before you build.',
   },
   {
     question: 'How tall can a fence be in St. George?',
@@ -32,19 +49,101 @@ const faqItems = [
     question: 'How do I check that a fence or wall company is licensed in Utah?',
     answer: 'Use the Utah Division of Professional Licensing’s public license lookup and search the company by name, then confirm insurance directly with the company. Verify license status yourself rather than relying on any website’s claim, including ours.',
   },
+  {
+    question: 'Does my HOA need to approve my fence?',
+    answer: 'If you have an HOA, check its governing documents and get approval in writing before you build. HOA approval and city permits are separate, and one does not replace the other.',
+  },
 ];
 ---
 
 <BaseLayout
-  title="Fence & Block Wall in St. George, UT"
-  description="Get matched with an independent St. George fence or block-wall company. City permit rules, height limits, and HOA and pool-fence questions answered first."
+  title="Fence & Block Wall, St. George UT"
+  description="Get matched with an independent St. George fence or block wall company. Permit rules, height limits, costs, and HOA and pool-fence answers first."
   path="/"
+  quoteHref={quoteHref}
   schemaNodes={[umbrellaServiceSchema(), faqSchema(faqItems)]}
   mainEntityId={abs(UMBRELLA_SERVICE_ID)}
 >
-  <Hero />
+  <Hero quoteHref={quoteHref} />
   <SuitabilityWorksheet />
   <TrustBar />
+
+  <section class="section">
+    <h2 class="font-display text-fl-2xl font-bold text-ink">Fence and wall projects we cover</h2>
+    <p class="mt-3 max-w-prose text-fl-base text-muted">
+      Each guide answers the questions that come before a project starts, then leads to an independent local company.
+    </p>
+    <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s) => (
+        <li class="card p-5">
+          <span class="flex h-10 w-10 items-center justify-center rounded-blk bg-brass-50" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="h-6 w-6 text-brass" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d={icons[s.icon]} />
+            </svg>
+          </span>
+          <h3 class="mt-3 font-display text-fl-lg font-bold"><a href={s.href} class="text-river hover:underline">{s.title}</a></h3>
+          <p class="mt-2 text-fl-sm text-muted">{s.blurb}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="border-y border-tint-line bg-tint">
+    <div class="section">
+      <h2 class="font-display text-fl-2xl font-bold text-ink">What fences and walls cost here</h2>
+      <p class="mt-3 max-w-prose text-fl-lg text-ink">
+        As of {COST_AS_OF}, a standard residential fence project in St. George typically runs about {fenceProject.low}–{fenceProject.high} installed, with a
+        median near {fenceProject.median}.
+      </p>
+      <CostTable caption={`Planning ranges, as of ${COST_AS_OF}`} unit="price and unit" rows={snapshotRows} />
+      <p class="mt-4 max-w-prose text-fl-sm text-muted">
+        National and aggregator planning ranges, not quotes. See the <a href="/fence-and-block-wall-cost-st-george-ut/">full cost guide</a>
+        for sources, dates, and method.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="card max-w-3xl p-6">
+      <p class="eyebrow">The questions most sites skip</p>
+      <h2 class="mt-2 font-display text-fl-2xl font-bold text-ink">Permits, HOAs, and pool fences come first</h2>
+      <p class="mt-3 text-fl-base text-ink">
+        In St. George a retaining wall of 4 feet or more needs a city permit, and so does any fence or retaining wall in a front
+        setback (City Code §10-18-5). HOAs can add stricter rules of their own, and pool fences raise
+        questions we would rather send you to the city for than answer with a number we could not verify.
+      </p>
+      <p class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-fl-base">
+        <a href="/fence-permit-st-george-ut/">Permit rules</a>
+        <a href="/hoa-fence-requirements-st-george-ut/">HOA requirements</a>
+        <a href="/pool-fence-and-gate-st-george-ut/">Pool fences and gates</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="border-y border-tint-line bg-white">
+    <div class="section grid gap-8 lg:grid-cols-2">
+      <div>
+        <h2 class="font-display text-fl-2xl font-bold text-ink">How it works</h2>
+        <ol class="mt-4 list-decimal space-y-3 pl-6 text-fl-base text-ink">
+          <li><strong>Read the guide that fits your project.</strong> Costs, permits, and vetting questions are answered up front.</li>
+          <li><strong>Tell us what you are building.</strong> Project type, city, and any HOA, slope, or pool details.</li>
+          <li><strong>An independent local company follows up.</strong> You compare and decide, with no obligation.</li>
+        </ol>
+        <p class="mt-4 text-fl-sm text-muted">
+          Want to see who is out there first? Read our <a href="/best-fence-and-wall-companies-st-george-ut/">list of local fence and wall companies</a>.
+        </p>
+      </div>
+      <div>
+        <h2 class="font-display text-fl-2xl font-bold text-ink">Service area</h2>
+        <p class="mt-4 text-fl-base text-ink">
+          We cover St. George and the nearby cities of Washington, Hurricane, Ivins, and Santa Clara, plus surrounding
+          communities in {site.serviceArea.county}. Tell us your city and what you are building and we will match you
+          with a company that covers it.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <FAQ items={faqItems} />
   <LeadForm />
 </BaseLayout>

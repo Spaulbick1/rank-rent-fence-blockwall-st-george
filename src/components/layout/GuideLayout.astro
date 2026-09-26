@@ -1,0 +1,154 @@
+---
+// Shared shell for every Phase 3 money page / guide. Assembles: guide hero
+// (H1 + the quotable direct answer, geo-aeo.md rule 2), prose slot, related
+// links, optional FAQ, closing CTA. Schema is assembled here so every page
+// follows Operating Rules 12-14 identically:
+//   - pages that ARE a distinct service line pass `service` and get their own
+//     Service node (@id = path#service); WebPage.mainEntity links to it.
+//   - every other page reuses the site-wide umbrella Service @id.
+//   - Article.mainEntityOfPage is an @id ref to this page's WebPage @id,
+//     built by the same function BaseLayout uses (schema.ts webPageId).
+// NO LocalBusiness / AggregateRating / Review anywhere. The third-party
+// disclosure is NOT rendered here -- it lives once, in the footer.
+import BaseLayout from './BaseLayout.astro';
+import FAQ from '../sections/FAQ.astro';
+import { Image } from 'astro:assets';
+import { site } from '../../lib/site-config';
+import {
+  abs,
+  serviceSchema,
+  umbrellaServiceSchema,
+  UMBRELLA_SERVICE_ID,
+  faqSchema,
+  articleSchema,
+} from '../../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  eyebrow: string;
+  h1: string;
+  /** 1-2 sentence self-contained answer: figure + geography + date. */
+  answer: string;
+  /** ISO date this page's content was last verified (not invented -- build/recheck date). */
+  updated: string;
+  updatedLabel: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  service?: { name: string; serviceType: string; description: string };
+  article?: { headline: string; datePublished: string };
+  faq?: { question: string; answer: string }[];
+  extraNodes?: object[];
+  related?: { href: string; label: string; blurb: string }[];
+  ctaHeading?: string;
+  ogType?: 'website' | 'article';
+}
+
+const {
+  title,
+  description,
+  path,
+  eyebrow,
+  h1,
+  answer,
+  updated,
+  updatedLabel,
+  image,
+  imageAlt = '',
+  service,
+  article,
+  faq,
+  extraNodes = [],
+  related = [],
+  ctaHeading = 'Ready to compare local fence and wall pros?',
+  ogType,
+} = Astro.props;
+
+const quoteHref = '/#lead-form';
+const servicePath = `${path}#service`;
+const svcNode = service
+  ? serviceSchema({ id: servicePath, path, name: service.name, serviceType: service.serviceType, description: service.description })
+  : umbrellaServiceSchema();
+const mainEntityId = service ? abs(servicePath) : abs(UMBRELLA_SERVICE_ID);
+
+const nodes: object[] = [
+  svcNode,
+  ...(article
+    ? [articleSchema({ path, headline: article.headline, description, datePublished: article.datePublished, dateModified: updated })]
+    : []),
+  ...(faq ? [faqSchema(faq)] : []),
+  ...extraNodes,
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path={path}
+  quoteHref={quoteHref}
+  schemaNodes={nodes}
+  mainEntityId={mainEntityId}
+  ogType={ogType ?? (article ? 'article' : 'website')}
+>
+  <section class="border-b border-tint-line bg-tint">
+    <div class={`section grid items-center gap-8 ${image ? 'lg:grid-cols-[3fr_2fr]' : ''}`}>
+      <div>
+        <p class="eyebrow">{eyebrow}</p>
+        <h1 class="mt-3 font-display text-fl-3xl font-bold tracking-tight text-ink">{h1}</h1>
+        <div class="sgfw-answer card">
+          <p class="eyebrow">Quick answer</p>
+          <p class="mt-2 text-fl-lg text-ink">{answer}</p>
+          <p class="mt-3 text-fl-sm text-muted">
+            {site.brandName} &middot; {site.serviceArea.primary} &middot; Updated <time datetime={updated}>{updatedLabel}</time>
+          </p>
+        </div>
+      </div>
+      {image && (
+        <div class="border-t-8 border-t-brass shadow-block">
+          <Image
+            src={image}
+            alt={imageAlt}
+            widths={[480, 800, 1200]}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            class="aspect-[4/3] w-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+      )}
+    </div>
+  </section>
+
+  <article class="section">
+    <div class="sgfw-prose">
+      <slot />
+    </div>
+  </article>
+
+  {faq && <FAQ items={faq} heading="Frequently asked questions" />}
+
+  {related.length > 0 && (
+    <section class="section pt-0">
+      <h2 class="font-display text-fl-xl font-bold text-ink">Keep reading</h2>
+      <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {related.map((r) => (
+          <li class="card p-4">
+            <a href={r.href} class="font-display text-fl-lg font-bold text-river hover:underline">{r.label}</a>
+            <p class="mt-1 text-fl-sm text-muted">{r.blurb}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="border-t border-tint-line bg-tint">
+    <div class="section flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h2 class="font-display text-fl-xl font-bold text-ink">{ctaHeading}</h2>
+        <p class="mt-1 max-w-prose text-fl-base text-muted">Tell us what you're building. It costs nothing and there is no obligation.</p>
+      </div>
+      <a href={quoteHref} class="btn-phone-standalone">Get Matched</a>
+    </div>
+  </section>
+</BaseLayout>

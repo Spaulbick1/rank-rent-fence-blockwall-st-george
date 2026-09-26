@@ -1,0 +1,174 @@
+---
+// Money page: Fence Repair hub -- problem/diagnostic framing. Prices only
+// from src/lib/costs.ts (national ranges; labelled as such).
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import CostTable from '../components/sections/CostTable.astro';
+import img from '../assets/images/cracked-block-wall.webp';
+import { repair } from '../lib/costs';
+
+const faq = [
+  {
+    question: 'How much does fence repair cost?',
+    answer: `Most fence repairs cost ${repair.standard}, with minor repairs at ${repair.minor} and major repairs at ${repair.major}, based on national ranges published in early 2026. Replacing a single damaged post averages ${repair.post}, and gate repairs typically run ${repair.gate}.`,
+  },
+  {
+    question: 'Should I repair or replace my fence?',
+    answer: 'Repair when the damage is limited to a few boards, a gate, or one or two posts and the rest is sound. Replace when posts are rotted or leaning along much of the run, when most panels are failing, or when repair quotes approach the price of new. Get a repair quote and a replacement quote on the same scope to compare.',
+  },
+  {
+    question: 'Does homeowners insurance cover wind damage to a fence?',
+    answer: 'Sometimes. Coverage depends on your policy, the cause of damage, and your deductible, so call your insurer before you start repairs and document the damage with photos. Wear and age are generally not covered.',
+  },
+  {
+    question: 'Do I need a permit to repair a fence in St. George?',
+    answer: 'Repair rules are not spelled out in the sections we rely on. St. George City Code §10-18-5 requires a permit before constructing any fence or retaining wall in a front setback, so ask the city whether your repair, especially a rebuild, needs one before work begins.',
+  },
+  {
+    question: 'Why is my gate sagging?',
+    answer: 'A sagging gate is usually a hinge, post, or frame problem: a leaning gate post, loose hinge hardware, or a frame without a diagonal brace. Fixing the post and hardware is often cheaper than replacing the gate.',
+  },
+];
+---
+
+<GuideLayout
+  title="Fence Repair in St. George, UT"
+  description="Fence and wall repair in St. George, UT: leaning posts, wind damage, sagging gates, cracked block, repair-or-replace advice, and typical costs."
+  path="/fence-repair-st-george-ut/"
+  eyebrow="Fence & wall repair · St. George & Washington County"
+  h1="Fence Repair in St. George, UT: Diagnosing the Problem and Choosing Repair or Replace"
+  answer={`Most fence repairs cost ${repair.standard}, based on national ranges published in early 2026: minor fixes run ${repair.minor} and major repairs run ${repair.major}. Replacing one damaged post averages ${repair.post}. These are not St. George quotes, so get local written estimates.`}
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  image={img}
+  imageAlt="Vertical crack running through gray concrete blocks and their mortar joints in a block wall"
+  service={{
+    name: 'St. George Elite Fence — Fence Repair Referral',
+    serviceType: 'Fence and wall repair referral / contractor matching',
+    description: 'Connects St. George, UT homeowners with damaged fences, gates, or block walls with independent, third-party repair companies. Does not perform repairs and is not a contractor.',
+  }}
+  faq={faq}
+  related={[
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Cost guide', blurb: 'Compare repair cost with new-fence cost.' },
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation', blurb: 'If replacement is the better call.' },
+    { href: '/block-wall-installation-st-george-ut/', label: 'Block wall guide', blurb: 'Retaining wall rules and permits.' },
+    { href: '/fence-permit-st-george-ut/', label: 'Permit rules', blurb: 'When a rebuild needs a city permit.' },
+  ]}
+>
+  <p>
+    Fences fail slowly and then suddenly. A post that has been leaning for a year goes over in the first hard wind, and
+    a gate that scrapes stops latching. This page is a diagnostic guide: what the common failures look like, what usually causes
+    them in a sunny, windy, dry climate, and how to decide between a fix and a replacement.
+  </p>
+
+  <h2>Common problems and what they usually mean</h2>
+  <h3>A leaning or wobbling post</h3>
+  <p>
+    The post is the foundation, so a lean is a foundation problem. Causes include a post set too shallow or without enough
+    concrete, a rotted base on a wood post, or soil that has washed out from irrigation or runoff. If one post leans and
+    the rest are firm, resetting or replacing that post is the usual repair. If posts lean along much of the run, the original installation is the problem and
+    replacement deserves a real look.
+  </p>
+
+  <h3>Wind damage</h3>
+  <p>
+    Solid privacy panels catch wind like sails. Wind damage tends to show up as panels blown out of their rails, posts
+    snapped or pushed over, and gates ripped off their hinges. Document damage with dated photos before cleanup, and if
+    you plan to file a claim, call your insurer before you repair. A repair that reuses the same weak post spacing may fail
+    again in the next storm, so ask the repair company whether posts need to be closer, deeper, or better set.
+  </p>
+
+  <h3>Rotted, warped, or split boards on a wood fence</h3>
+  <p>
+    Boards fail first at the ground and at the top edge. Individual boards are cheap to replace. When rot has reached
+    the rails or posts, the cost climbs because the structure has to be repaired, not just the surface. Sealing or staining on
+    a schedule slows this considerably, so a repair is also the moment to ask about a maintenance plan.
+  </p>
+
+  <h3>Sun-damaged vinyl</h3>
+  <p>
+    Vinyl in strong sun can fade, chalk, or become brittle over time, depending on the formulation. Cracked panels
+    or rails are usually replaced as sections rather than patched. If your fence is under a manufacturer warranty, read what it says about fading and cracking before you pay for a repair.
+  </p>
+
+  <h3>Sagging or sticking gates</h3>
+  <p>
+    A gate that drags or will not latch is usually a hardware, post, or frame issue rather than a "bad gate." Tightening or replacing
+    hinges, resetting the gate post, or adding a diagonal brace or tension cable often solves it. Gate repairs typically cost {repair.gate}.
+  </p>
+
+  <h3>Chain-link and ornamental iron</h3>
+  <p>
+    Chain-link sags where posts lean or the tension wire loosens, and gets bent where it was hit. Ornamental iron fails at
+    welds and at the finish: rust starts where the coating is chipped, and a repair usually means welding and recoating.
+    Ask whether a repair includes rust treatment and repainting so the fix does not rust through again.
+  </p>
+
+  <h3>Cracked or leaning block walls</h3>
+  <p>
+    Hairline cracks in mortar joints are common and often cosmetic. A crack that widens, runs stair-step through the
+    joints, or shows offset between courses suggests movement. A wall that leans or bows, and especially a retaining wall,
+    should be assessed by a qualified professional because a failure can be unsafe. A retaining wall of 4 feet or more, or any wall in a front setback,
+    involves St. George City Code §10-18-5, so a rebuild may need a permit.
+  </p>
+  <div class="sgfw-permit">
+    <strong>Do not ignore a leaning retaining wall.</strong> If soil is moving or the wall is visibly bowing, keep people
+    and structures back from it and get it assessed before the next heavy rain.
+  </div>
+
+  <h2>Repair or replace?</h2>
+  <p>A useful way to decide is to ask three questions:</p>
+  <ol>
+    <li><strong>How much of the fence is affected?</strong> A few boards, one gate, or one or two posts point to repair. Widespread rot, lean, or panel failure points to replacement.</li>
+    <li><strong>Why did it fail?</strong> If the cause was one event, such as a car strike or a fallen limb, repair is often sensible. If the cause was age or installation, more failures are coming.</li>
+    <li><strong>What do the two quotes say?</strong> Ask for a repair quote and a replacement quote on the same scope. When repair gets close to the price of new, replacement usually wins.</li>
+  </ol>
+
+  <h2>What repairs cost</h2>
+  <p>These are national ranges published in early 2026, not local quotes. The <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a> lists sources and method.</p>
+  <CostTable
+    caption="Fence repair cost, national ranges published early 2026"
+    unit="per repair"
+    rows={[
+      { label: 'Minor repair', range: repair.minor, note: 'Loose boards, latches, small patches.' },
+      { label: 'Standard repair', range: repair.standard, note: 'A panel or post; the most common range.' },
+      { label: 'Major repair', range: repair.major, note: 'Multiple sections or structural work.' },
+      { label: 'Replace one damaged post', range: repair.post, note: 'Concrete-set posts cost more to reset.' },
+      { label: 'Gate repair', range: repair.gate },
+    ]}
+  />
+  <p>Labor for repair work is commonly quoted at {repair.hourly} per hour; welding and specialty work runs higher.</p>
+
+  <h2>Stopping the next failure</h2>
+  <p>
+    A repair that ignores the cause is a repair you will pay for twice. Before you approve the work, ask the company what
+    caused the failure and what they are changing so it does not repeat. The answers that usually matter:
+  </p>
+  <ul>
+    <li><strong>Post depth and setting.</strong> Are replacement posts set deeper, or in concrete, when the old ones failed at the ground?</li>
+    <li><strong>Water.</strong> Sprinklers that hit a fence every morning rot wood, corrode metal, and undermine posts. Redirect them.</li>
+    <li><strong>Wind load.</strong> On solid fences, ask whether panel spacing, post spacing, or added bracing will help.</li>
+    <li><strong>Finish.</strong> Reseal, restain, or recoat while the repair is open. Bare wood and chipped metal finish fail first.</li>
+    <li><strong>Hardware.</strong> Replace worn hinges and latches with better-rated hardware rather than reusing them.</li>
+  </ul>
+
+  <h2>Safety and temporary fixes</h2>
+  <p>
+    If a fence is down and it kept a pet, a child, or a pool area secure, put a temporary barrier up right away, even if it is
+    just a few sturdy stakes and heavy-duty fencing, while you wait for a repair. Do not stand under or push on a leaning wall,
+    and keep your hands clear of broken metal and exposed nails. If a downed fence is tangled with a utility line, stay away and call the utility.
+  </p>
+
+  <h2>Before you hire a repair company</h2>
+  <ul>
+    <li>Photograph the damage and note when and how it happened.</li>
+    <li>Ask for a written scope: what is being replaced, what materials, and whether the fix addresses the cause.</li>
+    <li>Check license status yourself with the <a href="https://dopl.utah.gov/" rel="noopener">Utah Division of Professional Licensing</a>, and confirm insurance directly.</li>
+    <li>Ask about the warranty on repair work and on any new materials.</li>
+    <li>Call 811 (<a href="https://www.bluestakes.org/" rel="noopener">Blue Stakes of Utah</a>) before any digging, including resetting posts; the service asks for at least 3 business days of notice.</li>
+  </ul>
+
+  <p class="sgfw-note">
+    Repair costs are national ranges, not St. George quotes. Permit references cite St. George City Code §10-18-5, rechecked
+    September 26, 2026.
+  </p>
+</GuideLayout>

@@ -22,7 +22,7 @@ const nav = [
 
 <header class="sgfw-header sticky top-0 z-50 border-b border-tint-line bg-paper/95 backdrop-blur">
   <div class="mx-auto flex h-16 max-w-content items-center justify-between px-4 sm:px-6">
-    <a href="/" class="flex items-center gap-2 font-display text-fl-lg font-bold text-ink" aria-label={`${site.brandName} — home`}>
+    <a href="/" class="flex min-w-0 items-center gap-2 font-display text-fl-lg font-bold leading-tight text-ink xl:whitespace-nowrap" aria-label={`${site.brandName} — home`}>
       <!-- Header mark = the favicon: three pickets over two brass rails on a river-blue block. -->
       <svg class="sgfw-mark h-8 w-8 flex-none" viewBox="0 0 32 32" aria-hidden="true">
         <rect width="32" height="32" rx="3" fill="#0E5C7A" />
@@ -32,7 +32,7 @@ const nav = [
       {site.brandName}
     </a>
 
-    <nav class="hidden items-center gap-6 md:flex" aria-label="Primary">
+    <nav class="hidden items-center gap-6 whitespace-nowrap lg:flex" aria-label="Primary">
       {nav.map((l) => <a href={l.href} class="text-fl-base text-ink hover:text-river">{l.label}</a>)}
     </nav>
 
@@ -42,12 +42,12 @@ const nav = [
           Call {site.phone.display}
         </a>
       ) : (
-        <span class="hidden text-fl-sm text-muted sm:inline">Phone line live at launch</span>
+        <span class="hidden whitespace-nowrap text-fl-sm text-muted xl:inline">Phone line live at launch</span>
       )}
       <a href={quoteHref} class="btn-quote">Get Matched</a>
 
       <button
-        class="sgfw-hamburger inline-flex h-10 w-10 items-center justify-center rounded-blk border border-tint-line md:hidden"
+        class="sgfw-hamburger inline-flex h-10 w-10 items-center justify-center rounded-blk border border-tint-line lg:hidden"
         aria-label="Open menu"
         aria-expanded="false"
         aria-controls="sgfw-mobile-nav"
@@ -58,7 +58,7 @@ const nav = [
     </div>
   </div>
 
-  <nav id="sgfw-mobile-nav" class="sgfw-mobile-nav hidden border-t border-tint-line bg-paper md:hidden" aria-label="Primary mobile">
+  <nav id="sgfw-mobile-nav" class="sgfw-mobile-nav hidden border-t border-tint-line bg-paper lg:hidden" aria-label="Primary mobile">
     <div class="section flex flex-col gap-3 py-4">
       {nav.map((l) => <a href={l.href} class="text-fl-base">{l.label}</a>)}
       {site.phone.href && <a href={site.phone.href} class="btn-phone">Call {site.phone.display}</a>}

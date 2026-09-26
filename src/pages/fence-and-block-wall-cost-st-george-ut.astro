@@ -1,0 +1,157 @@
+---
+// Cost guide -- the organic-winnable crown jewel. EVERY figure is imported
+// from src/lib/costs.ts (single source of truth, lessons-learned #5); no $
+// amount is typed into this file's prose. Opens with a quotable direct
+// answer (geo-aeo.md rule 2). Article + FAQ schema.
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import CostTable from '../components/sections/CostTable.astro';
+import img from '../assets/images/ornamental-iron-fence.webp';
+import {
+  COST_AS_OF,
+  fenceProject,
+  perFoot,
+  blockWall,
+  retainingWall,
+  repair,
+  costSources,
+  costMethodNote,
+  localCheck2022,
+} from '../lib/costs';
+
+const faq = [
+  {
+    question: 'How much does a fence cost in St. George, UT?',
+    answer: `As of ${COST_AS_OF}, a standard residential fence project in St. George typically costs about ${fenceProject.low} to ${fenceProject.high} installed, with a median near ${fenceProject.median}. Per linear foot, chain-link runs ${perFoot[0].range}, wood privacy ${perFoot[1].range}, vinyl ${perFoot[2].range}, and ornamental iron ${perFoot[3].range}.`,
+  },
+  {
+    question: 'How much does a block wall cost in St. George, UT?',
+    answer: `As of ${COST_AS_OF}, a concrete block (CMU) wall typically costs about ${blockWall.perSqFt} per square foot installed, or roughly ${blockWall.perLinear6ft} per linear foot at 6 feet tall. Retaining walls run ${retainingWall.block} per square foot in block and ${retainingWall.poured} in poured concrete.`,
+  },
+  {
+    question: 'How much does fence repair cost?',
+    answer: `Most fence repairs cost ${repair.standard}, with minor fixes at ${repair.minor} and major repairs at ${repair.major}. Replacing a single damaged post averages ${repair.post}. These are national ranges published in early 2026, not St. George quotes.`,
+  },
+  {
+    question: 'Why do the prices on this page differ from my quote?',
+    answer: 'These are planning ranges built from published guides, not bids on your lot. Quotes move with material grade, height, gates, slope, rock, access, demolition, and permit handling, so two quotes on different scopes are not comparable. Always price the same written scope with two or three companies.',
+  },
+  {
+    question: 'Does the cost include the St. George permit?',
+    answer: 'Not necessarily. Ask each company whether the permit and any site or drainage plan are included, or who pays for them. A permit is required in St. George for any fence or retaining wall in a front setback and for retaining walls of 4 feet or more (City Code §10-18-5).',
+  },
+];
+---
+
+<GuideLayout
+  title="Fence & Wall Cost in St. George"
+  description="What fences and block walls cost in St. George, UT as of September 2026: per-foot and per-square-foot ranges, cost drivers, and every source."
+  path="/fence-and-block-wall-cost-st-george-ut/"
+  eyebrow="Cost guide · St. George & Washington County"
+  h1="How Much Do Fences and Block Walls Cost in St. George, UT?"
+  answer={`As of ${COST_AS_OF}, a typical residential fence in St. George, UT costs about ${fenceProject.low}–${fenceProject.high} installed (median near ${fenceProject.median}), and a concrete block (CMU) wall runs about ${blockWall.perSqFt} per square foot. Ranges below are dated planning figures, not quotes.`}
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  image={img}
+  imageAlt="Black ornamental iron picket fence with pointed finials running beside green shrubs"
+  article={{ headline: 'How Much Do Fences and Block Walls Cost in St. George, UT?', datePublished: '2026-09-26' }}
+  faq={faq}
+  related={[
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation guide', blurb: 'Heights, materials, and vetting.' },
+    { href: '/block-wall-installation-st-george-ut/', label: 'Block wall installation guide', blurb: 'CMU, retaining walls, and the permit rule.' },
+    { href: '/fence-repair-st-george-ut/', label: 'Fence repair', blurb: 'Repair costs and repair-versus-replace.' },
+    { href: '/fence-permit-st-george-ut/', label: 'Permit rules', blurb: 'When the city requires a permit.' },
+  ]}
+>
+  <p>
+    Nobody in St. George publishes a fence or block-wall price list, so homeowners usually learn the number only after
+    calling several companies. This page collects dated, published ranges into one place so you can walk into those
+    calls knowing what is normal. Every figure here comes from one shared data file, and each table is tied to the source
+    list and method at the bottom, so the numbers do not drift from page to page.
+  </p>
+
+  <h2>Total project cost</h2>
+  <p>
+    A standard residential fence project in St. George typically ranges from {fenceProject.low} to {fenceProject.high}, with a median
+    near {fenceProject.median}, as of {COST_AS_OF}. That spread is wide because "a fence" can mean 60 feet of chain-link or 250 feet of vinyl with three gates. Per-foot
+    pricing is the better yardstick.
+  </p>
+
+  <h2>Fence cost per linear foot</h2>
+  <CostTable caption={`Installed fence cost per linear foot, as of ${COST_AS_OF}`} unit="per linear foot" rows={perFoot} />
+  <p>
+    As a local cross-check, a St. George-specific guide dated June 2022 put 4-foot fences at {localCheck2022.vinyl} per foot for vinyl,
+    {localCheck2022.wood} for wood privacy, and {localCheck2022.chainLink} for chain-link. That guide is older and covers a shorter fence, so read it as evidence the
+    ranges above are the right order of magnitude, not as current pricing.
+  </p>
+
+  <h2>Block wall and retaining wall cost per square foot</h2>
+  <CostTable
+    caption={`Block and retaining wall cost, as of ${COST_AS_OF}`}
+    unit="per square foot of wall"
+    rows={[
+      { label: 'CMU / concrete block wall', range: blockWall.perSqFt, note: `About ${blockWall.perLinear6ft} per linear foot at 6 feet tall (6 feet x the per-square-foot range).` },
+      { label: 'Segmental block retaining wall', range: retainingWall.block, note: 'Includes base and drainage work; taller walls cost more per foot of wall.' },
+      { label: 'Poured concrete retaining wall', range: retainingWall.poured, note: 'Formwork and reinforcement raise the price.' },
+    ]}
+  />
+  <p>
+    One published calculator's basic, favorable-conditions estimate for a plain CMU wall came in lower, at {blockWall.lowEndCheck} per
+    square foot. Treat that as a floor for simple work on easy sites, not the expected result on a sloped St. George lot.
+    Freestanding walls follow fence height limits; retaining walls of 4 feet or more need a city permit under City Code §10-18-5.
+    See the <a href="/block-wall-installation-st-george-ut/">block wall guide</a>.
+  </p>
+
+  <h2>Fence repair cost</h2>
+  <CostTable
+    caption={`Fence repair cost, national ranges published early 2026`}
+    unit="per repair"
+    rows={[
+      { label: 'Minor repair (a loose board, latch, small patch)', range: repair.minor },
+      { label: 'Standard repair (a panel or post)', range: repair.standard, note: 'The most common range for a typical repair.' },
+      { label: 'Major repair (multiple sections, structural)', range: repair.major },
+      { label: 'Replace one damaged post', range: repair.post, note: 'Posts set in concrete cost more to pull and reset.' },
+      { label: 'Gate repair', range: repair.gate, note: 'Sagging or misaligned gates are usually a hardware and frame fix.' },
+    ]}
+  />
+  <p>Contractor labor for repair work is commonly quoted at {repair.hourly} per hour. See the <a href="/fence-repair-st-george-ut/">fence repair guide</a> for repair-versus-replace decisions.</p>
+
+  <h2>What moves the price on your lot</h2>
+  <ul>
+    <li><strong>Material and style.</strong> Chain-link sits at the bottom, vinyl privacy and ornamental iron near the top.</li>
+    <li><strong>Height and length.</strong> Both raise material and post costs. St. George City Code §10-18-1 caps most residential fences at 4 feet in front yards and 6 feet 4 inches in side and rear yards.</li>
+    <li><strong>Gates.</strong> Every gate adds hardware and labor above the per-foot rate.</li>
+    <li><strong>Slope and soil.</strong> Rocky or hard ground and steep grades add excavation and stepping labor.</li>
+    <li><strong>Access.</strong> Tight side yards and long carries for material add time.</li>
+    <li><strong>Demolition and haul-away</strong> of an existing fence or wall.</li>
+    <li><strong>Permit and plan preparation.</strong> Required for front-setback fences and retaining walls of 4 feet or more.</li>
+    <li><strong>Timing.</strong> Busy seasons and material availability can shift quotes.</li>
+  </ul>
+
+  <h2>How to compare quotes fairly</h2>
+  <ol>
+    <li>Write one scope: material, height, total feet, number and width of gates, removal, and cleanup.</li>
+    <li>Give that same scope to two or three independent companies.</li>
+    <li>Ask each to itemize gates, removal, permits, and any concrete or reinforcement.</li>
+    <li>Check license status with the <a href="https://dopl.utah.gov/" rel="noopener">Utah Division of Professional Licensing</a> and confirm insurance directly.</li>
+    <li>Compare warranty terms in writing, including workmanship coverage and what the manufacturer covers.</li>
+  </ol>
+
+  <h2>Methodology and sources</h2>
+  <p>
+    <strong>Method.</strong> These are planning ranges assembled September 26, 2026 from the published guides listed below,
+    reconciled into single ranges per material. {costMethodNote} The per-linear-foot figure for a 6-foot block wall is
+    arithmetic (6 feet times the per-square-foot range), not a separate source. None of these are quotes for your property,
+    and prices change; recheck before you budget.
+  </p>
+  <ul>
+    {costSources.map((s) => (
+      <li>
+        <a href={s.url} rel="noopener">{s.name}</a> — {s.date}. Used for: {s.used}.
+      </li>
+    ))}
+  </ul>
+  <p class="sgfw-note">
+    Most sources are national, not St. George-specific; the one St. George source is dated 2022. That is why this page shows ranges
+    and tells you to get local written quotes. Permit facts cite St. George City Code §10-18-1 and §10-18-5, rechecked September 26, 2026.
+  </p>
+</GuideLayout>

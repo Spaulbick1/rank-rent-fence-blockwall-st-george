@@ -1,0 +1,169 @@
+---
+// Money page: Pool Fence & Gate -- the wedge page. Ships HONEST AND HEDGED:
+// NO pool-barrier height figure appears anywhere on this page (or site) --
+// that figure is an unverified gap (KEYWORD_RESEARCH.md section 4). The
+// page's authority comes from being the local page that addresses the
+// question at all and telling readers exactly how to get the authoritative
+// answer. Building Department contact re-verified 2026-09-26 from
+// sgcityutah.gov (435-627-4100) -- NOTE: differs from the 435-627-4000
+// noted in earlier research docs; the city site value is used.
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import img from '../assets/images/pool-area-security-gate.webp';
+import { howToSchema } from '../lib/schema';
+import { COST_AS_OF, perFoot } from '../lib/costs';
+
+const path = '/pool-fence-and-gate-st-george-ut/';
+
+const steps = [
+  {
+    name: 'Ask the City of St. George Building Department what applies to your pool',
+    text: 'Call the Building Department at 435-627-4100 (Monday to Friday, 8 a.m. to 5 p.m.) and ask what barrier requirements apply to your specific pool, whether new or existing, and whether your property is inside a special zone.',
+  },
+  {
+    name: 'Get the requirement in writing',
+    text: 'Ask for the requirement in writing, or note the code section and the name of the person you spoke with, so your fence company and you are working from the same standard.',
+  },
+  {
+    name: 'Check HOA rules',
+    text: 'Ask your HOA whether it has fence style, height, color, or gate rules that apply to a pool enclosure, and get approval before ordering materials.',
+  },
+  {
+    name: 'Confirm whether a permit is needed',
+    text: 'Under St. George City Code 10-18-5, a fence or retaining wall in a front setback needs a permit. Ask the city whether your pool barrier needs one.',
+  },
+  {
+    name: 'Give every company the same written requirement',
+    text: 'Hand each fence company the written requirement and ask for quotes that state how the design meets it, including gate type, latch, and hinge details.',
+  },
+];
+
+const faq = [
+  {
+    question: 'Does St. George require a fence around a residential pool?',
+    answer: 'Confirm with the City of St. George Building Department at 435-627-4100. We have not verified a residential pool-barrier requirement in the St. George City Code sections we rely on (Title 10, Chapter 18), so this page does not state one. A fence around a pool is still a fence, and any fence in a front setback needs a permit under City Code §10-18-5.',
+  },
+  {
+    question: 'How tall does a pool fence need to be?',
+    answer: 'We do not publish a pool-fence height because we have not verified the current requirement for St. George homes. Ask the Building Department at 435-627-4100 and get the answer in writing before you buy materials.',
+  },
+  {
+    question: 'What should a pool gate do?',
+    answer: 'Pool gates are commonly expected to close and latch on their own, with the latch placed where young children cannot easily reach it. Whether and how those features are required for your pool is a question for the Building Department. Ask the fence company to describe the gate and latch in the quote.',
+  },
+  {
+    question: 'What fence material works around a pool?',
+    answer: 'Ornamental iron or aluminum picket fences are common because they let you see the pool area and are durable. Vinyl and block are also used. The right choice depends on the requirement you confirm, your HOA rules, and your budget.',
+  },
+  {
+    question: 'Do HOAs have rules about pool fences?',
+    answer: 'Many do. Fence style, height, and color are commonly regulated, and pool enclosures are no exception. Get HOA approval in writing before ordering, and remember that HOA approval does not replace any city requirement.',
+  },
+];
+---
+
+<GuideLayout
+  title="Pool Fence & Gates, St. George UT"
+  description="Pool fences and gates in St. George, UT: what we could not verify about local pool-barrier rules, gate features, permits, and how to get the answer."
+  path={path}
+  eyebrow="Pool fence & gate · St. George & Washington County"
+  h1="Pool Fences and Gates in St. George, UT: What to Confirm Before You Build"
+  answer={`As of ${COST_AS_OF}, we could not verify a residential pool-barrier height in the St. George City Code, so we do not publish one. Confirm the current requirement for your pool with the City of St. George Building Department (435-627-4100) before you buy materials; any fence in a front setback needs a permit under City Code §10-18-5.`}
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  image={img}
+  imageAlt="Black metal security gate at the end of a walkway between two walls, with a sign reading keep this gate closed and a pool visible beyond"
+  service={{
+    name: 'St. George Elite Fence — Pool Fence and Gate Referral',
+    serviceType: 'Pool fence and gate installation referral / contractor matching',
+    description: 'Connects St. George, UT homeowners planning a pool fence or gate with independent, third-party fence companies. Does not install fences and is not a contractor.',
+  }}
+  faq={faq}
+  extraNodes={[
+    howToSchema({
+      path,
+      name: 'How to confirm pool fence requirements for a St. George, UT home',
+      description: 'A step-by-step way to find the pool-barrier requirement that applies to your specific pool before hiring a fence company.',
+      steps,
+    }),
+  ]}
+  related={[
+    { href: '/fence-permit-st-george-ut/', label: 'Fence permit rules', blurb: 'When the city requires a permit.' },
+    { href: '/hoa-fence-requirements-st-george-ut/', label: 'HOA requirements', blurb: 'Get HOA approval before ordering.' },
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation', blurb: 'Materials, gates, and vetting.' },
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Cost guide', blurb: 'Per-foot ranges by material.' },
+  ]}
+>
+  <p>
+    Pool fences are the one fence project where "close enough" is not good enough, because the purpose is safety.
+    That is also why we are careful here. Some sources quote a single number for pool-fence height. We looked for that number in the St. George City Code chapter that governs fences and retaining walls
+    (Title 10, Chapter 18) and could not verify a residential pool-barrier requirement there. Rather than repeat a figure we
+    cannot back up, this page tells you what we do know and how to get the authoritative answer in one phone call.
+  </p>
+
+  <div class="sgfw-callout">
+    <strong>What we did not verify, and why it matters.</strong> Pool-barrier rules can come from more than one place,
+    such as the adopted building code, city amendments, and other health or safety rules, and they can differ for new pools
+    and existing pools. Because we have not confirmed which applies to a home like yours, we do not publish a height. Ask the
+    city, and get it in writing.
+  </div>
+
+  <h2>What we do know</h2>
+  <ul>
+    <li><strong>A pool fence is still a fence.</strong> St. George City Code §10-18-1 sets height and placement limits for fences generally, including a decorative, open-style requirement for fences close behind the sidewalk in the front yard. Those are fence rules, not a pool-barrier standard, so do not assume a fence that satisfies them is compliant for a pool.</li>
+    <li><strong>Front-setback fences need a permit.</strong> Under §10-18-5, a permit is required before you construct any fence or retaining wall in a front setback, unless it is shown in detail on an approved site development plan.</li>
+    <li><strong>Retaining walls have their own rule.</strong> If your pool sits on a slope with a retaining wall, §10-18-5 also requires a permit for CMU, segmental block, rockery, and reinforced-concrete retaining walls of 4 feet or greater.</li>
+    <li><strong>Your HOA may add rules.</strong> Style, color, and height are commonly regulated, and HOA approval does not replace anything the city requires.</li>
+  </ul>
+
+  <h2>How to get the right answer</h2>
+  <ol>
+    {steps.map((s) => (
+      <li><strong>{s.name}.</strong> {s.text}</li>
+    ))}
+  </ol>
+  <p class="sgfw-note">
+    Building Department contact information is from the City of St. George's website, checked September 26, 2026: 61 S Main St,
+    St. George, UT 84770; Monday to Friday, 8 a.m. to 5 p.m. Permits can be submitted online through the city's CityInspect portal.
+  </p>
+
+  <h2>Gate features to ask about</h2>
+  <p>
+    Whatever the requirement turns out to be, the gate is where pool fences succeed or fail in real life. A gate that
+    someone props open is no barrier at all. When you talk to fence companies, ask them to describe in the quote:
+  </p>
+  <ul>
+    <li><strong>Closing and latching.</strong> Pool gates are commonly expected to close and latch on their own. Ask how the hinges and latch do that, and how the design keeps working after years of sun and dust.</li>
+    <li><strong>Latch placement.</strong> Where the latch sits, and whether small children can reach it.</li>
+    <li><strong>Swing direction.</strong> Which way the gate opens relative to the pool.</li>
+    <li><strong>Hardware and finish.</strong> Hot climates are hard on cheap latches and hinges. Ask about the hardware brand and coating.</li>
+    <li><strong>Gaps.</strong> Spacing between pickets and between the bottom rail and the ground, and whether the design can be climbed.</li>
+  </ul>
+
+  <h2>Materials for a pool fence</h2>
+  <p>
+    Open-style ornamental iron or aluminum is a common pool-fence choice because it lets you watch the pool from the house and stands up to sun. Vinyl and block are also used. Each one is a
+    different tradeoff between visibility, privacy, upkeep, and price. For cost planning, the dated per-foot ranges as of {COST_AS_OF} are
+    {perFoot[0].range} for chain-link, {perFoot[1].range} for wood privacy, {perFoot[2].range} for vinyl privacy, and {perFoot[3].range} for ornamental iron. Those are general fence ranges. Pool-specific hardware
+    and gates can move the price, so see the <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a> for the method.
+  </p>
+
+  <h2>New pool or existing pool?</h2>
+  <p>
+    Timing matters. If you are building a new pool, plan the barrier alongside it and ask the city how it is reviewed. If you are adding or replacing a fence around an existing pool, tell the Building Department exactly that when you call, because requirements can differ.
+    Either way, share the confirmed requirement with every fence company you get quotes from.
+  </p>
+
+  <h2>Choosing a fence company for a pool project</h2>
+  <ul>
+    <li>Ask whether they have installed pool enclosures before, and to explain how their design meets the requirement you confirmed.</li>
+    <li>Check license status yourself with the <a href="https://dopl.utah.gov/" rel="noopener">Utah Division of Professional Licensing</a>, and confirm insurance directly.</li>
+    <li>Get the gate and latch specification in writing.</li>
+    <li>Ask who handles the permit, the HOA submittal, and any inspection.</li>
+    <li>Call 811 (<a href="https://www.bluestakes.org/" rel="noopener">Blue Stakes of Utah</a>) before digging; the service asks for at least 3 business days of notice.</li>
+  </ul>
+
+  <p class="sgfw-note">
+    This page is general guidance, not a code interpretation or safety certification. Requirements can change, so confirm them
+    directly with the City of St. George before you build.
+  </p>
+</GuideLayout>

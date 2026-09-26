@@ -1,0 +1,137 @@
+---
+// List-intent guide. Mini-profiles use ONLY what each company's own website
+// states (fetched 2026-09-26), phrased as "its site says" -- never our claim
+// (compliance.md rules 1/4/6). No ratings, no rankings, no licensing or
+// insurance claims repeated. Listed alphabetically. ItemList names only
+// entities described in the visible copy; type is Organization, never
+// LocalBusiness/AggregateRating/Review.
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import { itemListSchema } from '../lib/schema';
+
+const path = '/best-fence-and-wall-companies-st-george-ut/';
+
+const companies = [
+  {
+    name: 'Kirklands Fence & Garden',
+    url: 'https://kirklandsfenceandgarden.com/',
+    where: 'Saint George, Utah',
+    blurb: 'Its website lists residential fencing, commercial fencing, and automatic gate installation.',
+  },
+  {
+    name: 'Modern Stone and Masonry',
+    url: 'https://blockwallstgeorgeutah.com/',
+    where: 'St. George, Utah, serving Washington County',
+    blurb: 'Its website lists block fence walls, 6-foot block walls, and block wall repair, along with stonemasonry, stucco, concrete flatwork, pavers, and flagstone. It says it has served the St. George area for over 10 years.',
+  },
+  {
+    name: 'Robinson Fencing',
+    url: 'https://robinsonfences.com/',
+    where: 'Cedar City, Utah, serving Southern Utah',
+    blurb: 'Its website lists residential and commercial chain-link, commercial security fencing, privacy link, and vinyl fencing, and mentions free estimates across Southern Utah and financing options.',
+  },
+  {
+    name: 'St George Deck and Fence',
+    url: 'https://stgeorgedeckandfence.com/',
+    where: 'St. George, Utah',
+    blurb: 'Its website lists residential and commercial fencing and fence installation and repair, alongside residential decks, pool decks, and deck repair.',
+  },
+  {
+    name: 'Taylor Made Fencing',
+    url: 'https://taylormadefencing.com/',
+    where: 'Washington, Utah',
+    blurb: 'Its website lists chain link, ranch or field, vinyl, wood or pole, and temporary fencing.',
+  },
+];
+
+const faq = [
+  {
+    question: 'Who are the fence companies in St. George, UT?',
+    answer: 'Local fence and wall businesses that appear in St. George searches include Kirklands Fence & Garden, St George Deck and Fence, Taylor Made Fencing (Washington, UT), Robinson Fencing (Cedar City, UT), and, for block walls, Modern Stone and Masonry. This is an unranked, alphabetical list based on what each company\'s own website states, not an endorsement.',
+  },
+  {
+    question: 'How do I choose between fence companies?',
+    answer: 'Compare at least two or three written quotes on the same scope, verify each company\'s Utah license status and insurance yourself, ask about warranty and who pulls the permit, and look at completed work. A price far below the others usually means a different scope.',
+  },
+  {
+    question: 'Are the companies on this page paying to be listed?',
+    answer: 'No. Listings are not paid placements, and the order is alphabetical. If a listed company ever becomes a paying partner of this site, this page will say so.',
+  },
+  {
+    question: 'Which company should I pick for a block wall?',
+    answer: 'Ask any masonry company to describe the footing, reinforcement, and drainage in writing, and confirm who pulls the permit. St. George City Code §10-18-5 requires a permit for retaining walls of 4 feet or more and for any fence or retaining wall in a front setback.',
+  },
+];
+---
+
+<GuideLayout
+  title="Fence & Wall Pros in St. George"
+  description="Local fence and block wall companies serving St. George, UT, listed alphabetically from their own websites, plus a checklist for choosing between them."
+  path={path}
+  eyebrow="Local companies · St. George & Washington County"
+  h1="Fence and Block Wall Companies Serving St. George, UT"
+  answer="As of September 2026, local fence and wall businesses that come up for St. George include Kirklands Fence & Garden, St George Deck and Fence, Taylor Made Fencing, Robinson Fencing, and, for block walls, Modern Stone and Masonry. This list is alphabetical and drawn from each company's own website; it is not a ranking or an endorsement."
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  faq={faq}
+  extraNodes={[
+    itemListSchema({
+      path,
+      name: 'Fence and block wall companies serving St. George, UT',
+      items: companies.map((c) => ({ name: c.name, url: c.url, description: `${c.where}. ${c.blurb}` })),
+    }),
+  ]}
+  related={[
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Cost guide', blurb: 'What to expect before you request quotes.' },
+    { href: '/fence-permit-st-george-ut/', label: 'Permit rules', blurb: 'Questions to ask about who pulls the permit.' },
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation', blurb: 'Vetting checklist and red flags.' },
+    { href: '/block-wall-installation-st-george-ut/', label: 'Block wall installation', blurb: 'What to ask a masonry company.' },
+  ]}
+>
+  <p>
+    Most homeowners get two or three quotes, and it helps to know who is out there. These are fence and wall businesses
+    serving St. George and Southern Utah that we could confirm were operating with a live website as of September 26, 2026. The
+    descriptions below repeat only what each company's own site says. We have not inspected their work, checked their
+    licenses, or verified their claims, and this is not a complete list of every company in the area.
+  </p>
+
+  <h2>Companies, in alphabetical order</h2>
+  <ul>
+    {companies.map((c) => (
+      <li>
+        <strong><a href={c.url} rel="noopener">{c.name}</a></strong> — {c.where}. {c.blurb}
+      </li>
+    ))}
+  </ul>
+
+  <div class="sgfw-callout">
+    <strong>How this list was built.</strong> Listings are not paid placements, and none of these companies has any
+    arrangement with this site as of the update date above. Order is alphabetical, not ranked, and we show no ratings or
+    reviews because we have none of our own to verify. If that changes, this page will say so.
+  </div>
+
+  <h2>How to choose between them</h2>
+  <ol>
+    <li><strong>Price the same scope.</strong> Write down material, height, total feet, gates, removal, and cleanup, and give the same list to each company.</li>
+    <li><strong>Verify the license yourself.</strong> Search each company in the <a href="https://dopl.utah.gov/" rel="noopener">Utah Division of Professional Licensing</a> lookup. Do not rely on a website's claim, ours or theirs.</li>
+    <li><strong>Confirm insurance directly</strong> with the insurer or agent, and ask for a certificate.</li>
+    <li><strong>Ask about permits and HOA paperwork.</strong> Find out who prepares the site plan and who submits. See the <a href="/fence-permit-st-george-ut/">permit guide</a> and <a href="/hoa-fence-requirements-st-george-ut/">HOA guide</a>.</li>
+    <li><strong>Look at completed work,</strong> ideally a few years old, and ask for references you can call.</li>
+    <li><strong>Compare warranties in writing,</strong> covering workmanship and materials separately.</li>
+    <li><strong>Check specialty fit.</strong> A company that mostly does chain-link may not be the right pick for a reinforced block retaining wall, and a masonry company may not do wood privacy fences. Ask.</li>
+  </ol>
+
+  <h2>Questions to ask every company</h2>
+  <ul>
+    <li>How long until you can start, and how long will the job take?</li>
+    <li>Who is on site, employees or subcontractors?</li>
+    <li>What is the payment schedule?</li>
+    <li>How do you set posts in my soil, and how deep?</li>
+    <li>What happens if the permit requires a change?</li>
+    <li>What is not included in this quote?</li>
+  </ul>
+
+  <p class="sgfw-note">
+    Company details are as described on each company's website on September 26, 2026, and may have changed. Names are used only to identify the
+    businesses. Listing here is not an endorsement, and no company on this page is affiliated with this site.
+  </p>
+</GuideLayout>

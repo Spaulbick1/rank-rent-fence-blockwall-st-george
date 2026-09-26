@@ -1,0 +1,38 @@
+---
+// Renders a cost table from rows supplied by the page, which in turn pull
+// every figure from src/lib/costs.ts (single source of truth). The wrapper
+// scrolls horizontally on narrow screens so the page itself never does.
+interface Row {
+  label: string;
+  range: string;
+  note?: string;
+}
+interface Props {
+  caption: string;
+  unit: string;
+  rows: readonly Row[];
+}
+const { caption, unit, rows } = Astro.props;
+---
+
+<div class="sgfw-table-wrap">
+  <table class="sgfw-table">
+    <caption>{caption}</caption>
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Typical installed range ({unit})</th>
+        <th scope="col">What to know</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <th scope="row">{r.label}</th>
+          <td class="whitespace-nowrap font-semibold">{r.range}</td>
+          <td>{r.note ?? ''}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

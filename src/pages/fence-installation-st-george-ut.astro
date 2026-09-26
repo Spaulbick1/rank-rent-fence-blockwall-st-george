@@ -1,0 +1,188 @@
+---
+// Money page: Fence Installation hub. Service node = this page's own
+// @id (Operating Rule 12 gold standard). Facts: St. George City Code
+// 10-18-1 (heights) and 10-18-5 (permits), re-verified 2026-09-26; prices
+// come only from src/lib/costs.ts. No pool-barrier height anywhere.
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import CostTable from '../components/sections/CostTable.astro';
+import img from '../assets/images/vinyl-privacy-fence.webp';
+import { COST_AS_OF, fenceProject, perFoot } from '../lib/costs';
+
+const faq = [
+  {
+    question: 'How much does it cost to install a fence in St. George, UT?',
+    answer: `As of ${COST_AS_OF}, a standard residential fence project in St. George typically runs about ${fenceProject.low} to ${fenceProject.high} installed, with a median near ${fenceProject.median}. Material, total length, gates, and lot conditions decide where you land in that range.`,
+  },
+  {
+    question: 'How tall can my fence be in St. George?',
+    answer: 'In most zones, St. George City Code §10-18-1 caps front-yard fences at 4 feet and side and rear-yard fences at 6 feet 4 inches. A few zones allow a taller front fence if it is at least 50 percent open. Your HOA may set stricter limits than the city.',
+  },
+  {
+    question: 'Do I need a permit to build a fence in St. George?',
+    answer: 'A permit is required before you build any fence or retaining wall in a front setback, unless it is shown in detail on an approved site development plan (City Code §10-18-5). Confirm your specific project with the city before you dig.',
+  },
+  {
+    question: 'Which fence material lasts best in the St. George desert?',
+    answer: 'No single material wins on every measure. Sun and heat are hard on some finishes, so ask any company how the material you choose is rated for UV, what the warranty covers, and what upkeep it needs. Metal and block tolerate sun well but cost more up front.',
+  },
+  {
+    question: 'How do I check that a fence company is licensed in Utah?',
+    answer: 'Search the company by name in the Utah Division of Professional Licensing (DOPL) public license lookup, then ask for proof of insurance directly. Verify it yourself rather than relying on any website\'s claim, including this one.',
+  },
+];
+---
+
+<GuideLayout
+  title="Fence Installation, St. George UT"
+  description="Fence installation in St. George, UT: height limits, permit rules, material choices for the desert, cost factors, and how to vet a fence company."
+  path="/fence-installation-st-george-ut/"
+  eyebrow="Fence installation · St. George & Washington County"
+  h1="Fence Installation in St. George, UT: Rules, Materials, and What to Check First"
+  answer={`As of ${COST_AS_OF}, installing a fence in St. George, UT typically costs about ${fenceProject.low}–${fenceProject.high} for a standard residential project (median near ${fenceProject.median}). St. George City Code §10-18-1 limits front-yard fences to 4 feet and side and rear-yard fences to 6 feet 4 inches in most zones.`}
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  image={img}
+  imageAlt="White vinyl privacy fence running along a residential lawn with houses and trees behind it"
+  service={{
+    name: 'St. George Elite Fence — Fence Installation Referral',
+    serviceType: 'Fence installation referral / contractor matching',
+    description: 'Connects St. George, UT homeowners planning a new wood, vinyl, chain-link, or ornamental iron fence with independent, third-party fence companies. Does not install fences and is not a contractor.',
+  }}
+  faq={faq}
+  related={[
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Fence & block wall cost guide', blurb: 'Sourced ranges, dated, with the method shown.' },
+    { href: '/fence-permit-st-george-ut/', label: 'Fence permit rules', blurb: 'When a St. George permit is required, step by step.' },
+    { href: '/hoa-fence-requirements-st-george-ut/', label: 'HOA fence requirements', blurb: 'How HOA approval fits alongside the city rules.' },
+    { href: '/block-wall-installation-st-george-ut/', label: 'Block wall installation', blurb: 'CMU and retaining walls, permits, and cost.' },
+  ]}
+>
+  <p>
+    A fence looks like a simple purchase until the details start stacking up: how tall it can legally be, whether the
+    city wants a permit, whether your HOA has already decided the color, and which material will still look decent after
+    a few St. George summers. This guide walks through those questions in the order they actually come up, so you can
+    talk to fence companies with the answers already in hand.
+  </p>
+
+  <h2>How a fence project runs, from first idea to finished fence</h2>
+  <p>Most residential fence jobs follow the same sequence. Skipping an early step is how homeowners end up moving a fence line or paying for a redo.</p>
+  <ol>
+    <li><strong>Confirm your property lines.</strong> Use your plat, survey, or the corner pins on your lot. A fence built a few inches over a line is a neighbor dispute waiting to happen, and the installer generally builds where you point.</li>
+    <li><strong>Check the city height and setback rules</strong> (next section), and note whether any part of the fence sits in a front setback.</li>
+    <li><strong>Get HOA approval first, if you have an HOA.</strong> City approval and HOA approval are separate; one does not replace the other. See our <a href="/hoa-fence-requirements-st-george-ut/">HOA fence requirements guide</a>.</li>
+    <li><strong>Pull a permit if one is required.</strong> The <a href="/fence-permit-st-george-ut/">permit guide</a> explains exactly when.</li>
+    <li><strong>Have utilities marked.</strong> Call 811 (<a href="https://www.bluestakes.org/" rel="noopener">Blue Stakes of Utah</a>) before any digging. The service asks for at least 3 business days of notice.</li>
+    <li><strong>Choose a material and collect written quotes</strong> from at least two or three independent companies for the same scope.</li>
+    <li><strong>Installation, then a walkthrough.</strong> Check gate swing, latch operation, post alignment, cleanup, and haul-away before the final payment.</li>
+  </ol>
+
+  <h2>Height and placement rules in St. George</h2>
+  <p>
+    St. George City Code §10-18-1 governs fence height. In plain terms, for most zones: no fence may exceed 4 feet in the
+    front yard, and no fence may exceed 6 feet 4 inches in the side and rear yards. Within 10 feet behind the sidewalk,
+    only decorative fences, such as picket or wrought iron styles that are at least 50 percent open, are permitted.
+  </p>
+  <p>
+    Some zones (RE-37.5, RE-5, A-1, A-5, A-10, and R-1-40) allow a fence up to 6 feet 4 inches within the front setback,
+    provided it is at least 50 percent open and stays at least 10 feet from the sidewalk or property line. Barbed wire is
+    prohibited in residential zones except for agricultural use in residential estates. Zoning varies by lot, so check
+    which zone yours falls in before you design anything.
+  </p>
+  <div class="sgfw-permit">
+    <strong>Permit trigger to remember:</strong> under City Code §10-18-5, a permit is required before you build any fence
+    or retaining wall in a front setback, unless it is shown in detail on an approved site development plan. Height does
+    not matter for that front-setback rule.
+  </div>
+
+  <h2>Fence materials for a desert climate</h2>
+  <p>
+    Every material trades price against upkeep and how it handles sun, heat, and wind. The per-foot figures below are
+    dated planning ranges (not St. George quotes); see the <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a>
+    for sources and method.
+  </p>
+  <CostTable caption={`Installed fence cost per linear foot, as of ${COST_AS_OF}`} unit="per linear foot" rows={perFoot} />
+
+  <h3>Wood privacy fences</h3>
+  <p>
+    Wood is the classic backyard choice and among the most affordable privacy options. In a hot, dry climate, unfinished
+    boards dry out, and a fence that is never sealed or stained will gray, warp, and split sooner. Ask how the company sets
+    posts and whether the boards are treated, then plan for periodic re-sealing as part of the true cost of ownership.
+  </p>
+
+  <h3>Vinyl (PVC) fences</h3>
+  <p>
+    Vinyl needs almost no painting or sealing and comes in white, tan, and wood-grain finishes. The questions worth asking
+    in a sunny climate are about the formulation: whether the panels are UV-stabilized, how the manufacturer handles
+    fading or brittleness in its warranty, and whether the posts are reinforced. Long runs also need room for thermal
+    movement, so how the company connects panels matters.
+  </p>
+
+  <h3>Chain-link</h3>
+  <p>
+    Chain-link is the price leader and works well for containing pets and marking a boundary, especially on larger lots. It
+    offers little privacy on its own. Vinyl-coated or powder-coated versions cost more than plain galvanized but hold their
+    appearance better. Slats can add privacy, though they also catch wind.
+  </p>
+
+  <h3>Ornamental iron and aluminum</h3>
+  <p>
+    Open-picket metal fences are durable, look sharp, and fit the 50-percent-open rule that applies to decorative fences
+    near the sidewalk in the front yard. They provide little privacy, and steel needs a good finish to resist rust; ask
+    what coating the company uses. Aluminum avoids rust but is generally lighter.
+  </p>
+
+  <h3>Block and masonry</h3>
+  <p>
+    A block wall is a different kind of project with its own permit and cost profile. If privacy, sound, and permanence
+    matter more than price, read our <a href="/block-wall-installation-st-george-ut/">block wall installation guide</a>.
+  </p>
+
+  <h2>Wind, soil, and slope</h2>
+  <p>
+    Wind is a real design load for any solid privacy fence, because it acts like a sail. Post depth, spacing, and how the posts are
+    set (and whether concrete is used) matter more here than the color of the panels. Ask the company how they set posts in
+    your specific soil. Rocky or hard-packed ground can add labor, which shows up in the quote. On sloped lots, ask how
+    the fence will step or rack down the grade, because each approach changes the look and the price.
+  </p>
+
+  <h2>Gates</h2>
+  <p>
+    Plan gate locations before quotes, since gates cost more per foot than fence and are the part most likely to fail.
+    Confirm gate width for a mower or trailer, the hardware brand and finish, and whether the gate frame is reinforced
+    against sagging. If a gate borders a pool area, read our <a href="/pool-fence-and-gate-st-george-ut/">pool fence and gate guide</a> first.
+  </p>
+
+  <h2>What drives the price</h2>
+  <ul>
+    <li><strong>Material.</strong> Chain-link is at the low end and ornamental iron or vinyl privacy at the high end.</li>
+    <li><strong>Total length and height.</strong> Cost scales with linear feet; a taller fence uses more material and heavier posts.</li>
+    <li><strong>Gates.</strong> Each gate adds hardware and labor beyond the per-foot rate.</li>
+    <li><strong>Lot conditions.</strong> Slope, rock, tight access, and utility conflicts increase labor.</li>
+    <li><strong>Removal of an old fence.</strong> Demolition and haul-away are often quoted separately.</li>
+    <li><strong>Permits and HOA submittals.</strong> Ask who pulls the permit and whether that fee is in the quote.</li>
+  </ul>
+
+  <h2>Vetting checklist before you sign</h2>
+  <ul>
+    <li>Look the company up in the <a href="https://dopl.utah.gov/" rel="noopener">Utah Division of Professional Licensing</a> and confirm its license status yourself.</li>
+    <li>Ask for a certificate of insurance and confirm it directly with the insurer or agent.</li>
+    <li>Get a written scope: material, height, linear feet, gates, post spacing, concrete, removal, cleanup.</li>
+    <li>Ask who pulls the permit and who handles HOA paperwork.</li>
+    <li>Compare at least two or three quotes on the same scope. A big gap usually means the scopes differ, not that one company is a bargain.</li>
+    <li>Get warranty terms in writing, including what is covered for workmanship and what the manufacturer covers.</li>
+    <li>Agree on a payment schedule tied to progress; avoid paying the full amount up front.</li>
+  </ul>
+
+  <h2>Red flags</h2>
+  <ul>
+    <li>Pressure to sign the same day, or a "today only" price.</li>
+    <li>No written estimate, or a quote that will not itemize gates, removal, and permits.</li>
+    <li>A company that says permits or HOA approval are "not needed" without checking your lot.</li>
+    <li>A request for a large cash deposit, or for payment in full before work starts.</li>
+    <li>No verifiable license or insurance when you ask.</li>
+  </ul>
+
+  <p class="sgfw-note">
+    Heights, zones, and permit rules come from St. George City Code §10-18-1 and §10-18-5, rechecked September 26, 2026.
+    Codes change, so confirm with the City of St. George before you build.
+  </p>
+</GuideLayout>

@@ -25,7 +25,7 @@ main a:not([class]) {
 }
 
 .btn {
-  @apply inline-flex items-center justify-center rounded-blk px-5 py-3 text-fl-base font-semibold transition-colors;
+  @apply inline-flex items-center justify-center whitespace-nowrap rounded-blk px-5 py-3 text-fl-base font-semibold transition-colors;
 }
 
 /* Phone-first button hierarchy (v1.17): wherever a phone CTA and a
@@ -94,4 +94,55 @@ main a:not([class]) {
 }
 .sgfw-prose .sgfw-cta {
   @apply mt-8 flex flex-col gap-3 sm:flex-row;
+}
+
+/* Phase 3: cost tables + guide chrome */
+.sgfw-table-wrap {
+  @apply mt-6 overflow-x-auto rounded-blk border border-tint-line bg-white;
+}
+.sgfw-table {
+  @apply w-full min-w-[34rem] border-collapse text-left text-fl-sm;
+}
+.sgfw-table caption {
+  @apply border-b border-tint-line bg-tint px-4 py-3 text-left font-display text-fl-base font-bold text-ink;
+}
+.sgfw-table th,
+.sgfw-table td {
+  @apply border-b border-tint-line px-4 py-3 align-top text-ink;
+}
+.sgfw-table thead th {
+  @apply bg-brass-50 text-brass-dark text-fl-sm font-semibold;
+}
+.sgfw-table tbody th {
+  @apply font-semibold;
+}
+.sgfw-table tbody tr:last-child th,
+.sgfw-table tbody tr:last-child td {
+  @apply border-b-0;
+}
+.sgfw-answer {
+  @apply mt-6 p-5;
+}
+
+/* Lead form: keep grid tracks from growing past the viewport on narrow screens */
+.sgfw-form,
+.sgfw-form > div.grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+.sgfw-form label,
+.sgfw-form input,
+.sgfw-form select,
+.sgfw-form textarea {
+  min-width: 0;
+  max-width: 100%;
+}
+.sgfw-form input:not([type='checkbox']),
+.sgfw-form select,
+.sgfw-form textarea {
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .sgfw-form > div.grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
