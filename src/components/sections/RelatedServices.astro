@@ -1,0 +1,51 @@
+---
+/**
+ * RelatedServices: in-body "next steps" block rendered by BaseLayout right after <slot /> in
+ * <main> on every indexable page (Operating Rule 18). See lib/priority-links.ts for the why and
+ * the list. Skips the current page so nothing self-links; renders nothing on legal/utility pages.
+ * Uses this site's own tokens (river / brass / tint-line / rounded-blk, cap-stone card).
+ */
+import { PRIORITY_LINKS, PRIORITY_EXCLUDE } from '../../lib/priority-links';
+import { site } from '../../lib/site-config';
+import { icons } from '../../lib/icons';
+
+const withSlash = (p: string) => (p.endsWith('/') ? p : p + '/');
+const current = withSlash(Astro.url.pathname);
+const excluded = PRIORITY_EXCLUDE.some((p) => current.startsWith(p));
+const links = PRIORITY_LINKS.filter((l) => l.href !== current);
+const [first, second] = links;
+---
+
+{!excluded && (
+  <aside aria-labelledby="next-steps-heading" class="mx-auto max-w-content px-4 pb-12 sm:px-6 lg:pb-16">
+    <div class="card p-6 md:p-8">
+      <h2 id="next-steps-heading" class="font-display text-fl-2xl font-bold text-ink">
+        Popular next steps in {site.serviceArea.primary}
+      </h2>
+      <p class="mt-2 max-w-prose text-fl-base text-muted">
+        Many homeowners start with
+        <a href={first.href} class="font-semibold text-river underline underline-offset-2 hover:text-river-dark">{first.label}</a>
+        and then read
+        <a href={second.href} class="font-semibold text-river underline underline-offset-2 hover:text-river-dark">{second.label}</a>
+        before they request a match.
+      </p>
+      <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {links.map((l) => (
+          <li>
+            <a href={l.href} class="flex h-full items-start gap-3 rounded-blk border border-tint-line bg-white px-4 py-3 transition-colors hover:border-river">
+              <span class="sgfw-iconlist-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d={icons[l.icon] ?? icons.check} />
+                </svg>
+              </span>
+              <span class="min-w-0">
+                <span class="block font-semibold text-ink">{l.label}</span>
+                <span class="mt-1 block text-fl-sm text-muted">{l.desc}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </aside>
+)}

@@ -106,13 +106,13 @@ export const costSources = [
   },
   {
     name: 'NerdWallet — Cost to Install a Fence',
-    url: 'https://www.nerdwallet.com/article/mortgages/cost-to-install-a-fence',
+    url: 'https://www.nerdwallet.com/home-ownership/home-improvement/learn/cost-to-install-a-fence',
     date: 'Updated July 10, 2025',
     used: 'National per-foot ranges by material',
   },
   {
     name: 'HomeAdvisor — Wrought Iron Fence Cost',
-    url: 'https://www.homeadvisor.com/cost/fencing/install-a-wrought-iron-fence',
+    url: 'https://www.homeadvisor.com/cost/fencing/install-a-wrought-iron-fence/',
     date: 'Updated June 19, 2026',
     used: 'Ornamental / wrought iron per-foot range',
   },

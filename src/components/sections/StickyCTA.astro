@@ -10,11 +10,11 @@ interface Props {
 const { quoteHref = site.defaultQuoteHref } = Astro.props;
 ---
 
-<div class="fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-tint-line bg-paper p-3 shadow-lift sm:hidden">
+<aside aria-label="Call or get matched" class="fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-tint-line bg-paper p-3 shadow-lift sm:hidden">
   {site.phone.href ? (
     <a href={site.phone.href} class="btn-phone flex-1" data-analytics="phone_click">Call Now</a>
   ) : (
     <span class="flex-1 rounded-blk border border-tint-line px-5 py-3 text-center text-fl-sm text-muted">Phone live at launch</span>
   )}
   <a href={quoteHref} class="btn-quote flex-1">Get Matched</a>
-</div>
+</aside>

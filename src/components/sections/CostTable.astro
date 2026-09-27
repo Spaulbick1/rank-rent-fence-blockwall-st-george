@@ -15,7 +15,7 @@ interface Props {
 const { caption, unit, rows } = Astro.props;
 ---
 
-<div class="sgfw-table-wrap">
+<div class="sgfw-table-wrap" role="region" aria-label={caption} tabindex="0">
   <table class="sgfw-table">
     <caption>{caption}</caption>
     <thead>

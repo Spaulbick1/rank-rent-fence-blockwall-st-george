@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Phase 5 technical-SEO audit for St. George Elite Fence (rank-rent-build v1.41).
+"""Technical-SEO audit for St. George Elite Fence (Phase 5, rank-rent-build v1.41; Rule 17/18 checks added Phase 6, v1.43).
 
 Run after a build:  python3 scripts/audit.py [dist_dir]
 Exits 1 if any FAIL. WARN lines are for human review. Re-run in Phases 6-7.
@@ -224,6 +224,42 @@ try:
     if urls != want: F('sitemap', f'missing {sorted(want-urls)} extra {sorted(urls-want)}')
     else: print(f'sitemap: {len(urls)} URLs, matches indexable set')
 except Exception as e: F('sitemap', str(e))
+
+# Operating Rule 17 (v1.42): every sitemap <url> carries a non-empty <lastmod>
+try:
+    for loc in idx.findall('.//s:loc', ns):
+        sm = ET.parse(os.path.join(dist, loc.text.replace(SITE + '/', '')))
+        for u in sm.findall('.//s:url', ns):
+            lm = u.find('s:lastmod', ns)
+            if lm is None or not (lm.text or '').strip(): F('sitemap', f'no <lastmod> on {u.find("s:loc", ns).text}')
+except Exception as e: F('sitemap lastmod', str(e))
+
+# Operating Rule 18 (v1.43): RelatedServices block + priority-links.ts pass rule (built HTML)
+PL_SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'src', 'lib', 'priority-links.ts')
+try:
+    pl = open(PL_SRC, encoding='utf-8').read()
+    prio = re.findall(r"href: '([^']+)'", pl.split('PRIORITY_EXCLUDE')[0])
+    excl = re.findall(r"'([^']+)'", pl.split('export const PRIORITY_EXCLUDE')[1])
+    legal = [r for r in pages if r.startswith(('/privacy', '/terms'))]
+    if not 6 <= len(prio) <= 8: F('priority-links', f'{len(prio)} entries (want 6-8)')
+    for h in prio:
+        if h not in pages: F('priority-links', f'{h} is not a built route')
+    cnt = {r: 0 for r in pages}
+    for r, p in pages.items():
+        for a in p.a:
+            res = resolve(a.get('href', ''))
+            if not res: continue
+            t = res[0] if res[0].endswith('/') else res[0] + '/'
+            if t != r and t in cnt: cnt[t] += 1
+    for r, p in pages.items():
+        n = sum(1 for x in p.heads if 'Popular next steps' in x[1])
+        want = 0 if any(r.startswith(e) for e in excl) else 1
+        if n != want: F(r, f'RelatedServices rendered {n}x (want {want})')
+    lmax = max(cnt[r] for r in legal) if legal else 0
+    for h in prio:
+        if h in cnt and cnt[h] <= lmax: F(h, f'priority page inbound {cnt[h]} <= legal max {lmax}')
+    print('rule 18 inbound (occurrences): ' + ', '.join(f'{h}={cnt.get(h)}' for h in prio) + ' | legal: ' + ', '.join(f'{r}={cnt[r]}' for r in sorted(legal)))
+except Exception as e: F('priority-links', repr(e))
 
 rb = open(os.path.join(dist, 'robots.txt')).read()
 if f'Sitemap: {SITE}/sitemap-index.xml' not in rb: F('robots.txt', 'no Sitemap line')

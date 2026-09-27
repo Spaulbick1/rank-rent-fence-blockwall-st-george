@@ -18,6 +18,9 @@ export default defineConfig({
     sitemap({
       // noindex utility pages stay out of the sitemap (phase-3-4 reference).
       filter: (page) => !/\/(thank-you|404)\/?$/.test(new URL(page).pathname),
+      // Operating Rule 17 (v1.42): stamp <lastmod> with the build time -- honest about what it
+      // represents (when this deployment was generated); never invent per-page dates.
+      serialize: (item) => ({ ...item, lastmod: new Date().toISOString() }),
     }),
   ],
 });

@@ -2,6 +2,7 @@
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import StickyCTA from '../sections/StickyCTA.astro';
+import RelatedServices from '../sections/RelatedServices.astro';
 import { site } from '../../lib/site-config';
 import {
   organizationSchema,
@@ -27,6 +28,8 @@ interface Props {
   ogType?: 'website' | 'article';
   /** Path (not full URL) to the social preview image; defaults to the sitewide 1200x630 card */
   ogImage?: string;
+  /** Suppress the in-body RelatedServices block (Operating Rule 18); legal/utility pages are excluded automatically */
+  hideRelated?: boolean;
 }
 
 const {
@@ -39,6 +42,7 @@ const {
   noindex = false,
   ogType = 'website',
   ogImage = '/images/og-default.png',
+  hideRelated = false,
 } = Astro.props;
 
 const canonical = new URL(path, site.url).toString();
@@ -132,6 +136,7 @@ const graph = schemaGraph([
     )}
   </head>
   <body>
+    <a href="#main" class="sgfw-skip">Skip to main content</a>
     <Header quoteHref={quoteHref} />
     {
       showBreadcrumb && (
@@ -150,8 +155,9 @@ const graph = schemaGraph([
         </nav>
       )
     }
-    <main>
+    <main id="main" tabindex="-1" class="scroll-mt-16">
       <slot />
+      {!hideRelated && <RelatedServices />}
     </main>
     <Footer />
     <StickyCTA quoteHref={quoteHref} />

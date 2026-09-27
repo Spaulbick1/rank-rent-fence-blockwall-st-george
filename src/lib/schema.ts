@@ -152,6 +152,21 @@ export function webPageId(path: string): string {
   return abs(path) + '#webpage';
 }
 
+// Phase 6 (2026-09-27): Google's Rich Results Test flags a bare YYYY-MM-DD
+// datePublished/dateModified as "invalid datetime / missing a timezone". The
+// pages keep passing plain dates; this renders them as midnight Utah time
+// (America/Denver: MDT -06:00 from the 2nd Sunday of March to the 1st Sunday
+// of November, otherwise MST -07:00). Same calendar date -- no invented time.
+export function utahDateTime(d: string): string {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
+  const [y, m, day] = d.split('-').map(Number);
+  const firstSunday = (month: number) => 1 + ((7 - new Date(Date.UTC(y, month, 1)).getUTCDay()) % 7);
+  const dstStart = Date.UTC(y, 2, firstSunday(2) + 7);
+  const dstEnd = Date.UTC(y, 10, firstSunday(10));
+  const t = Date.UTC(y, m - 1, day);
+  return `${d}T00:00:00${t >= dstStart && t < dstEnd ? '-06:00' : '-07:00'}`;
+}
+
 // Long-form dated content (cost guides, licensing guides) -- carried
 // forward for Phase 3's cost/diagnostic pages, not used by any Phase 2 page.
 export function articleSchema(opts: {
@@ -167,8 +182,8 @@ export function articleSchema(opts: {
     '@id': abs(opts.path) + '#article',
     headline: opts.headline,
     description: opts.description,
-    datePublished: opts.datePublished,
-    dateModified: opts.dateModified ?? opts.datePublished,
+    datePublished: utahDateTime(opts.datePublished),
+    dateModified: utahDateTime(opts.dateModified ?? opts.datePublished),
     author: { '@type': 'Organization', '@id': abs('/#organization'), name: site.brandName },
     publisher: { '@type': 'Organization', '@id': abs('/#organization'), name: site.brandName },
     mainEntityOfPage: { '@id': webPageId(opts.path) },

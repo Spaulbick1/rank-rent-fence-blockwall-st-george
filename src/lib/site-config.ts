@@ -30,7 +30,7 @@ export const site = {
   // been pulled (see UT-005's treatment of plumbing -- same rule). It tells
   // readers to verify license status themselves via DOPL's own lookup.
   disclosure:
-    'St. George Elite Fence is an independent referral service. We connect homeowners in the St. George, UT area with independent, third-party fence and block-wall companies -- we do not build fences or walls, and we are not a contractor. Always verify a company\'s Utah contractor license status with the Utah Division of Professional Licensing, and confirm insurance, directly before you hire.',
+    'St. George Elite Fence is an independent referral service. We connect homeowners in the St. George, UT area with independent, third-party fence and block-wall companies — we do not build fences or walls, and we are not a contractor. Always verify a company\'s Utah contractor license status with the Utah Division of Professional Licensing, and confirm insurance, directly before you hire.',
 
   serviceArea: {
     primary: 'St. George, UT',

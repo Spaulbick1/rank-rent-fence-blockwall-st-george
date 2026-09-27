@@ -16,6 +16,26 @@ h1, h2, h3, .font-display {
 
 /* Injected/markdown content (set:html) bypasses component classes on links
    -- without this, a link inside body copy renders unstyled (phase-2-design.md). */
+/* Phase 6 (2026-09-27): branded keyboard focus ring. River on the light
+   surfaces (6.9:1 on paper), brass-50 on the dark footer (>= 3:1, WCAG 1.4.11). */
+:focus-visible {
+  outline: 3px solid #0E5C7A;
+  outline-offset: 2px;
+}
+footer :focus-visible {
+  outline-color: #F5EDD8;
+}
+main:focus {
+  outline: none;
+}
+.sgfw-table-wrap:focus-visible {
+  outline-offset: 0;
+}
+/* Skip link: off-screen until focused, then pinned above the sticky header. */
+.sgfw-skip {
+  @apply absolute left-4 top-2 z-[60] -translate-y-24 rounded-blk bg-river px-4 py-2 font-semibold text-white focus:translate-y-0;
+}
+
 main a:not([class]) {
   @apply text-river underline underline-offset-2 hover:text-river-dark;
 }
