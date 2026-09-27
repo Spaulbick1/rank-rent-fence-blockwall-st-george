@@ -19,6 +19,10 @@
 // nodes as those pages ship in Phase 3/4.
 import { site } from './site-config';
 
+// Every City / county node names its state so "Washington", "Hurricane" and
+// "Santa Clara" resolve to Utah, not D.C./WA/CA (Claude second-opinion review, Phase 5).
+const UTAH = { '@type': 'State', name: 'Utah' } as const;
+
 export function abs(path: string): string {
   return new URL(path, site.url).toString();
 }
@@ -43,8 +47,8 @@ export function organizationSchema() {
     // and live-forwarding (flips site.phoneIsPlaceholder to false).
     ...(!site.phoneIsPlaceholder && site.phone.href ? { telephone: site.phone.href } : {}),
     areaServed: [
-      ...site.serviceArea.cities.map((name) => ({ '@type': 'City', name })),
-      { '@type': 'AdministrativeArea', name: site.serviceArea.county },
+      ...site.serviceArea.cities.map((name) => ({ '@type': 'City', name, containedInPlace: UTAH })),
+      { '@type': 'AdministrativeArea', name: site.serviceArea.county, containedInPlace: UTAH },
     ],
   };
 }
@@ -84,6 +88,7 @@ export function serviceSchema(opts: {
     ).map((name) => ({
       '@type': name === site.serviceArea.county ? 'AdministrativeArea' : 'City',
       name,
+      containedInPlace: UTAH,
     })),
   };
 }
@@ -182,7 +187,7 @@ export function umbrellaServiceSchema() {
   return serviceSchema({
     id: UMBRELLA_SERVICE_ID,
     path: '/',
-    name: `${site.brandName} -- Fence & Block Wall Referral Service`,
+    name: `${site.brandName} — Fence & Block Wall Referral Service`,
     serviceType: 'Fence and block-wall installation and repair referral / contractor matching service',
     description:
       'Connects homeowners in the St. George, UT area with independent, third-party fence and block-wall companies for new fence installation, fence repair, block/CMU and retaining walls, pool fences and gates, and HOA or new-construction requirements. Does not itself build fences or walls and is not a contractor.',
