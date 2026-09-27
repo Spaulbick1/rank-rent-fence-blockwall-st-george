@@ -3,7 +3,7 @@
 // from src/lib/costs.ts (national ranges; labelled as such).
 import GuideLayout from '../components/layout/GuideLayout.astro';
 import CostTable from '../components/sections/CostTable.astro';
-import img from '../assets/images/cracked-block-wall.webp';
+// Photo: Pexels 26292376 (Alfo Medeiros, Pexels license), Phase 4 stopgap while Adobe credits are out.
 import { repair } from '../lib/costs';
 
 const faq = [
@@ -39,8 +39,6 @@ const faq = [
   answer={`Most fence repairs cost ${repair.standard}, based on national ranges published in early 2026: minor fixes run ${repair.minor} and major repairs run ${repair.major}. Replacing one damaged post averages ${repair.post}. These are not St. George quotes, so get local written estimates.`}
   updated="2026-09-26"
   updatedLabel="September 26, 2026"
-  image={img}
-  imageAlt="Vertical crack running through gray concrete blocks and their mortar joints in a block wall"
   service={{
     name: 'St. George Elite Fence — Fence Repair Referral',
     serviceType: 'Fence and wall repair referral / contractor matching',

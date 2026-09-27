@@ -1,0 +1,175 @@
+---
+// Spoke (Phase 4): Retaining wall cost -- desert sloped-lot angle. Every $
+// figure imported from src/lib/costs.ts (HomeGuide Jan 16 2026 primary;
+// Angi Sep 15 2026 cross-check). Local rules: St. George City Code 10-18-5
+// (4-ft permit trigger + measuring method + drainage plan), rechecked
+// 2026-09-26; neighbor-city engineering triggers from each city's code
+// (Santa Clara 17.28.020/.060, Washington City 10-5-9, Washington County
+// 10-15A-2), read 2026-09-26. Umbrella Service (cost spoke, not a distinct
+// service line). Article + FAQ.
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import CostTable from '../components/sections/CostTable.astro';
+import IconList from '../components/sections/IconList.astro';
+import { COST_AS_OF, retainingWall } from '../lib/costs';
+
+const path = '/retaining-wall-cost-st-george-ut/';
+const rw = retainingWall;
+const byHeight4 = rw.byHeight10ft[1].range;
+
+const faq = [
+  {
+    question: 'How much does a retaining wall cost in St. George, UT?',
+    answer: `As of ${COST_AS_OF}, published national figures put a retaining wall at about ${rw.overallPerSqFt} per square foot of wall face including materials and labor, or roughly ${byHeight4} for a 10-foot-long wall 4 feet tall. No St. George company publishes retaining wall prices, so use these as planning ranges and get written quotes.`,
+  },
+  {
+    question: 'Do I need a permit for a retaining wall in St. George?',
+    answer: 'Yes if it is 4 feet or taller, or if it sits in a front setback. St. George City Code §10-18-5 requires a permit for rockery, segmental block, reinforced concrete, or CMU retaining walls 4 feet or greater, and for any fence or retaining wall in a front setback, unless shown in detail on an approved site development plan.',
+  },
+  {
+    question: 'Does a retaining wall need an engineer?',
+    answer: `Often, once it reaches about 4 feet. HomeGuide notes that walls 4 feet or higher usually need a structural engineer's design, and nearby codes require engineering at set heights (Santa Clara over 4 feet; Washington County for any permitted wall). Engineering fees run about ${rw.engineering} per HomeGuide; ask St. George's Building Department what your wall needs.`,
+  },
+  {
+    question: 'What is the cheapest type of retaining wall?',
+    answer: `By material, timber (${rw.timber} per sq ft) and concrete block (${rw.block}) sit at the low end of HomeGuide's ranges, with natural stone (${rw.stone}) the widest. Timber has a shorter life, and on a tall or loaded wall the engineering and drainage matter more than the block price.`,
+  },
+  {
+    question: 'How much does drainage add?',
+    answer: `HomeGuide lists a French drain at ${rw.frenchDrain} per linear foot and footings at ${rw.footings} per linear foot. Drainage behind the wall is what keeps it standing, so a quote that leaves it out is not comparable to one that includes it.`,
+  },
+];
+
+const drivers = [
+  { icon: 'ruler', title: 'Height', text: 'Cost climbs faster than height: taller walls need deeper footings, reinforcement, and often engineering, and at 4 feet St. George requires a permit.' },
+  { icon: 'slope', title: 'Slope and soil', text: 'A steep cut, rock, or loose fill changes excavation, base depth, and how much soil the wall must hold.' },
+  { icon: 'drop', title: 'Drainage', text: 'Gravel backfill, a perforated drain, and weep outlets keep water from building up behind the wall. St. George asks for a drainage plan with the permit.' },
+  { icon: 'blocks', title: 'Wall type and material', text: 'Segmental block, poured concrete, CMU, stone, and timber differ in price per square foot and in how tall they can go.' },
+  { icon: 'house', title: 'Access and loads', text: 'Walls near a driveway, pool, or house, or on a tight side yard, can need heavier design and more hand labor.' },
+  { icon: 'scroll', title: 'Permit and plans', text: `Permits run about ${rw.permit} per HomeGuide and Angi, plus any engineering and the site and drainage plans the city requires.` },
+];
+---
+
+<GuideLayout
+  title="Retaining Wall Cost, St. George"
+  description="Retaining wall cost in St. George, UT as of September 2026: per square foot by type and height, engineering, drainage, and the 4-foot permit rule."
+  path={path}
+  eyebrow="Cost guide · Retaining walls · St. George & Washington County"
+  h1="How Much Does a Retaining Wall Cost in St. George, UT?"
+  answer={`As of ${COST_AS_OF}, a retaining wall typically costs about ${rw.overallPerSqFt} per square foot of wall face installed, or about ${byHeight4} for a 10-foot run 4 feet tall (HomeGuide, national). In St. George, retaining walls 4 feet or taller need a city permit under City Code §10-18-5.`}
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  article={{ headline: 'How Much Does a Retaining Wall Cost in St. George, UT?', datePublished: '2026-09-26' }}
+  faq={faq}
+  related={[
+    { href: '/block-wall-installation-st-george-ut/', label: 'Block wall installation', blurb: 'CMU and retaining walls, and how to vet a mason.' },
+    { href: '/fence-permit-st-george-ut/', label: 'Fence and wall permits', blurb: 'The 4-foot rule and how the city measures height.' },
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Fence and block wall cost', blurb: 'All ranges and every source in one place.' },
+    { href: '/cmu-block-wall-vs-wood-fence-st-george-ut/', label: 'CMU wall vs wood fence', blurb: 'Cost, lifespan, and upkeep compared.' },
+  ]}
+>
+  <p>
+    On a sloped lot, or where two lots sit at different grades, a retaining wall is often part of a fence or wall project.
+    It is also one of the easiest wall projects to under-budget, because the parts that keep a wall standing are the parts
+    you cannot see. This guide gives dated
+    planning ranges, explains what moves the price, and shows where St. George's permit rule kicks in.
+  </p>
+  <p>
+    <strong>A note on the numbers:</strong> no St. George wall company publishes retaining wall prices, so the figures below
+    are national ranges from HomeGuide (updated January 16, 2026), cross-checked against Angi (updated September 15, 2026).
+    They are for planning, not quotes.
+  </p>
+
+  <h2>Retaining wall cost by height</h2>
+  <p>
+    Height is the biggest single driver. HomeGuide prices a 10-foot-long wall at three heights:
+  </p>
+  <CostTable
+    caption={`Retaining wall cost for a 10-foot run, as of ${COST_AS_OF}`}
+    unit="total for 10 linear feet"
+    rows={rw.byHeight10ft.map((h) => ({
+      label: `${h.height} tall`,
+      range: h.range,
+      note: h.height === '4 feet' ? 'St. George permit threshold (City Code §10-18-5).' : h.height === '6 feet' ? 'Engineering and a permit are likely.' : 'Usually below permit and engineering thresholds.',
+    }))}
+  />
+  <p>
+    HomeGuide also notes that most retaining wall contractors have a project minimum of about {rw.projectMinimum}, so a short
+    garden wall may cost more per foot than the table suggests.
+  </p>
+
+  <h2>Cost per square foot by material</h2>
+  <CostTable
+    caption={`Retaining wall cost by material, as of ${COST_AS_OF}`}
+    unit="per square foot of wall"
+    rows={[
+      { label: 'Concrete block (CMU)', range: rw.block, note: 'Mortared, reinforced block on a footing.' },
+      { label: 'Poured concrete', range: rw.poured, note: 'Formwork, steel, and engineering raise the price.' },
+      { label: 'Natural stone', range: rw.stone, note: 'Wide range: stacked stone to large boulders.' },
+      { label: 'Timber', range: rw.timber, note: 'Low cost but the shortest life; not for tall or loaded walls.' },
+    ]}
+  />
+
+  <h2>Cost per square foot by wall type</h2>
+  <CostTable
+    caption={`Retaining wall cost by structural type, as of ${COST_AS_OF}`}
+    unit="per square foot of wall"
+    rows={[
+      { label: 'Segmental (interlocking block)', range: rw.segmental, note: 'Dry-stacked units; drainage and base are part of the job.' },
+      { label: 'Gravity wall', range: rw.gravity, note: 'Relies on its own weight; common for lower walls.' },
+      { label: 'Cantilevered wall', range: rw.cantilevered, note: 'Reinforced concrete or CMU on a footing; taller walls.' },
+    ]}
+  />
+  <p>
+    HomeGuide's overall average, including materials and labor, is {rw.overallPerSqFt} per square foot. Angi puts the national
+    average project at {rw.nationalAvgAngi} (typical range {rw.nationalRangeAngi}).
+  </p>
+
+  <h2>What drives the price on a St. George lot</h2>
+  <IconList items={drivers} />
+
+  <h2>Extra costs to ask about</h2>
+  <CostTable
+    caption={`Add-on costs, as of ${COST_AS_OF}`}
+    unit="price and unit"
+    rows={[
+      { label: 'Structural engineering', range: rw.engineering, note: `HomeGuide; Angi lists ${rw.engineeringAngi} for a structural engineer.` },
+      { label: 'Permit', range: rw.permit, note: 'Varies by city and wall size (HomeGuide, Angi).' },
+      { label: 'French drain', range: `${rw.frenchDrain} per linear ft`, note: 'Drainage behind the wall.' },
+      { label: 'Footings', range: `${rw.footings} per linear ft`, note: 'Deeper and wider as the wall gets taller.' },
+      { label: 'Old wall demolition', range: `${rw.demolition} per linear ft`, note: 'Plus disposal fees.' },
+    ]}
+  />
+
+  <h2>The St. George permit rule for retaining walls</h2>
+  <div class="sgfw-permit">
+    <p><strong>St. George City Code §10-18-5.</strong> Rockery, segmental block, reinforced concrete, or CMU retaining walls four feet or greater in height need a city permit, and so does any fence or retaining wall in a front setback, unless shown in detail on an approved site development plan.</p>
+    <p class="mt-3"><strong>How height is measured.</strong> Concrete and CMU walls: top of footing to top of wall. Rockery and segmental block walls: exposed face to finished grade next to the base of the wall.</p>
+  </div>
+  <p>
+    The application needs a site plan and, for retaining walls, a landscape and drainage plan. The
+    <a href="/fence-permit-st-george-ut/">permit guide</a> walks through the steps and where to apply.
+  </p>
+
+  <h2>Neighboring cities set their own triggers</h2>
+  <p>
+    If your property is outside St. George city limits, a different code applies, and several set engineering or permit
+    triggers of their own. For example, Santa Clara requires a building permit and engineered design for a retaining wall over
+    4 feet measured from the bottom of the footing, and Washington City requires a Public Works permit and engineering analysis
+    for rockery walls 3 feet or taller. Check the <a href="/washington-county-fence-service-areas/">service area guide</a> for
+    your city.
+  </p>
+
+  <h2>How to compare retaining wall quotes</h2>
+  <ul>
+    <li>Get the height, length, wall type, and block or material named in writing, measured the way your city measures it.</li>
+    <li>Ask whether engineering, the permit, the drainage plan, and inspections are in the price.</li>
+    <li>Ask what goes behind the wall: gravel backfill, drain pipe, fabric, and where the water exits.</li>
+    <li>Ask how deep the footing or base will be and what happens if they hit rock.</li>
+    <li>Confirm the company's Utah license status with DOPL and ask for proof of insurance. See the <a href="/licensed-fence-contractor-compare-st-george-ut/">license guide</a>.</li>
+  </ul>
+  <p class="sgfw-note">
+    Sources: HomeGuide, "Retaining Wall Cost" (updated January 16, 2026); Angi, "Retaining Wall Cost" (updated September 15, 2026);
+    St. George City Code §10-18-5 (checked September 26, 2026). Full source list on the
+    <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a>.
+  </p>
+</GuideLayout>

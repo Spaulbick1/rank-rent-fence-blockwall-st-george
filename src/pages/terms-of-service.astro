@@ -1,0 +1,123 @@
+---
+// Terms of Service (Phase 4). ATTORNEY REVIEW: draft dated 2026-09-26 --
+// counsel review within 30 days of launch (compliance.md rule 5).
+// A2P 10DLC carrier set (compliance.md rule 9): SMS program description,
+// message frequency, msg & data rates, STOP/HELP, carrier liability
+// disclaimer, 18+. Third-party matching language (compliance.md rule 3) is
+// stated in legal terms here; the footer carries the plain-language
+// disclosure sentence once. No license classification is asserted (UT-002:
+// readers verify with DOPL themselves).
+import PageLayout from '../components/layout/PageLayout.astro';
+import { site } from '../lib/site-config';
+---
+
+<PageLayout
+  title="Terms of Service"
+  description="Terms for using St. George Elite Fence: the referral service, the SMS program, STOP and HELP, age limit, independent companies and liability."
+  path="/terms-of-service/"
+  eyebrow="Legal"
+  h1="Terms of Service"
+  lede="The rules for using this site and our referral service, including our text-message program."
+  reviewed="2026-09-26"
+  reviewedLabel="September 26, 2026"
+>
+  <h2 id="acceptance">Agreement to these terms</h2>
+  <p>
+    These terms apply to {site.domain} and to the referral service offered through it by {site.brandName}, operated by
+    {site.legalEntity} ("we," "us"). By using the site or sending us a request, you agree to these terms and to our
+    <a href="/privacy-policy/">Privacy Policy</a>. If you do not agree, please do not use the site.
+  </p>
+
+  <h2 id="age">You must be 18 or older</h2>
+  <p>
+    You must be at least 18 years old to send a request, to join our text-message program, or otherwise use the referral service.
+  </p>
+
+  <h2 id="the-service">What the service is</h2>
+  <p>
+    {site.brandName} is a referral and matching service. We publish information about fence and block-wall projects and, at
+    your request, pass your project details to an independent fence or wall company that covers your area. We are not a
+    contractor. We do not build, install, or repair fences or walls, we do not employ or supervise the companies we refer you to,
+    and we are not a party to any agreement you make with them. The price, scope, schedule, permits, workmanship, warranty,
+    licensing, and insurance for any project are between you and the company you hire.
+  </p>
+
+  <h2 id="sms-program">SMS program terms</h2>
+  <p>
+    <strong>Program description.</strong> If you check the consent box on our request form, you agree to receive text messages
+    from {site.brandName} and from the independent company you are matched with about the request you submitted, such as a
+    confirmation that we received it, which company will contact you, and follow-up about scheduling or a quote. We do not send
+    promotional or marketing texts.
+  </p>
+  <ul>
+    <li><strong>Message frequency varies</strong> with your request, usually a few messages.</li>
+    <li><strong>Message and data rates may apply</strong>, according to your mobile plan.</li>
+    <li><strong>To stop</strong>, reply STOP to any message. You will receive one confirmation and no further texts about that request.</li>
+    <li><strong>For help</strong>, reply HELP to any message or use our <a href="/contact/">contact page</a>.</li>
+    <li><strong>Consent is optional.</strong> You do not have to agree to receive texts to submit a request or to hire any company.</li>
+    <li><strong>Carriers are not liable</strong> for delayed or undelivered messages.</li>
+  </ul>
+  <p>
+    How we handle your number and consent is described in the <a href="/privacy-policy/#sms">SMS section of our Privacy Policy</a>.
+  </p>
+
+  <h2 id="consent-to-contact">Consent to be contacted</h2>
+  <p>
+    When you send a request, you ask us and the company we match you with to contact you about it at the phone number or email
+    you provide, using the methods you agreed to. You can withdraw consent at any time by replying STOP, telling the caller, or
+    contacting us.
+  </p>
+
+  <h2 id="calls">Phone calls</h2>
+  <p>
+    Calls to a phone number on this site may be routed to us or to a matched company and may be logged or recorded as described
+    in our <a href="/privacy-policy/#call-recording">Privacy Policy</a>. If a call is recorded, you will hear a notice at the start.
+  </p>
+
+  <h2 id="information">Information on this site</h2>
+  <p>
+    Our guides are general information, not legal, engineering, or professional advice. Cost ranges are planning estimates from
+    dated, named sources, not quotes. City codes change, and the city or county and your HOA have the final word on what applies
+    to your property. Confirm permits, property lines, utilities (call 811 before digging), and HOA rules before any work begins.
+  </p>
+
+  <h2 id="independent-companies">Independent companies</h2>
+  <p>
+    We do not guarantee the availability, pricing, licensing, insurance, workmanship, or conduct of any company we refer you to or
+    mention on this site. Before you hire anyone, verify their Utah contractor license status with the Utah Division of Professional
+    Licensing, confirm their insurance, and get the scope and price in writing. See
+    <a href="/licensed-fence-contractor-compare-st-george-ut/">how to check a Utah contractor's license</a>.
+  </p>
+
+  <h2 id="liability">No warranty and limitation of liability</h2>
+  <p>
+    The site and the referral service are provided "as is" and "as available," without warranties of any kind, to the fullest
+    extent the law allows. To the fullest extent the law allows, we are not liable for any indirect, incidental, or consequential
+    damages, or for any loss arising from work performed, or not performed, by any company you hire. Some jurisdictions do not
+    allow certain limitations, so some of these may not apply to you.
+  </p>
+
+  <h2 id="acceptable-use">Acceptable use</h2>
+  <p>
+    Do not submit false requests, requests on behalf of someone else without their permission, or content that is unlawful or
+    abusive, and do not try to disrupt or scrape the site.
+  </p>
+
+  <h2 id="content">Content ownership</h2>
+  <p>
+    The guides, text, and design of this site belong to {site.legalEntity}. You may share links to them and quote short passages
+    with attribution; please do not republish whole pages.
+  </p>
+
+  <h2 id="governing-law">Governing law</h2>
+  <p>These terms are governed by the laws of the State of Utah, without regard to its conflict-of-laws rules.</p>
+
+  <h2 id="changes">Changes to these terms</h2>
+  <p>
+    We may update these terms. The "last reviewed" date above shows the latest version; continued use of the site after a change
+    means you accept the updated terms.
+  </p>
+
+  <h2 id="contact">Contact</h2>
+  <p>Questions about these terms can be sent through the <a href="/contact/">contact page</a>.</p>
+</PageLayout>

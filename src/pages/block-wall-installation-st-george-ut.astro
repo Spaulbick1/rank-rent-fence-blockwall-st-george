@@ -4,7 +4,8 @@
 // is measured + what the application needs (all re-verified 2026-09-26).
 import GuideLayout from '../components/layout/GuideLayout.astro';
 import CostTable from '../components/sections/CostTable.astro';
-import img from '../assets/images/segmental-block-retaining-wall.webp';
+// Photo: Pexels 11341077 (Alexey Demidov, Pexels license), Phase 4 stopgap while Adobe credits are out.
+import img from '../assets/images/cmu-block-wall-gray.webp';
 import { COST_AS_OF, blockWall, retainingWall } from '../lib/costs';
 
 const faq = [
@@ -41,7 +42,7 @@ const faq = [
   updated="2026-09-26"
   updatedLabel="September 26, 2026"
   image={img}
-  imageAlt="Segmental block retaining wall in tan and gray tones with a flat capstone course and plants along its base"
+  imageAlt="Gray concrete masonry unit (CMU) block wall laid in a running-bond pattern"
   service={{
     name: 'St. George Elite Fence — Block Wall Referral',
     serviceType: 'Block wall, CMU and retaining wall installation referral / contractor matching',
@@ -53,6 +54,8 @@ const faq = [
     { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Cost guide', blurb: 'Block, retaining, and fence ranges from one dated source list.' },
     { href: '/hoa-fence-requirements-st-george-ut/', label: 'HOA requirements', blurb: 'Why HOA approval comes before you order block.' },
     { href: '/fence-installation-st-george-ut/', label: 'Fence installation', blurb: 'If a fence fits your goal better than a wall.' },
+    { href: '/retaining-wall-cost-st-george-ut/', label: 'Retaining wall cost', blurb: 'Cost by height and type, engineering, and drainage.' },
+    { href: '/cmu-block-wall-vs-wood-fence-st-george-ut/', label: 'CMU wall vs wood fence', blurb: 'Cost, lifespan, and upkeep side by side.' },
   ]}
 >
   <p>
@@ -109,7 +112,7 @@ const faq = [
     unit="per square foot of wall"
     rows={[
       { label: 'CMU / concrete block wall', range: blockWall.perSqFt, note: `About ${blockWall.perLinear6ft} per linear foot at 6 feet tall.` },
-      { label: 'Segmental block retaining wall', range: retainingWall.block, note: 'Drainage and base preparation are part of the job.' },
+      { label: 'Concrete block (CMU) retaining wall', range: retainingWall.block, note: 'Drainage and base preparation are part of the job.' },
       { label: 'Poured concrete retaining wall', range: retainingWall.poured, note: 'Formwork, steel, and engineering raise the price.' },
     ]}
   />

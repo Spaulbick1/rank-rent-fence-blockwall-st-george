@@ -1,0 +1,176 @@
+---
+// Spoke (Phase 4): CMU block wall vs wood fence -- comparison/decision
+// intent. $ figures from src/lib/costs.ts only (the SAME wood/vinyl/CMU
+// ranges the cost guide uses -- deliberately not a second source's
+// different ranges, lessons-learned #5). Lifespans from costs.ts `lifespan`
+// (Angi Jul 2026; HomeAdvisor Jun 2026). Upkeep: HomeGuide fence cost
+// (sealing every 1-2 years, Feb 3 2026) + HomeGuide stain cost (Feb 4 2026).
+// Noise: FHWA (updated Jun 9 2017), highway-barrier context stated.
+// Local rules: St. George City Code 10-18-1 (open-fence rule near sidewalk)
+// and Ivins City Code 16.11.135 (CMU color on arterials), read 2026-09-26.
+// Umbrella Service. Article + FAQ.
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+import { COST_AS_OF, perFoot, blockWall, fenceStain, lifespan } from '../lib/costs';
+
+const path = '/cmu-block-wall-vs-wood-fence-st-george-ut/';
+const wood = perFoot.find((r) => r.key === 'wood')!;
+const vinyl = perFoot.find((r) => r.key === 'vinyl')!;
+
+const faq = [
+  {
+    question: 'Is a block wall more expensive than a wood fence?',
+    answer: `Usually, up front. As of ${COST_AS_OF}, a wood privacy fence runs about ${wood.range} per linear foot installed, while a 6-foot CMU block wall works out to roughly ${blockWall.perLinear6ft} per linear foot (${blockWall.perSqFt} per square foot of wall). The gap narrows over time because block needs far less upkeep and lasts much longer.`,
+  },
+  {
+    question: 'How long does a block wall last compared with a wood fence?',
+    answer: `Published estimates put a wood fence at ${lifespan.wood.range} (Angi) and a well-built concrete block wall at ${lifespan.block.range} (HomeAdvisor). Vinyl falls in between at ${lifespan.vinyl.range} (Angi).`,
+  },
+  {
+    question: 'Can I build a solid block wall in my front yard in St. George?',
+    answer: 'Only within limits. St. George City Code §10-18-1 generally caps front-yard fences and walls at 4 feet, and within 10 feet behind the sidewalk only decorative fences that are at least 50 percent open are allowed, which a solid block wall is not. Any fence or wall in a front setback also needs a permit under §10-18-5.',
+  },
+  {
+    question: 'Which is better for privacy and noise?',
+    answer: 'A solid, gap-free wall. The Federal Highway Administration notes that a noise barrier works best when it is long, continuous, and solid with few openings, which describes a mortared block wall better than a board fence that develops gaps as it ages.',
+  },
+  {
+    question: 'How often does a wood fence need sealing?',
+    answer: `HomeGuide says wood needs sealing every 1 to 2 years. Staining or sealing a fence costs about ${fenceStain.perLinearFt} per linear foot, or ${fenceStain.typical} for a typical 100 to 150 foot fence (HomeGuide, February 2026).`,
+  },
+];
+
+const chooseBlock = [
+  { icon: 'clock', title: 'You plan to stay for decades', text: `Block's ${lifespan.block.range} estimated life spreads its higher price over far more years.` },
+  { icon: 'shield', title: 'You want the most privacy and sound control', text: 'A continuous, solid wall blocks sight lines and noise better than boards that shrink and gap.' },
+  { icon: 'slope', title: 'The wall also holds soil', text: 'Where there is a grade change, a reinforced block wall can do the retaining job; wood cannot. See the retaining wall guide.' },
+  { icon: 'sun', title: 'You do not want yearly upkeep', text: 'Block does not need sealing every year or two the way wood does.' },
+];
+
+const chooseWood = [
+  { icon: 'tag', title: 'Budget is the deciding factor', text: `At ${wood.range} per foot, wood costs a fraction of a block wall today.` },
+  { icon: 'ruler', title: 'You need it in a front yard near the sidewalk', text: 'An open picket or rail design can meet the city\'s 50-percent-open rule where a solid wall cannot.' },
+  { icon: 'wrench', title: 'You want easy repairs', text: 'Boards and posts can be replaced one at a time without a mason.' },
+  { icon: 'fence', title: 'It is a temporary or interior fence', text: 'Dog runs, garden enclosures, and short runs rarely justify a block footing.' },
+];
+---
+
+<GuideLayout
+  title="CMU vs Wood Fence, St. George UT"
+  description="CMU block wall or wood fence in St. George, UT? Cost per foot, lifespan, upkeep, privacy, and the city rules that decide what you can build where."
+  path={path}
+  eyebrow="Comparison · Walls & fences · St. George & Washington County"
+  h1="CMU Block Wall vs. Wood Fence in St. George: Cost, Lifespan, and Rules"
+  answer={`As of ${COST_AS_OF}, a wood privacy fence costs about ${wood.range} per linear foot installed and lasts ${lifespan.wood.range}, while a 6-foot CMU block wall costs roughly ${blockWall.perLinear6ft} per linear foot and lasts ${lifespan.block.range}. Block costs more up front and far less to keep.`}
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  article={{ headline: 'CMU Block Wall vs. Wood Fence in St. George: Cost, Lifespan, and Rules', datePublished: '2026-09-26' }}
+  faq={faq}
+  related={[
+    { href: '/block-wall-installation-st-george-ut/', label: 'Block wall installation', blurb: 'Types, permits, and vetting a mason.' },
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation', blurb: 'Wood, vinyl, chain-link, and iron.' },
+    { href: '/retaining-wall-cost-st-george-ut/', label: 'Retaining wall cost', blurb: 'When the wall also holds back soil.' },
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Full cost guide', blurb: 'Every range and source.' },
+  ]}
+>
+  <p>
+    In St. George the choice between a block wall and a wood fence usually comes down to three things: how long you plan to
+    stay, how much upkeep you will tolerate, and where the fence line runs, because the city's front-yard rules can decide the
+    question for you. Here is how the two compare on the numbers, followed by the rules that apply to both.
+  </p>
+
+  <h2>Side-by-side comparison</h2>
+  <div class="sgfw-table-wrap">
+    <table class="sgfw-table">
+      <caption>CMU block wall vs. wood fence, as of {COST_AS_OF}</caption>
+      <thead>
+        <tr>
+          <th scope="col">Factor</th>
+          <th scope="col">CMU block wall</th>
+          <th scope="col">Wood privacy fence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Installed cost</th>
+          <td>{blockWall.perSqFt} per sq ft; about {blockWall.perLinear6ft} per linear ft at 6 ft tall</td>
+          <td>{wood.range} per linear ft</td>
+        </tr>
+        <tr>
+          <th scope="row">Estimated lifespan</th>
+          <td>{lifespan.block.range} (HomeAdvisor)</td>
+          <td>{lifespan.wood.range} (Angi)</td>
+        </tr>
+        <tr>
+          <th scope="row">Routine upkeep</th>
+          <td>Occasional cleaning; patch or repaint any stucco or paint finish</td>
+          <td>Sealing every 1 to 2 years (HomeGuide), about {fenceStain.perLinearFt} per linear ft</td>
+        </tr>
+        <tr>
+          <th scope="row">Privacy and noise</th>
+          <td>Solid and continuous</td>
+          <td>Good when new; gaps open as boards shrink</td>
+        </tr>
+        <tr>
+          <th scope="row">Can it retain soil?</th>
+          <td>Yes, when designed and reinforced as a retaining wall</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <th scope="row">Permit in St. George</th>
+          <td>Required in a front setback; required for CMU retaining walls 4 ft or taller (§10-18-5)</td>
+          <td>Required in a front setback (§10-18-5)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="sgfw-note">
+    Vinyl sits between the two: about {vinyl.range} per linear foot and {lifespan.vinyl.range} of life (Angi), though Angi notes
+    UV exposure can make vinyl more brittle over time.
+  </p>
+
+  <h2>The real cost over time</h2>
+  <p>
+    Wood's lower price comes with a maintenance bill. HomeGuide says a wood fence needs sealing every one to two years, and
+    staining or sealing a typical 100 to 150 foot fence costs about {fenceStain.typical}. Over a block wall's much longer life, a
+    wood fence may also need to be replaced outright at least once. Block asks for more money on day one and very little after
+    that, provided it was built on a proper footing with reinforcement where the design calls for it.
+  </p>
+
+  <h2>When a block wall makes more sense</h2>
+  <IconList items={chooseBlock} />
+
+  <h2>When a wood fence makes more sense</h2>
+  <IconList items={chooseWood} />
+
+  <h2>Rules that apply to both in St. George</h2>
+  <p>
+    A block wall used as a boundary or privacy wall is treated as a fence for height purposes. Under St. George City Code
+    §10-18-1, most zones cap front-yard fences at 4 feet and side and rear-yard fences at 6 feet 4 inches, and within 10 feet
+    behind the sidewalk only decorative fences that are at least 50 percent open, such as picket or wrought iron, are allowed.
+    A permit is needed for any fence or retaining wall in a front setback, and for CMU and other retaining walls 4 feet or taller
+    (§10-18-5). The <a href="/fence-permit-st-george-ut/">permit guide</a> covers the details.
+  </p>
+  <p>
+    Neighboring cities differ. Ivins, for example, requires CMU block colored "Sandstone" for walls along its arterial and
+    collector streets (Ivins City Code 16.11.135). HOAs often add their own material and color rules on top of city code, so
+    check your CC&amp;Rs before choosing; see the <a href="/hoa-fence-requirements-st-george-ut/">HOA guide</a>.
+  </p>
+
+  <h2>Questions to ask either kind of company</h2>
+  <ul>
+    <li>For block: footing size and depth, rebar and grout spacing, cap style, and the finish (bare, painted, or stucco).</li>
+    <li>For wood: species and grade, post material and depth, whether posts are set in concrete, and the first sealing.</li>
+    <li>For both: who pulls the permit, how the property line was confirmed, and what the warranty covers.</li>
+  </ul>
+  <p class="sgfw-note">
+    Sources: cost figures from the <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a>'s source list; lifespans from
+    <a href={lifespan.wood.url} rel="noopener">Angi on wood fences</a> and <a href={lifespan.vinyl.url} rel="noopener">vinyl fences</a>
+    (both updated July 9, 2026) and <a href={lifespan.block.url} rel="noopener">HomeAdvisor on block walls</a> (updated June 20, 2026);
+    upkeep from <a href="https://homeguide.com/costs/fence-installation-cost" rel="noopener">HomeGuide's fence cost guide</a>
+    (February 3, 2026) and <a href="https://homeguide.com/costs/cost-to-stain-paint-fence" rel="noopener">stain cost guide</a>
+    (February 4, 2026); noise from the
+    <a href="https://www.fhwa.dot.gov/ENVIRonment/noise/noise_compatible_planning/federal_approach/audible_landscape/al04.cfm" rel="noopener">Federal Highway Administration</a>
+    (guidance on highway noise barriers); codes checked September 26, 2026.
+  </p>
+</GuideLayout>

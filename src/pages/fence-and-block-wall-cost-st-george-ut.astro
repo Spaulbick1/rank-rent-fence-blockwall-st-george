@@ -5,7 +5,8 @@
 // answer (geo-aeo.md rule 2). Article + FAQ schema.
 import GuideLayout from '../components/layout/GuideLayout.astro';
 import CostTable from '../components/sections/CostTable.astro';
-import img from '../assets/images/ornamental-iron-fence.webp';
+// Photo: Pexels 14747824 (Jan van der Wolf, Pexels license), Phase 4 stopgap while Adobe credits are out.
+import img from '../assets/images/ornamental-iron-fence-finials.webp';
 import {
   COST_AS_OF,
   fenceProject,
@@ -52,7 +53,7 @@ const faq = [
   updated="2026-09-26"
   updatedLabel="September 26, 2026"
   image={img}
-  imageAlt="Black ornamental iron picket fence with pointed finials running beside green shrubs"
+  imageAlt="Dark ornamental iron fence panel with pointed finials and a scrolled center detail against a pale wall"
   article={{ headline: 'How Much Do Fences and Block Walls Cost in St. George, UT?', datePublished: '2026-09-26' }}
   faq={faq}
   related={[
@@ -60,6 +61,8 @@ const faq = [
     { href: '/block-wall-installation-st-george-ut/', label: 'Block wall installation guide', blurb: 'CMU, retaining walls, and the permit rule.' },
     { href: '/fence-repair-st-george-ut/', label: 'Fence repair', blurb: 'Repair costs and repair-versus-replace.' },
     { href: '/fence-permit-st-george-ut/', label: 'Permit rules', blurb: 'When the city requires a permit.' },
+    { href: '/retaining-wall-cost-st-george-ut/', label: 'Retaining wall cost', blurb: 'By height, type, and material, plus engineering.' },
+    { href: '/cmu-block-wall-vs-wood-fence-st-george-ut/', label: 'CMU wall vs wood fence', blurb: 'Which costs less over time.' },
   ]}
 >
   <p>
@@ -90,7 +93,7 @@ const faq = [
     unit="per square foot of wall"
     rows={[
       { label: 'CMU / concrete block wall', range: blockWall.perSqFt, note: `About ${blockWall.perLinear6ft} per linear foot at 6 feet tall (6 feet x the per-square-foot range).` },
-      { label: 'Segmental block retaining wall', range: retainingWall.block, note: 'Includes base and drainage work; taller walls cost more per foot of wall.' },
+      { label: 'Concrete block (CMU) retaining wall', range: retainingWall.block, note: 'Includes base and drainage work; taller walls cost more per foot of wall.' },
       { label: 'Poured concrete retaining wall', range: retainingWall.poured, note: 'Formwork and reinforcement raise the price.' },
     ]}
   />

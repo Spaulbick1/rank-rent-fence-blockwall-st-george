@@ -1,0 +1,114 @@
+---
+// How Matching Works (Phase 4) -- the referral model in the site's own
+// words. The literal disclosure sentence stays ONCE, in the footer (Scott's
+// instruction + compliance.md rule 3); this page explains the model without
+// repeating it. Utah advertising definition = fact UT-001 (cited as
+// 58-55-102 without the subsection number: a new version of that section
+// takes effect 10/1/2026 and may renumber it). DOPL lookup = UT-002.
+// Umbrella Service + FAQPage. "Guide" framing allowed here (v1.19: footer/
+// about-type pages only).
+import PageLayout from '../components/layout/PageLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import { site } from '../lib/site-config';
+import { umbrellaServiceSchema, UMBRELLA_SERVICE_ID, abs, faqSchema } from '../lib/schema';
+
+const steps = [
+  { icon: 'scroll', title: '1. You read the guide that fits', text: 'Costs, city permit rules, HOA questions, and how to vet a company are answered before anyone contacts you.' },
+  { icon: 'doc', title: '2. You describe the project', text: 'Project type, city, and anything that changes the job: a slope, a pool, an HOA, a tight side yard, or a new-construction lot.' },
+  { icon: 'link', title: '3. We pass it to one independent company', text: 'We send your request to an independent fence or block-wall company that covers your city and that kind of work.' },
+  { icon: 'phone', title: '4. The company contacts you directly', text: 'They ask their own questions, visit if needed, and quote the job. The quote, contract, and work are between you and them.' },
+  { icon: 'check', title: '5. You decide', text: 'There is no obligation to hire anyone, and you are free to get other quotes.' },
+];
+
+const weDo = [
+  { icon: 'pin', title: 'Match by area and project type', text: `We route requests by city (${site.serviceArea.cities.join(', ')}, and unincorporated ${site.serviceArea.county}) and by the kind of work described.` },
+  { icon: 'tag', title: 'Publish dated cost ranges', text: 'Every price on the site comes from one dated source list, so the numbers agree from page to page.' },
+  { icon: 'scroll', title: 'Cite the actual rules', text: 'Permit and height statements quote the city or county code section and the date we last checked it.' },
+];
+
+const weDont = [
+  { icon: 'fence', title: 'We do not do the work', text: 'We do not build, install, or repair fences or walls, send crews, or supervise any job.' },
+  { icon: 'shield', title: 'We do not vouch for licenses', text: 'We do not state that any company is licensed or insured. Check the Utah DOPL license lookup and ask for a certificate of insurance yourself.' },
+  { icon: 'tag', title: 'We do not set prices', text: 'Each company sets its own price. Our ranges are for planning, not quotes.' },
+];
+
+const faq = [
+  {
+    question: 'Does it cost anything to be matched?',
+    answer: 'No. Homeowners never pay us. Fence and wall companies that receive requests through this site may pay us for those referrals, which is how the site is funded.',
+  },
+  {
+    question: 'Are you a fence company?',
+    answer: `No. ${site.brandName} is a referral service. The company you are matched with is an independent business that quotes and performs the work under its own license and insurance.`,
+  },
+  {
+    question: 'How many companies will contact me?',
+    answer: 'We pass each request to one company at a time. If that company cannot take the job, we may pass it to another company that covers your area.',
+  },
+  {
+    question: 'Do companies pay to be on your best-companies list?',
+    answer: 'No. The best fence and wall companies page is not a paid list, and payment for referrals does not change our guides or that list.',
+  },
+  {
+    question: 'How do I check that the company is licensed?',
+    answer: "Search the company's name in the Utah Division of Professional Licensing license lookup, check that the license is active, and ask for a certificate of insurance. Our license guide walks through it.",
+  },
+];
+---
+
+<PageLayout
+  title="How Fence & Wall Matching Works"
+  description="How St. George Elite Fence matches homeowners with independent fence and block wall companies, who pays, and what we do and do not check."
+  path="/how-fence-and-wall-matching-works/"
+  eyebrow="How it works · St. George & Washington County"
+  h1="How Fence and Wall Matching Works"
+  lede="A plain explanation of what happens to your request, who pays for the service, and where our role ends."
+  schemaNodes={[umbrellaServiceSchema(), faqSchema(faq)]}
+  mainEntityId={abs(UMBRELLA_SERVICE_ID)}
+>
+  <p>
+    {site.brandName} is a local guide and referral service for fence and block-wall projects in St. George and the rest of
+    Washington County. We write the research homeowners need before they call anyone, and when you ask, we connect you with one
+    independent company that covers your area. This page explains each step.
+  </p>
+
+  <h2>The five steps</h2>
+  <IconList items={steps} />
+
+  <h2>Who pays for this</h2>
+  <p>
+    Homeowners never pay us. Fence and wall companies that receive requests through this site may pay us for those referrals. That
+    arrangement does not change what our guides say, and it does not buy a place on our
+    <a href="/best-fence-and-wall-companies-st-george-ut/">company list</a>, which is not a paid list.
+  </p>
+
+  <h2>What we do</h2>
+  <IconList items={weDo} />
+
+  <h2>What we do not do</h2>
+  <IconList items={weDont} />
+
+  <h2>Why we are careful with the word "contractor"</h2>
+  <p>
+    Utah's contractor licensing law defines a contractor to include a person who represents that they will perform construction
+    work by advertising on a website, social media, or other means (<a href="https://le.utah.gov/xcode/Title58/Chapter55/58-55-S102.html" rel="noopener">Utah Code § 58-55-102</a>).
+    Because we are not a contractor, nothing on this site offers to build or repair a fence or wall. Wherever you see "get
+    matched," it means we pass your request to an independent company that does that work.
+  </p>
+
+  <h2>Your part: check before you hire</h2>
+  <p>
+    Before anyone starts work, confirm the company's license status with the Utah Division of Professional Licensing, get the
+    scope and price in writing, ask who pulls any <a href="/fence-permit-st-george-ut/">city permit</a>, and get your HOA's written
+    approval if you have one. Our <a href="/licensed-fence-contractor-compare-st-george-ut/">license and comparison guide</a> shows
+    how.
+  </p>
+
+  <div class="sgfw-cta">
+    <a href="/contact/#lead-form" class="btn-quote">Get Matched With a Pro</a>
+    <a href="/about/" class="btn-quote">About Us</a>
+  </div>
+
+  <Fragment slot="after"><FAQ items={faq} heading="Questions about matching" /></Fragment>
+</PageLayout>

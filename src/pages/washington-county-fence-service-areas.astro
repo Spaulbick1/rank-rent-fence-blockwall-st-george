@@ -1,0 +1,131 @@
+---
+// County hub / service-area page (Phase 4). Per WC-003's standing decision
+// there are no per-community thin pages: unincorporated communities are
+// carried here. City rows cite each city's own code (see the four city
+// silo pages for sections and URLs); St. George = City Code 10-18-1 and
+// 10-18-5 (rechecked 2026-09-26). Unincorporated county = Washington County
+// Code 10-15B-3/-4 (Ord. 2024-1271-O, read LIVE on amlegal 2026-09-26) and
+// 10-15A-2 (retaining wall permit + Utah-licensed engineer). County
+// Community Development contact from washco.utah.gov, same date.
+// Umbrella Service (no separate Service node for the hub).
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+
+const path = '/washington-county-fence-service-areas/';
+const countyFence = 'https://codelibrary.amlegal.com/codes/washingtoncout/latest/washingtonco_ut/0-0-0-25669';
+const countyWall = 'https://codelibrary.amlegal.com/codes/washingtoncout/latest/washingtonco_ut/0-0-0-25591';
+
+const cities = [
+  { icon: 'pin', title: 'St. George', href: '/fence-permit-st-george-ut/', text: 'Front yard 4 feet; side and rear 6 feet 4 inches; permit for anything in a front setback and for retaining walls 4 feet or taller.' },
+  { icon: 'pin', title: 'Washington', href: '/fence-installation-washington-ut/', text: '3 feet in the first 10 feet of the front yard; 6 feet on side and rear; permit over 6 feet; rockery walls from 3 feet need a Public Works permit.' },
+  { icon: 'pin', title: 'Hurricane', href: '/fence-installation-hurricane-ut/', text: 'Opaque front-yard fences 48 inches; side and rear 6 feet; nothing in utility easements.' },
+  { icon: 'pin', title: 'Ivins', href: '/fence-contractor-ivins-ut/', text: '3 feet 6 inches in the front setback; 6 feet on side and rear; Sandstone-colored CMU on arterial streets; courtyard walls need a permit.' },
+  { icon: 'pin', title: 'Santa Clara', href: '/fence-installation-santa-clara-ut/', text: 'Every fence reviewed; permit and engineering over 7 feet; front setback 3 feet (4 feet if 50 percent open); side and rear 6 feet.' },
+];
+
+const faq = [
+  {
+    question: 'Which areas of Washington County do you cover?',
+    answer: 'St. George, Washington, Hurricane, Ivins, and Santa Clara, plus unincorporated communities in Washington County such as Veyo, Central, Diamond Valley, Dammeron Valley, and Gunlock. Tell us your city and project and we will match you with an independent company that covers it.',
+  },
+  {
+    question: 'Whose fence rules apply if I live outside a city?',
+    answer: 'On unincorporated land, Washington County’s zoning code applies. It limits fences, walls, and hedges in a front setback to 3 feet and side and rear fences on interior lots to 6 feet (County Code §10-15B-3), and requires a permit and a Utah-licensed engineer’s design for many rockery and segmental block retaining walls (§10-15A-2).',
+  },
+  {
+    question: 'Are fence heights the same in every city?',
+    answer: 'No. Front-yard limits range from 3 feet (Washington, Santa Clara, and unincorporated county) to 3 feet 6 inches (Ivins), 48 inches for opaque fences (Hurricane), and 4 feet (St. George). Check the code for the city your property is in, not the city in your mailing address.',
+  },
+];
+---
+
+<GuideLayout
+  title="Fence Rules, Washington County UT"
+  description="Fence and block wall rules across Washington County, UT: St. George, Washington, Hurricane, Ivins, Santa Clara, and unincorporated areas compared."
+  path={path}
+  eyebrow="Service areas · Washington County, UT"
+  h1="Fence and Block Wall Rules Across Washington County, UT"
+  answer="As of September 2026, front-yard fence limits in Washington County range from 3 feet (Washington City, Santa Clara, and unincorporated county land) to 4 feet (St. George), and side and rear limits from 6 feet to 6 feet 4 inches (St. George). Permit triggers differ city by city."
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  faq={faq}
+  related={[
+    { href: '/fence-permit-st-george-ut/', label: 'St. George permit guide', blurb: 'The §10-18-5 rules step by step.' },
+    { href: '/retaining-wall-cost-st-george-ut/', label: 'Retaining wall cost', blurb: 'Where most permit triggers land.' },
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Cost guide', blurb: 'Ranges and sources for the whole area.' },
+    { href: '/contact/', label: 'Get matched', blurb: 'Tell us your city and project.' },
+  ]}
+>
+  <p>
+    Washington County is one market for fence and wall companies, but it is several jurisdictions for fence rules. A 6-foot block
+    wall that is fine in one city's rear yard can need a permit, a different setback, or a specific block color a few miles away.
+    Your property's jurisdiction, not your mailing address, decides which code applies. Here is how the cities we cover compare,
+    each summarized from its own code as read on September 26, 2026.
+  </p>
+
+  <h2>City by city</h2>
+  <IconList items={cities} cols={2} />
+
+  <h2>Side-by-side comparison</h2>
+  <div class="sgfw-table-wrap">
+    <table class="sgfw-table">
+      <caption>Residential fence and wall rules, as read September 26, 2026</caption>
+      <thead>
+        <tr>
+          <th scope="col">Jurisdiction</th>
+          <th scope="col">Front yard / setback</th>
+          <th scope="col">Side and rear</th>
+          <th scope="col">Permit or engineering trigger</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">St. George</th><td>4 ft (open style within 10 ft of sidewalk)</td><td>6 ft 4 in</td><td>Any fence or retaining wall in a front setback; retaining walls 4 ft or more</td></tr>
+        <tr><th scope="row">Washington</th><td>3 ft in first 10 ft</td><td>6 ft</td><td>Over 6 ft; rockery walls 3 ft or more</td></tr>
+        <tr><th scope="row">Hurricane</th><td>48 in (opaque)</td><td>6 ft</td><td>Not stated in §10-37-9; ask the city</td></tr>
+        <tr><th scope="row">Ivins</th><td>3 ft 6 in</td><td>6 ft</td><td>Front courtyard walls; retaining walls over 4 ft must be terraced</td></tr>
+        <tr><th scope="row">Santa Clara</th><td>3 ft (4 ft if 50% open)</td><td>6 ft</td><td>Fence system over 7 ft; retaining wall over 4 ft</td></tr>
+        <tr><th scope="row">Unincorporated county</th><td>3 ft</td><td>6 ft</td><td>Many rockery and segmental retaining walls 4 ft or more exposed</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Unincorporated Washington County</h2>
+  <p>
+    Outside the incorporated cities and towns, in communities such as Veyo, Central, Diamond Valley, Dammeron Valley, and Gunlock,
+    Washington County's own zoning code applies. The county's fence rules, in Chapter 15, Article B of its zoning code, say:
+  </p>
+  <ul>
+    <li>In any front setback area, no wall, fence, or hedge may exceed 3 feet (§10-15B-3).</li>
+    <li>On interior lots, fences up to 6 feet may go along side and rear property lines (§10-15B-3).</li>
+    <li>Where two lots differ in grade, the fence, including any retaining wall or berm, may not exceed 10 feet on either side, and fences may not be bermed to gain height (§10-15B-3).</li>
+    <li>On corner lots, nothing over 3 feet may sit in the triangle formed 30 feet from the intersection (§10-15B-4).</li>
+  </ul>
+  <p>
+    For retaining walls, Article A requires a building permit and/or excavation permit from Community Development before a rockery or
+    segmental block retaining wall is built or altered, unless it was approved on a subdivision's engineered drawings. Walls that may
+    not need a building permit include non-tiered walls under 4 feet of exposed height with front and back slopes flatter than
+    10 horizontal to 1 vertical within 10 feet of the wall, and some double-tiered walls. Retaining walls that do need a building
+    permit must be designed by an engineer licensed in Utah (§10-15A-2).
+  </p>
+  <div class="sgfw-facts">
+    <dl>
+      <dt>Washington County Community Development</dt>
+      <dd>111 East Tabernacle St., St. George, UT 84770 · (435) 301-7250 · permit applications accepted electronically (county website, checked September 26, 2026)</dd>
+      <dt>The code</dt>
+      <dd><a href={countyFence} rel="noopener">County Code 10-15B, fencing</a> · <a href={countyWall} rel="noopener">County Code 10-15A, retaining walls</a></dd>
+    </dl>
+  </div>
+
+  <h2>Before you build anywhere in the county</h2>
+  <ul>
+    <li>Confirm which jurisdiction your parcel is in. The county's parcel and zoning records, or a call to the city, will tell you.</li>
+    <li>Find your property lines, setbacks, and any utility easements on your plat before setting a fence line.</li>
+    <li>Get HOA approval in writing if you have an HOA; it is separate from the city or county.</li>
+    <li>Call 811 (Blue Stakes of Utah) at least 3 business days before digging.</li>
+    <li>Check the company's license with the Utah DOPL lookup; see our <a href="/licensed-fence-contractor-compare-st-george-ut/">license guide</a>.</li>
+  </ul>
+  <p class="sgfw-note">
+    Summaries of each jurisdiction's code as published online and read on September 26, 2026. Codes change; the city or county's
+    current code and interpretation control. Not legal advice.
+  </p>
+</GuideLayout>

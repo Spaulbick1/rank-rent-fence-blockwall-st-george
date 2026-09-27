@@ -1,0 +1,38 @@
+---
+// Icon-accented itemized list (Operating Rule 16, v1.41). Phase 4 pages use
+// this wherever they itemize services, situations, steps, or categories, so
+// every list of that kind carries a brass line-art icon. `html` lets a page
+// pass its own static copy with inline links (never user input).
+import { icons } from '../../lib/icons';
+
+interface Item {
+  icon: string;
+  title: string;
+  text?: string;
+  html?: string;
+  href?: string;
+}
+interface Props {
+  items: Item[];
+  cols?: 1 | 2;
+}
+const { items, cols = 1 } = Astro.props;
+---
+
+<ul class={`sgfw-iconlist ${cols === 2 ? 'sm:grid-cols-2' : ''}`}>
+  {items.map((it) => (
+    <li>
+      <span class="sgfw-iconlist-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d={icons[it.icon] ?? icons.check} />
+        </svg>
+      </span>
+      <div class="min-w-0">
+        <p class="font-semibold text-ink">
+          {it.href ? <a href={it.href}>{it.title}</a> : it.title}
+        </p>
+        {it.html ? <p class="mt-1 text-muted" set:html={it.html} /> : it.text && <p class="mt-1 text-muted">{it.text}</p>}
+      </div>
+    </li>
+  ))}
+</ul>

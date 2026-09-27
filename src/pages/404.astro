@@ -1,0 +1,32 @@
+---
+// 404 (Phase 4). Cloudflare Pages serves dist/404.html for every unmatched
+// URL; BaseLayout skips the canonical for path '/404/' and this page is
+// noindex and excluded from the sitemap. Links to the money pages.
+import PageLayout from '../components/layout/PageLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+
+const links = [
+  { icon: 'fence', title: 'Fence installation', href: '/fence-installation-st-george-ut/', text: 'Materials, heights, and vetting.' },
+  { icon: 'blocks', title: 'Block and retaining walls', href: '/block-wall-installation-st-george-ut/', text: 'CMU walls and the 4-foot permit rule.' },
+  { icon: 'tag', title: 'Fence and block wall cost', href: '/fence-and-block-wall-cost-st-george-ut/', text: 'Dated price ranges and sources.' },
+  { icon: 'scroll', title: 'Fence and wall permits', href: '/fence-permit-st-george-ut/', text: 'When St. George requires a permit.' },
+  { icon: 'wrench', title: 'Fence repair', href: '/fence-repair-st-george-ut/', text: 'Repair or replace, and what it costs.' },
+  { icon: 'pin', title: 'Service areas', href: '/washington-county-fence-service-areas/', text: 'Rules in Washington, Hurricane, Ivins, and Santa Clara.' },
+];
+---
+
+<PageLayout
+  title="Page Not Found"
+  description="That page does not exist. Find fence and block wall guides for St. George and Washington County, UT."
+  path="/404/"
+  eyebrow="404"
+  h1="We could not find that page"
+  lede="The link may be old or mistyped. These guides cover most fence and wall questions in St. George."
+  noindex={true}
+>
+  <IconList items={links} cols={2} />
+  <div class="sgfw-cta">
+    <a href="/" class="btn-quote">Back to the Homepage</a>
+    <a href="/contact/#lead-form" class="btn-quote">Get Matched With a Pro</a>
+  </div>
+</PageLayout>

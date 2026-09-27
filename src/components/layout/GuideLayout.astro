@@ -36,7 +36,7 @@ interface Props {
   updatedLabel: string;
   image?: ImageMetadata;
   imageAlt?: string;
-  service?: { name: string; serviceType: string; description: string };
+  service?: { name: string; serviceType: string; description: string; areaServed?: string[] };
   article?: { headline: string; datePublished: string };
   faq?: { question: string; answer: string }[];
   extraNodes?: object[];
@@ -68,7 +68,7 @@ const {
 const quoteHref = '/#lead-form';
 const servicePath = `${path}#service`;
 const svcNode = service
-  ? serviceSchema({ id: servicePath, path, name: service.name, serviceType: service.serviceType, description: service.description })
+  ? serviceSchema({ id: servicePath, path, name: service.name, serviceType: service.serviceType, description: service.description, areaServed: service.areaServed })
   : umbrellaServiceSchema();
 const mainEntityId = service ? abs(servicePath) : abs(UMBRELLA_SERVICE_ID);
 

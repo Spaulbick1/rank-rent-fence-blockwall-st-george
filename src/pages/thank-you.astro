@@ -1,0 +1,37 @@
+---
+// Thank-you (Phase 4). noindex,follow; excluded from the sitemap by
+// astro.config.mjs's filter. Phase 8's form handler redirects here. Sets
+// expectations without promising a response time we cannot verify for
+// independent companies (compliance.md rule 4).
+import PageLayout from '../components/layout/PageLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+
+const next = [
+  { icon: 'link', title: 'We pass your request on', text: 'We send it to an independent fence or block-wall company that covers your city and the kind of project you described.' },
+  { icon: 'phone', title: 'The company contacts you', text: "The call or text may come from the company's own number, not ours. Keep an eye on unknown numbers for a day or two." },
+  { icon: 'scroll', title: 'You get a quote and decide', text: 'Ask for the price, the scope, who pulls any permit, and the timeline in writing. You are under no obligation, and homeowners never pay us.' },
+];
+---
+
+<PageLayout
+  title="Request Received"
+  description="Your fence or block wall request is in. Here is what happens next and what to ask before you hire."
+  path="/thank-you/"
+  eyebrow="Request received"
+  h1="Thanks. Your request is in."
+  lede="An independent local fence or wall company will contact you directly about your project."
+  noindex={true}
+>
+  <h2>What happens now</h2>
+  <IconList items={next} />
+
+  <h2>While you wait</h2>
+  <p>
+    Check whether your project needs a city permit with the <a href="/fence-permit-st-george-ut/">permit guide</a>, and read
+    <a href="/licensed-fence-contractor-compare-st-george-ut/">how to check a Utah contractor's license</a> before anyone starts work.
+    If you have an HOA, start its approval now; the <a href="/hoa-fence-requirements-st-george-ut/">HOA guide</a> explains why.
+  </p>
+  <p class="sgfw-note">
+    Did not mean to send a request, or want to change it? Reply STOP to any text you receive, or tell the company when they call.
+  </p>
+</PageLayout>

@@ -1,0 +1,169 @@
+---
+// Spoke (Phase 4): licensed-contractor compare -- DOPL verification angle.
+// Facts: UT-002 (DOPL + lookup URL; lookup page itself showed "Information
+// Current as of 09/25/2026" and a HANDYMAN and LIEN RECOVERY FUND MEMBER
+// profession filter when opened 2026-09-26); UT-006 (what a record shows,
+// from a live electrical record). Statutes read from le.utah.gov version
+// PDFs 2026-09-26: 58-55-302(2)(b) insurance to license (effective
+// 5/7/2025), 58-55-305(1)(h) small-project exemption $7,000 / $3,000
+// affirmation (effective 5/7/2025, renumbered 1/1/2027), 38-11-107 and
+// 38-11-204 residence lien protection (UT-008..UT-010). S330 scope for
+// fences/guardrails and retaining walls = UT-007 (current R156-55a read
+// directly on adminrules.utah.gov 2026-09-26 by the pool-service session).
+// DELIBERATELY NOT STATED: any classification code for freestanding CMU /
+// masonry walls (S230 seen only in a Feb 2026 Utah State Bulletin reprint;
+// see UT_STATE section 4) -- Scott to verify manually. No company is named
+// as licensed. Umbrella Service. Article + HowTo + FAQ.
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+import { howToSchema } from '../lib/schema';
+import { utahSmallProjectExemption as ex } from '../lib/costs';
+
+const path = '/licensed-fence-contractor-compare-st-george-ut/';
+const lookup = 'https://secure.utah.gov/llv/search/index.html';
+
+const steps = [
+  { name: 'Get the company\'s legal name and license number', text: 'Ask for the business name exactly as licensed and the license number. The name on the truck or website is not always the licensed name.' },
+  { name: 'Open the Utah DOPL license lookup', text: 'Go to the Division of Professional Licensing Licensee Lookup and Verification page at secure.utah.gov/llv and search by name or by license number.' },
+  { name: 'Narrow the search to contractors', text: 'Use a "containing" name search and filter the profession to Contractor, so similar names from other professions drop out.' },
+  { name: 'Read the record', text: 'Check that the status is active, note the expiration date, look for any disciplinary action, and read the classifications and the named qualifier.' },
+  { name: 'Match the classification to your job', text: 'Ask the company which of its listed classifications covers fence, masonry, or retaining wall work, and confirm that classification appears on the record.' },
+  { name: 'Ask for proof of insurance', text: 'Request a certificate of liability insurance, and proof of workers compensation if the company has employees, and check the dates.' },
+];
+
+const faq = [
+  {
+    question: 'How do I check if a fence contractor is licensed in Utah?',
+    answer: 'Search the company in the Utah Division of Professional Licensing (DOPL) license lookup at secure.utah.gov/llv, filtered to Contractor. Confirm the license is active, check the expiration date and any disciplinary action, and make sure the listed classification covers your kind of work.',
+  },
+  {
+    question: 'Does a fence company need a license in Utah?',
+    answer: `Utah requires contractors doing construction work to be licensed by DOPL, with limited exemptions, including one for small building repair and improvement jobs under ${ex.under} (Utah Code §58-55-305). Whether a particular fence or wall job fits an exemption is a question for DOPL. If a company says it does not need a license, ask which exemption it relies on.`,
+  },
+  {
+    question: 'Do Utah contractors have to carry insurance?',
+    answer: 'To get a license, Utah Code §58-55-302 requires an applicant to file proof of public liability insurance and, where it covers employees, workers compensation insurance. Coverage can lapse later, so ask for a current certificate before work starts.',
+  },
+  {
+    question: 'What protects me if the contractor does not pay a supplier?',
+    answer: 'Utah law generally protects a homeowner who has a written contract with a licensed or exempt contractor and pays that contractor in full: unpaid subcontractors and suppliers are then barred from keeping a lien on the home and may claim from the state Residence Lien Recovery Fund instead (Utah Code §38-11-107 and §38-11-204).',
+  },
+  {
+    question: 'Does this site check licenses for me?',
+    answer: 'No. We do not state that any company is licensed or insured. The DOPL record and the insurance certificate are the sources to trust, and it takes a few minutes to check both yourself.',
+  },
+];
+
+const compare = [
+  { icon: 'shield', title: 'License record', text: 'Active status, expiration date, classifications, and any discipline, all from DOPL, not from the company\'s website.' },
+  { icon: 'lock', title: 'Insurance', text: 'A current certificate of liability insurance, and workers compensation if they have employees.' },
+  { icon: 'doc', title: 'Written scope', text: 'Length, height, material, gates, post or footing depth, removal of the old fence, and cleanup, in writing.' },
+  { icon: 'scroll', title: 'Permit and HOA', text: 'Who pulls any city permit, whether the fee is included, and who gets HOA approval.' },
+  { icon: 'tag', title: 'Price and payments', text: 'The total, the deposit, and when each payment is due, tied to milestones rather than dates.' },
+  { icon: 'check', title: 'Warranty', text: 'What the workmanship and material warranties cover and for how long.' },
+];
+---
+
+<GuideLayout
+  title="Check a Fence Contractor License"
+  description="How to check a fence or block wall contractor's Utah license with DOPL, what the record shows, insurance and exemptions, and how to compare quotes."
+  path={path}
+  eyebrow="Licensing & comparison · St. George & Washington County"
+  h1="How to Check a Fence or Wall Contractor's License in Utah, and Compare Quotes"
+  answer="Before hiring a fence or wall company in St. George, search its name in the Utah Division of Professional Licensing lookup (secure.utah.gov/llv), confirm an active license with no discipline, and ask for proof of insurance. As of September 2026, Utah requires license applicants to file proof of liability insurance (Utah Code §58-55-302)."
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  article={{ headline: "How to Check a Fence or Wall Contractor's License in Utah, and Compare Quotes", datePublished: '2026-09-26' }}
+  faq={faq}
+  extraNodes={[
+    howToSchema({
+      path,
+      name: "How to check a fence or wall contractor's Utah license",
+      description: 'Step-by-step check of a Utah contractor license and insurance using the DOPL Licensee Lookup and Verification system.',
+      steps,
+    }),
+  ]}
+  related={[
+    { href: '/best-fence-and-wall-companies-st-george-ut/', label: 'Local fence and wall companies', blurb: 'An unranked list to start your search.' },
+    { href: '/how-fence-and-wall-matching-works/', label: 'How matching works', blurb: 'What we do and do not check.' },
+    { href: '/fence-permit-st-george-ut/', label: 'Permit rules', blurb: 'Who pulls the permit, and when one is needed.' },
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Cost guide', blurb: 'Know the range before you compare.' },
+  ]}
+>
+  <p>
+    Anyone can build a good-looking website. In Utah, the Division of Professional Licensing (DOPL) keeps the public record that
+    tells you whether a construction company is licensed, whether that license is active, and whether it has been disciplined.
+    Checking takes a few minutes and is the single best protection you have before signing a fence or wall contract.
+  </p>
+
+  <h2>Step by step: check a Utah contractor license</h2>
+  <ol>
+    {steps.map((s) => (
+      <li><strong>{s.name}.</strong> {s.text}</li>
+    ))}
+  </ol>
+  <p>
+    The lookup is at <a href={lookup} rel="noopener">secure.utah.gov/llv</a>. When we checked it on September 26, 2026, it showed data
+    current as of September 25, 2026. DOPL also publishes
+    <a href="https://commerce.utah.gov/disciplinary-actions-and-citations/" rel="noopener">disciplinary actions and citations</a> if you
+    want to read the detail behind a flag on a record.
+  </p>
+
+  <h2>What a license record shows</h2>
+  <p>
+    A DOPL contractor record lists the profession and license type, the license number, the status, the issue and expiration dates,
+    any agency or disciplinary action, and the license's classifications with the qualifier named for each. The classification is the
+    part most homeowners skip: it describes the kinds of work the license covers. Ask the company which of its classifications covers
+    your fence, block wall, or retaining wall, and check that it is on the record.
+  </p>
+  <p>
+    For fences, DOPL's current contractor rule (<a href="https://adminrules.utah.gov/public/rule/R156-55a/Current%20Rules" rel="noopener">Utah Admin. Code R156-55a</a>,
+    effective August 7, 2026) lists fences and guardrails, and retaining walls, within the scope of the S330 Landscape and Recreation
+    Contractor classification. Broader classifications and exceptions exist, so for a block wall or a retaining wall that holds up a
+    driveway, structure, or slope, ask the company which classification it works under and confirm it with DOPL.
+  </p>
+
+  <h2>Insurance</h2>
+  <p>
+    Utah Code §58-55-302 requires a license applicant to file proof of public liability insurance, and of workers compensation
+    insurance covering employees, before DOPL issues the license. That is a snapshot at licensing. Ask for a current certificate of
+    insurance for the job, and check the policy dates.
+  </p>
+
+  <h2>Small jobs and the exemption question</h2>
+  <p>
+    Utah's licensing law exempts some small jobs. Under Utah Code §58-55-305, a person doing alteration, repair, remodeling, addition,
+    or improvement work on a building with a contracted value under {ex.under}, including labor and materials, is exempt from licensing,
+    and one whose project is over {ex.affirmationOver} must file a one-time affirmation with DOPL that they carry liability insurance (and workers
+    compensation if applicable). This is the version in effect as of September 2026.
+  </p>
+  <p>
+    Whether a particular fence or wall job fits that exemption is DOPL's call, not ours. If a company tells you it does not need a
+    license, ask which exemption it is relying on, and check with DOPL before you sign.
+  </p>
+
+  <h2>A protection that depends on hiring licensed</h2>
+  <p>
+    Utah generally protects a homeowner who has a written contract with a licensed or exempt contractor and pays that contractor in
+    full: unpaid subcontractors or suppliers cannot keep a lien on the home and may instead claim from the state's Residence Lien
+    Recovery Fund (Utah Code §38-11-107 and §38-11-204). It is one more reason to put the contract in writing and to hire a company
+    whose license you have checked.
+  </p>
+
+  <h2>How to compare fence and wall quotes</h2>
+  <p>Put the quotes side by side on the same six points:</p>
+  <IconList items={compare} cols={2} />
+
+  <h2>Red flags</h2>
+  <ul>
+    <li>No license number, or a name that does not match anything in the DOPL lookup.</li>
+    <li>"We never need a permit" without asking where your front setback is or how tall the retaining wall will be.</li>
+    <li>A large cash deposit before any materials are ordered.</li>
+    <li>No written scope, or a price that only appears after the old fence is removed.</li>
+    <li>Pressure to sign the same day.</li>
+  </ul>
+  <p class="sgfw-note">
+    Sources: Utah DOPL Licensee Lookup and Verification (checked September 26, 2026); Utah Code §58-55-302 and §58-55-305 (versions
+    effective May 7, 2025) and §38-11-107 and §38-11-204, read on le.utah.gov. This page is general information, not legal advice.
+  </p>
+</GuideLayout>

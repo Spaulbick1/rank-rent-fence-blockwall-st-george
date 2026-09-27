@@ -1,0 +1,125 @@
+---
+// City silo (Phase 4): Hurricane, UT. Sourced local content: Hurricane City
+// Code 10-37-9 "Fences and walls" read on library.municode.com 2026-09-26
+// (version "Jul 8, 2026 (current)"; Ord. 2023-17 latest amendment), and the
+// city's Building Department page (cityofhurricane.com/161, same date):
+// address/phone, "no structures of any kind are permitted within a public
+// utility easement", design criteria (12-inch frost depth, 105 mph wind).
+// General fence permit threshold NOT in 10-37-9; FAQ now cites IBC 105.2 (7 ft fences / 4 ft retaining) via Title 9 sec 9-1-2 + UpCodes Utah IBC 2021 (2026-09-26). Verify current Utah IBC edition. Earlier: page told readers
+// to ask the Building Department rather than guessing. Pool clause cited
+// WITHOUT any height (no pool-barrier height anywhere on this site).
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+import { COST_AS_OF, fenceProject, blockWall } from '../lib/costs';
+
+const path = '/fence-installation-hurricane-ut/';
+const code = 'https://library.municode.com/ut/hurricane/codes/code_of_ordinances?nodeId=TIT10LAUSRE_CH37SUDEST';
+const bldg = 'https://www.cityofhurricane.com/161/Building-Department';
+
+const faq = [
+  {
+    question: 'How tall can a fence be in Hurricane, UT?',
+    answer: 'Hurricane City Code §10-37-9 limits fences and walls in rear and side yards to 6 feet unless a conditional use permit allows more, and limits opaque fences and walls in a front yard to 48 inches unless the Planning Commission gives written permission.',
+  },
+  {
+    question: 'Can I build a fence in a utility easement in Hurricane?',
+    answer: "No structures are allowed. The Building Department's page states that regardless of zoning, no structures of any kind are permitted within a public utility easement, and §10-37-9 says retaining walls shall not be built in public utility easements.",
+  },
+  {
+    question: 'Is barbed wire allowed in Hurricane?',
+    answer: 'Not on lots with single-family or two-family homes. §10-37-9 prohibits security wire such as barbed, concertina, or razor wire, and electrified fencing, on those properties except for agricultural uses.',
+  },
+  {
+    question: 'Do I need a permit for a fence in Hurricane?',
+    answer: "Hurricane's fence section (§10-37-9) does not state a building-permit threshold. Hurricane adopts the state building codes (Title 9, §9-1-2), and the Utah edition of the International Building Code (2021 edition read) lists fences not over 7 feet, and retaining walls not over 4 feet measured from the bottom of the footing to the top of the wall (unless supporting a surcharge), among work that does not need a building permit. Zoning limits such as the 6-foot side and rear limit still apply, so confirm with the Hurricane Building Department (435-635-2811) before you build, especially for block walls, retaining walls, and anything near a property line or easement.",
+  },
+];
+
+const rules = [
+  { icon: 'fence', title: '6 feet in side and rear yards', text: 'Taller only by conditional use permit (§10-37-9(A)).' },
+  { icon: 'ruler', title: '48 inches for opaque front-yard fences', text: 'An opaque fence or wall over 48 inches in a front yard needs written permission from the Planning Commission (§10-37-9(C)).' },
+  { icon: 'house', title: 'Clear driveway and corner sight lines', text: 'No opaque fence, wall, or landscaping over 2 feet in the 12-by-12-foot triangle beside a driveway, or in a 25-foot triangle at a street corner (§10-37-9(E)).' },
+  { icon: 'pin', title: 'Stay out of utility easements', text: 'Retaining walls may not be built in public utility easements, and the Building Department says no structures of any kind are allowed there.' },
+  { icon: 'lock', title: 'No barbed or electric fencing on home lots', text: 'Barbed, concertina, and razor wire and electrified fencing are prohibited on single- and two-family lots, except for agricultural uses (§10-37-9(F)).' },
+  { icon: 'blocks', title: 'Fences between different uses', text: 'New development next to a different use must fence the shared line; next to agricultural land the fence must be at least 6 feet with posts 8 feet apart, unless the agricultural owner waives it (§10-37-9(G)).' },
+];
+---
+
+<GuideLayout
+  title="Fence & Wall Rules, Hurricane UT"
+  description="Fence and block wall rules in Hurricane, UT: 6-foot side and rear limit, 48-inch front-yard rule, sight triangles, easements, costs, and who to call."
+  path={path}
+  eyebrow="Hurricane · Washington County, UT"
+  h1="Fence and Block Wall Installation in Hurricane, UT: What the City Code Allows"
+  answer="As of September 2026, Hurricane City Code §10-37-9 limits rear and side-yard fences and walls to 6 feet unless a conditional use permit allows more, and limits opaque front-yard fences to 48 inches without Planning Commission permission. No structure may sit in a public utility easement."
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  service={{
+    name: 'St. George Elite Fence — Hurricane, UT Fence & Wall Referral',
+    serviceType: 'Fence and block wall installation referral / contractor matching',
+    description: 'Connects homeowners in Hurricane, UT with independent, third-party fence and block-wall companies. Does not build fences or walls and is not a contractor.',
+    areaServed: ['Hurricane'],
+  }}
+  faq={faq}
+  related={[
+    { href: '/washington-county-fence-service-areas/', label: 'All service areas', blurb: 'Rules city by city across the county.' },
+    { href: '/block-wall-installation-st-george-ut/', label: 'Block wall guide', blurb: 'CMU wall types and vetting a mason.' },
+    { href: '/cmu-block-wall-vs-wood-fence-st-george-ut/', label: 'Block wall vs wood fence', blurb: 'Cost, lifespan, and upkeep.' },
+    { href: '/licensed-fence-contractor-compare-st-george-ut/', label: 'Check a contractor license', blurb: 'Use the Utah DOPL lookup.' },
+  ]}
+>
+  <p>
+    Hurricane has its own city code, Building Department, and utility service, and its fence rules differ from St. George's in
+    ways that matter: the front-yard limit is stated as 48 inches for opaque fences, the side and rear limit is 6 feet rather
+    than St. George's 6 feet 4 inches, and utility easements are off limits. This page summarizes Hurricane City Code §10-37-9,
+    read on September 26, 2026.
+  </p>
+
+  <h2>Hurricane fence and wall rules at a glance</h2>
+  <IconList items={rules} />
+
+  <h2>Easements come first</h2>
+  <p>
+    If your lot has a public utility easement (your plat shows it), the Building Department states plainly that no structures of
+    any kind are permitted within it, regardless of zoning. Before a fence or wall line is set, find any easements on your plat
+    and keep posts and footings out of them. Call 811 (Blue Stakes of Utah) at least 3 business days before digging.
+  </p>
+
+  <h2>Pools</h2>
+  <p>
+    §10-37-9(D) requires permanent swimming pools that are not inside a building to be completely surrounded by a fence or wall
+    that satisfies building code requirements. The section does not restate those requirements, so ask the Building Department
+    what applies to your pool before you choose a fence. Our <a href="/pool-fence-and-gate-st-george-ut/">pool fence guide</a>
+    lists the questions to ask.
+  </p>
+
+  <h2>Footings, frost, and wind</h2>
+  <p>
+    Hurricane's Building Department lists its design criteria, including a 12-inch frost line depth and a 105 mph design wind
+    speed. Those figures are written for buildings, but they are good prompts for a fence or wall quote: ask how deep posts and
+    footings will go, and how a tall solid fence or block wall is designed to handle wind.
+  </p>
+
+  <h2>What it costs</h2>
+  <p>
+    No Hurricane fence or wall company publishes prices. As of {COST_AS_OF}, typical residential fence projects in the St. George
+    area run about {fenceProject.low}–{fenceProject.high} installed, and CMU block walls about {blockWall.perSqFt} per square foot. See
+    the <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a> for every range and source.
+  </p>
+
+  <h2>Who to call</h2>
+  <div class="sgfw-facts">
+    <dl>
+      <dt>Hurricane Building Department</dt>
+      <dd>147 N 870 W, Hurricane, UT 84737 · 435-635-2811 (<a href={bldg} rel="noopener">city website</a>, checked September 26, 2026)</dd>
+      <dt>Permits</dt>
+      <dd>Hurricane takes building permit applications online through the city's permit portal; ask whether your fence or wall needs one.</dd>
+      <dt>The code</dt>
+      <dd><a href={code} rel="noopener">Hurricane City Code, Title 10, Chapter 37 (§10-37-9 Fences and walls)</a></dd>
+    </dl>
+  </div>
+  <p class="sgfw-note">
+    Summary of Hurricane City Code §10-37-9 as published on Municode (version dated July 8, 2026, read September 26, 2026). Not
+    legal advice; the city's code and interpretation control.
+  </p>
+</GuideLayout>

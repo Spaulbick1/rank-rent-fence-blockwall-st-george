@@ -38,6 +38,36 @@ export const localCheck2022 = { vinyl: '$24–$30', wood: '$16–$22', chainLink
 export const retainingWall = {
   block: '$15–$40', // per sq ft, HomeGuide Jan 2026
   poured: '$20–$45', // per sq ft, HomeGuide Jan 2026
+  // Phase 4 (retaining-wall cost spoke) -- HomeGuide "Retaining Wall Cost",
+  // updated January 16, 2026 unless noted. Same source as block/poured above.
+  overallPerSqFt: '$35–$65', // "including the materials and professional labor"
+  segmental: '$15–$35', // per sq ft, by wall type
+  gravity: '$20–$50',
+  cantilevered: '$40–$80',
+  stone: '$20–$95', // natural stone, per sq ft
+  timber: '$15–$30', // wood/timber, per sq ft
+  byHeight10ft: [
+    { height: '2 feet', range: '$700–$1,300' },
+    { height: '4 feet', range: '$1,400–$2,600' },
+    { height: '6 feet', range: '$2,100–$3,900' },
+  ], // total cost for a 10-linear-foot wall at each height
+  projectMinimum: '$1,500–$3,000', // "Most retaining wall contractors have a ... project minimum"
+  engineering: '$500–$2,000+',
+  engineeringAngi: '$350–$750', // Angi, updated September 15, 2026 -- cross-check
+  permit: '$50–$450', // HomeGuide and Angi agree on this range
+  frenchDrain: '$10–$85+', // per linear foot
+  footings: '$18–$55', // per linear foot
+  demolition: '$15–$30', // per linear foot, plus disposal
+  nationalAvgAngi: '$6,085', // Angi, updated September 15, 2026
+  nationalRangeAngi: '$3,192–$9,208',
+};
+
+// Phase 4 (CMU vs wood spoke): upkeep figures -- HomeGuide "Cost to Stain or
+// Paint a Fence", updated February 4, 2026.
+export const fenceStain = {
+  perLinearFt: '$2–$14',
+  perSqFt: '$0.50–$2.50',
+  typical: '$300–$2,800', // typical 100-150 ft fence
 };
 
 export const repair = {
@@ -60,7 +90,7 @@ export const costSources = [
     name: 'HomeGuide — Retaining Wall Cost',
     url: 'https://homeguide.com/costs/retaining-wall-cost',
     date: 'Updated January 16, 2026',
-    used: 'Block and poured-concrete retaining wall cost per square foot',
+    used: 'Retaining wall cost per square foot by material and type, cost by height, engineering, permit, drainage, footing and demolition costs',
   },
   {
     name: 'HomeGuide — Concrete Retaining Wall Cost',
@@ -87,6 +117,18 @@ export const costSources = [
     used: 'Ornamental / wrought iron per-foot range',
   },
   {
+    name: 'Angi — Retaining Wall Cost',
+    url: 'https://www.angi.com/articles/how-much-does-it-cost-build-retaining-wall.htm',
+    date: 'Updated September 15, 2026',
+    used: 'Cross-check: national average and range, structural engineer fee, permit range',
+  },
+  {
+    name: 'HomeGuide — Cost to Stain or Paint a Fence',
+    url: 'https://homeguide.com/costs/cost-to-stain-paint-fence',
+    date: 'Updated February 4, 2026',
+    used: 'Wood fence staining and sealing cost',
+  },
+  {
     name: 'HomeBlue — Fence Cost in Saint George, Utah',
     url: 'https://www.homeblue.com/fence-installation/saint-george-ut-fence-cost.htm',
     date: 'Dated June 28, 2022 (older; cross-check only)',
@@ -96,3 +138,20 @@ export const costSources = [
 
 export const costMethodNote =
   'Overall St. George project range and median come from a Google cost summary and aggregator consensus checked September 22, 2026.';
+
+// Phase 4 (CMU vs wood spoke): lifespan ranges. Not prices, but kept here so
+// the comparison page and any future page cite one set of numbers.
+export const lifespan = {
+  wood: { range: '15 to 30 years', source: 'Angi, "How Long Does a Wood Fence Last?"', url: 'https://www.angi.com/articles/how-long-does-wood-fencing-last.htm', date: 'updated July 9, 2026' },
+  vinyl: { range: '20 to 30 years', source: 'Angi, "How Long Does a Vinyl Fence Last?"', url: 'https://www.angi.com/articles/how-long-does-vinyl-fence-last.htm', date: 'updated July 9, 2026' },
+  block: { range: '50 to 100 years', source: 'HomeAdvisor, "Cinder Block Wall Cost"', url: 'https://www.homeadvisor.com/cost/walls-and-ceilings/cinder-block-wall/', date: 'updated June 20, 2026' },
+} as const;
+
+// Phase 4 (license-compare spoke): statutory dollar thresholds, kept here so
+// no $ figure is typed into page prose. Utah Code 58-55-305(1)(h), version
+// effective 5/7/2025 (renumbered 1/1/2027 -- recheck then), read on
+// le.utah.gov 2026-09-26.
+export const utahSmallProjectExemption = {
+  under: '$7,000', // contracted value incl. labor and materials
+  affirmationOver: '$3,000', // one-time insurance affirmation filed with DOPL
+};

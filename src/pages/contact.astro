@@ -1,0 +1,56 @@
+---
+// Contact (Phase 4). Carries the #lead-form target every "Get Matched" CTA
+// points at (site.defaultQuoteHref = /contact/#lead-form). LeadForm ships
+// inert until Phase 8 (v1.32: launch with zero lead-capture surface). No
+// street address, email or phone for the LLC is published here: the site has
+// no local office (compliance.md rule 8) and the tracked number is a Phase 9
+// item. Umbrella Service is this page's mainEntity.
+import PageLayout from '../components/layout/PageLayout.astro';
+import LeadForm from '../components/sections/LeadForm.astro';
+import IconList from '../components/sections/IconList.astro';
+import { site } from '../lib/site-config';
+import { umbrellaServiceSchema, UMBRELLA_SERVICE_ID, abs } from '../lib/schema';
+
+const steps = [
+  { icon: 'fence', title: 'Tell us the project', text: 'New fence, repair, block or retaining wall, pool fence, or an HOA or new-construction requirement. Slope, HOA, and pool details help.' },
+  { icon: 'pin', title: 'Tell us the city', text: `We match requests in ${site.serviceArea.cities.join(', ')}, and the rest of ${site.serviceArea.county}.` },
+  { icon: 'link', title: 'An independent company follows up', text: 'The company that covers your area contacts you directly, quotes the job, and you decide. Homeowners do not pay us.' },
+];
+---
+
+<PageLayout
+  title="Contact & Get Matched"
+  description="Contact St. George Elite Fence or ask to be matched with an independent fence or block wall company in St. George and Washington County, UT."
+  path="/contact/"
+  eyebrow="Contact · St. George & Washington County"
+  h1="Contact Us or Get Matched With a Local Fence Pro"
+  lede="Use the form below to describe your fence or wall project. It costs nothing and there is no obligation."
+  quoteHref="#lead-form"
+  schemaNodes={[umbrellaServiceSchema()]}
+  mainEntityId={abs(UMBRELLA_SERVICE_ID)}
+>
+  <h2>How a request works</h2>
+  <IconList items={steps} />
+
+  <h2>Where we match</h2>
+  <p>
+    {site.serviceArea.cities.join(', ')}, plus unincorporated communities in {site.serviceArea.county}. See the
+    <a href="/washington-county-fence-service-areas/">service area guide</a> for each city's fence and wall rules. Requests
+    outside the county may not be matched.
+  </p>
+
+  <h2>Before you send it</h2>
+  <p>
+    If you are not sure what you need yet, the <a href="/fence-permit-st-george-ut/">permit guide</a> and the
+    <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a> answer the questions most homeowners ask first.
+    To see how requests are handled, read <a href="/how-fence-and-wall-matching-works/">how matching works</a>.
+  </p>
+
+  <h2>Corrections and privacy requests</h2>
+  <p>
+    Found something out of date, or want to ask about information you sent us? Use the same form and say so in the
+    message field. Privacy requests are handled as described in our <a href="/privacy-policy/">Privacy Policy</a>.
+  </p>
+
+  <Fragment slot="after"><LeadForm /></Fragment>
+</PageLayout>

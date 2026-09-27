@@ -4,18 +4,17 @@
 // line. The unit directly below it (SuitabilityWorksheet) carries the
 // structural differentiation, not this component.
 //
-// Photo: block-wall-split-face.webp, reused from the portfolio's shared
-// Site Photo Library (rank-rent-fence-blockwall-east-valley / Yuma fence
-// folders -- byte-identical file) per Scott's standing rule to check the
-// library before licensing from Adobe Stock. A close-up of split-face CMU
-// is deliberate: it shows the material, not a "finished job" we'd have to
-// claim as ours (compliance.md rule 6), and it reads for both halves of the
-// niche. FLAG: the same texture is also live on the Yuma and East Valley
-// fence sites -- replace with a licensed, St. George-region Adobe Stock
-// image in Phase 3/4's imagery pass. Alt text describes the scene only.
+// Photo (Phase 4, 2026-09-26): Pexels 22147447, a desert trail and red rock
+// above the St. George, UT valley (Pexels license). Replaced the reused
+// split-face CMU texture that was also live on the Yuma and East Valley
+// sites. Free-stock STOPGAP: Adobe Stock credits were still exhausted on
+// 2026-09-26 (per-image price shown, no credits) -- swap for a licensed
+// Adobe Stock St. George residential/wall image once credits reset. A place
+// photo, not a job photo, so it never implies "our work" (compliance.md
+// rule 6). Alt text describes the scene only.
 import { site } from '../../lib/site-config';
 import { Image } from 'astro:assets';
-import heroImg from '../../assets/images/block-wall-split-face.webp';
+import heroImg from '../../assets/images/st-george-red-rock-desert-trail.webp';
 
 interface Props {
   quoteHref?: string;
@@ -52,7 +51,7 @@ const { quoteHref = site.defaultQuoteHref } = Astro.props;
     <div class="border-t-8 border-t-brass shadow-block">
       <Image
         src={heroImg}
-        alt="Close-up of a split-face concrete block (CMU) wall surface"
+        alt="Gravel trail through red rock and desert shrubs above the St. George, Utah valley under a cloudy sky"
         widths={[480, 800, 1200]}
         sizes="(min-width: 1024px) 40vw, 100vw"
         class="aspect-[4/3] w-full object-cover"

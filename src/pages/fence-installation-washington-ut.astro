@@ -1,0 +1,122 @@
+---
+// City silo (Phase 4): Washington City, UT. Passes the thin-location-page
+// rule on its own sourced local content: Washington City Code 9-14-12
+// (heights, >6 ft building permit), 10-5-9 (rockery walls >=3 ft need a
+// Public Works permit + engineering), 9-10A-7 (commercial/residential
+// buffer wall), all read on codelibrary.amlegal.com 2026-09-26 (code
+// "2026 S-22 (current)"). Building Dept contact from washingtonutah.gov,
+// same date. Service node scoped to Washington (areaServed).
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+import { COST_AS_OF, fenceProject, blockWall } from '../lib/costs';
+
+const path = '/fence-installation-washington-ut/';
+const code = 'https://codelibrary.amlegal.com/codes/washingtonut/latest/washington_ut/0-0-0-7684';
+const rockery = 'https://codelibrary.amlegal.com/codes/washingtonut/latest/washington_ut/0-0-0-22025';
+
+const faq = [
+  {
+    question: 'How tall can a fence be in Washington, UT?',
+    answer: 'Under Washington City Code §9-14-12, fences, walls, and hedges may not exceed 6 feet in a required rear or interior side yard, or 3 feet within the first 10 feet of the required front yard measured from the street property line.',
+  },
+  {
+    question: 'Do I need a permit for a fence in Washington City?',
+    answer: 'A building permit is required for any fence or wall structure over 6 feet, which the code allows only within the buildable area of a lot (§9-14-12). Rockery walls 3 feet or taller need a Public Works permit and an engineering analysis (§10-5-9). Ask the Building Department about anything else.',
+  },
+  {
+    question: 'What if my lot is higher or lower than my neighbor’s?',
+    answer: 'Where two lots differ in grade, §9-14-12 lets a fence on the shared line be built to the maximum height allowed on either side of the property line. Talk to your neighbor and the city before you design around it.',
+  },
+  {
+    question: 'How much does a fence cost in Washington, UT?',
+    answer: `No Washington City company publishes prices. As of ${COST_AS_OF}, typical fence projects in the St. George area run about ${fenceProject.low}–${fenceProject.high}, and CMU block walls about ${blockWall.perSqFt} per square foot. See the cost guide for sources.`,
+  },
+];
+
+const rules = [
+  { icon: 'ruler', title: '3 feet near the street', text: 'Within the first 10 feet of the required front yard, measured from the street property line, fences, walls, and hedges max out at 3 feet (§9-14-12(C)).' },
+  { icon: 'fence', title: '6 feet in side and rear yards', text: 'In a required rear yard or interior side yard, the limit is 6 feet (§9-14-12(B)).' },
+  { icon: 'scroll', title: 'Permit over 6 feet', text: 'Inside the buildable area, fences and walls may go up to the permitted building height, but anything over 6 feet needs a building permit (§9-14-12(A)).' },
+  { icon: 'slope', title: 'Rockery walls from 3 feet', text: 'Rockery walls 3 feet or taller need a Public Works permit and an engineering analysis; they top out at 8 feet, including terraced walls combined (§10-5-9).' },
+  { icon: 'blocks', title: 'Buffer walls in commercial zones', text: 'Commercial development must put a 6-foot solid decorative fence or wall along a residential or agricultural zone boundary; chain-link with slats does not qualify (§9-10A-7).' },
+];
+---
+
+<GuideLayout
+  title="Fence & Wall Rules, Washington UT"
+  description="Building a fence or block wall in Washington, UT? City height limits, when a permit is needed, rockery wall rules, costs, and who to call."
+  path={path}
+  eyebrow="Washington City · Washington County, UT"
+  h1="Fence and Block Wall Installation in Washington, UT: Heights, Permits, and Costs"
+  answer="As of September 2026, Washington City Code §9-14-12 limits fences and walls to 6 feet in rear and interior side yards and 3 feet within the first 10 feet of the front yard, requires a building permit for anything over 6 feet, and §10-5-9 requires a Public Works permit for rockery walls 3 feet or taller."
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  service={{
+    name: 'St. George Elite Fence — Washington, UT Fence & Wall Referral',
+    serviceType: 'Fence and block wall installation referral / contractor matching',
+    description: 'Connects homeowners in Washington, UT with independent, third-party fence and block-wall companies. Does not build fences or walls and is not a contractor.',
+    areaServed: ['Washington'],
+  }}
+  faq={faq}
+  related={[
+    { href: '/washington-county-fence-service-areas/', label: 'All service areas', blurb: 'Rules city by city across the county.' },
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation guide', blurb: 'Materials, vetting, and red flags.' },
+    { href: '/retaining-wall-cost-st-george-ut/', label: 'Retaining wall cost', blurb: 'Height, drainage, and engineering costs.' },
+    { href: '/licensed-fence-contractor-compare-st-george-ut/', label: 'Check a contractor license', blurb: 'Use the Utah DOPL lookup.' },
+  ]}
+>
+  <p>
+    Washington City sits just east of St. George, but it has its own municipal code and its own Building Department, and its
+    fence rules are not the same as St. George's. The biggest difference homeowners notice is the front yard: Washington City's
+    limit near the street is 3 feet, not St. George's 4. This page summarizes the city's rules from the code itself, as read on
+    September 26, 2026.
+  </p>
+
+  <h2>Washington City fence and wall rules at a glance</h2>
+  <IconList items={rules} />
+
+  <h2>How the rules play out on a typical lot</h2>
+  <p>
+    For most homes, the practical result is a 6-foot privacy fence or block wall along the side and rear lot lines, stepping
+    down to 3 feet as it approaches the street. If you want something taller than 6 feet, the code only allows it inside the
+    buildable area of the lot, and it needs a building permit. Where your lot and your neighbor's sit at different grades,
+    §9-14-12 lets the fence on the shared line be built to the maximum height allowed on either side.
+  </p>
+  <p>
+    If the project includes holding back soil with boulders, the rockery rule in §10-5-9 matters: from 3 feet tall, the wall needs
+    a permit from Public Works and an engineering analysis, and rockery walls, including terraced ones combined, cannot exceed
+    8 feet. For block or poured retaining walls, ask the Building Department what applies to your design; see the
+    <a href="/retaining-wall-cost-st-george-ut/">retaining wall cost guide</a> for engineering and drainage costs.
+  </p>
+
+  <h2>What it costs</h2>
+  <p>
+    No Washington City fence or wall company publishes prices. As of {COST_AS_OF}, typical residential fence projects in the St.
+    George area run about {fenceProject.low}–{fenceProject.high} installed (median near {fenceProject.median}), and CMU block walls about
+    {blockWall.perSqFt} per square foot. The <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a> breaks this down by
+    material and lists every source.
+  </p>
+
+  <h2>HOAs in Washington City</h2>
+  <p>
+    If your home is in an HOA, its fence and wall standards apply on top of the city's. HOA approval is separate from city
+    rules, and neither replaces the other. Our <a href="/hoa-fence-requirements-st-george-ut/">HOA guide</a> explains how to
+    work through both.
+  </p>
+
+  <h2>Who to call</h2>
+  <div class="sgfw-facts">
+    <dl>
+      <dt>Washington City Building Department</dt>
+      <dd>111 North 100 East, Washington, UT 84780 · (435) 656-6326 · Monday to Thursday 7:30 a.m. to 5:30 p.m., Friday 8 a.m. to noon (city website, checked September 26, 2026)</dd>
+      <dt>Before you dig</dt>
+      <dd>Call 811 (Blue Stakes of Utah) at least 3 business days ahead.</dd>
+      <dt>The code</dt>
+      <dd><a href={code} rel="noopener">§9-14-12, fence and wall heights</a> · <a href={rockery} rel="noopener">§10-5-9, rockery walls</a></dd>
+    </dl>
+  </div>
+  <p class="sgfw-note">
+    This page summarizes Washington City Code as published on the city's code library (shown as current through supplement
+    2026 S-22 when read on September 26, 2026). It is not legal advice; the city's code and interpretation control.
+  </p>
+</GuideLayout>

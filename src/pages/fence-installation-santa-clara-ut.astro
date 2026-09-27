@@ -1,0 +1,123 @@
+---
+// City silo (Phase 4): Santa Clara, UT. Sourced local content: Santa Clara
+// City Code chapter 17.28 (rewritten by Ord. 2022-02): 17.28.020 permit
+// triggers (verbatim-checked), 17.28.030 general standards, 17.28.040
+// interior lots (verbatim-checked), 17.28.050 corner lots, 17.28.060
+// retaining walls (verbatim-checked), read on codelibrary.amlegal.com
+// 2026-09-26 ("2026 S-25 (current)"). Building phone/hours/fence permit
+// application from santaclarautah.gov/departments/building/, same date.
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+import { COST_AS_OF, fenceProject, blockWall } from '../lib/costs';
+
+const path = '/fence-installation-santa-clara-ut/';
+const permitCode = 'https://codelibrary.amlegal.com/codes/santaclaraut/latest/santaclara_ut/0-0-0-6390';
+const bldg = 'https://www.santaclarautah.gov/departments/building/';
+
+const faq = [
+  {
+    question: 'Do I need a permit for a fence in Santa Clara, UT?',
+    answer: 'Every fence and wall system gets a review by the building official before construction (§17.28.020(B)). A building permit and engineered design are required when the fence system exceeds 7 feet, when a retaining wall exceeds 4 feet measured from the bottom of the footing, when a shorter retaining wall supports a surcharge, or when the Planning Commission reviewed the fence.',
+  },
+  {
+    question: 'How tall can a fence be in Santa Clara?',
+    answer: 'On interior lots, side and rear fences may be 6 feet (§17.28.040). In a front setback, no fence, wall, or retaining wall may exceed 3 feet, except that a fence at least 50 percent open may be 4 feet if set 1 foot behind the property line.',
+  },
+  {
+    question: 'How tall can a retaining wall be in Santa Clara?',
+    answer: 'Up to 6 feet. Over 4 feet it must be engineered and approved to International Residential Code standards, and systems over 6 feet must be terraced at a 1:1 offset (§17.28.060).',
+  },
+  {
+    question: 'Can I raise the ground to get a taller fence?',
+    answer: 'No. §17.28.030 says finished grade may not be bermed to increase fence height.',
+  },
+];
+
+const rules = [
+  { icon: 'scroll', title: 'Every fence is reviewed', text: 'The building official reviews each wall and fence system before construction, and the city publishes a fence permit application (§17.28.020(B)).' },
+  { icon: 'ruler', title: 'Permit and engineering over 7 feet', text: 'A building permit and engineered design are required for a fence system over 7 feet (§17.28.020(A)).' },
+  { icon: 'fence', title: '6 feet on side and rear lines', text: 'Starting 15 feet back from the front property line (25 feet where the line is at the back of curb) (§17.28.040(A)).' },
+  { icon: 'house', title: '3 feet in the front setback', text: 'Or 4 feet for a fence at least 50 percent open, set 1 foot behind the property line (§17.28.040(B)).' },
+  { icon: 'pin', title: 'Corner-lot sight triangle', text: 'No obstruction over 2 feet in the triangle formed 30 feet from the intersection (§17.28.050).' },
+  { icon: 'slope', title: 'Retaining walls max 6 feet', text: 'Engineered over 4 feet; terraced at 1:1 above 6 feet; moisture-proofed on the retained side (§17.28.060).' },
+];
+---
+
+<GuideLayout
+  title="Fence & Wall Rules, Santa Clara"
+  description="Santa Clara, UT fence and wall rules: 7-foot permit trigger, 6-foot side and rear limit, 3-foot front setback, retaining walls, costs, and who to call."
+  path={path}
+  eyebrow="Santa Clara · Washington County, UT"
+  h1="Fence and Block Wall Installation in Santa Clara, UT: Permits, Heights, and Costs"
+  answer="As of September 2026, Santa Clara City Code §17.28.020 has the building official review every fence and wall before construction and requires a permit and engineered design for fence systems over 7 feet or retaining walls over 4 feet; side and rear fences may be 6 feet and front-setback fences 3 feet."
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  service={{
+    name: 'St. George Elite Fence — Santa Clara, UT Fence & Wall Referral',
+    serviceType: 'Fence and block wall installation referral / contractor matching',
+    description: 'Connects homeowners in Santa Clara, UT with independent, third-party fence and block-wall companies. Does not build fences or walls and is not a contractor.',
+    areaServed: ['Santa Clara'],
+  }}
+  faq={faq}
+  related={[
+    { href: '/washington-county-fence-service-areas/', label: 'All service areas', blurb: 'Rules city by city across the county.' },
+    { href: '/retaining-wall-cost-st-george-ut/', label: 'Retaining wall cost', blurb: 'What engineering and drainage add.' },
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation guide', blurb: 'Materials, vetting, and red flags.' },
+    { href: '/licensed-fence-contractor-compare-st-george-ut/', label: 'Check a contractor license', blurb: 'Use the Utah DOPL lookup.' },
+  ]}
+>
+  <p>
+    Santa Clara rewrote its fence and wall chapter in 2022, and it is one of the more process-driven cities around St. George:
+    every fence and wall system gets a review by the building official before it goes in, and the city offers a fence permit
+    application for the purpose. This page summarizes Santa Clara City Code chapter 17.28 as read on September 26, 2026.
+  </p>
+
+  <h2>Santa Clara fence and wall rules at a glance</h2>
+  <IconList items={rules} />
+
+  <h2>Heights on a typical lot</h2>
+  <p>
+    On an interior lot, a 6-foot fence may run along the side and rear property lines, starting 15 feet back from the front
+    property line where the line is measured from the back of the sidewalk, or 25 feet back where it is measured from the back of
+    the curb. In the front setback, fences, walls, and retaining walls stay at 3 feet, unless the fence is at least 50 percent open,
+    in which case it may be 4 feet tall if set 1 foot behind the property line.
+  </p>
+  <p>
+    A fence and wall system built entirely on one lot can reach 9 feet in total, and where a fence sits on a retaining wall on a
+    shared property line, the combination is limited to 9 feet measured from the lower side (§17.28.030). Grade may not be bermed
+    up to gain height.
+  </p>
+
+  <h2>Retaining walls</h2>
+  <p>
+    Santa Clara caps retaining walls at 6 feet. Above 4 feet, the wall must be engineered and approved under International
+    Residential Code standards, and a building permit is required once the wall exceeds 4 feet measured from the bottom of the
+    footing, a different measuring point from St. George's. Systems taller than 6 feet must be terraced into benches at a 1:1
+    offset, and retaining walls must be moisture-proofed on the retained side below grade. A rock wall no more than 4 feet tall
+    with a slope no steeper than 1:1 is not treated as a retaining wall under §17.28.060.
+  </p>
+
+  <h2>What it costs</h2>
+  <p>
+    No Santa Clara fence or wall company publishes prices. As of {COST_AS_OF}, typical residential fence projects in the St. George
+    area run about {fenceProject.low}–{fenceProject.high} installed, and CMU block walls about {blockWall.perSqFt} per square foot. Where
+    Santa Clara requires an engineered design, add that fee; the <a href="/retaining-wall-cost-st-george-ut/">retaining wall cost
+    guide</a> shows typical engineering costs.
+  </p>
+
+  <h2>Who to call</h2>
+  <div class="sgfw-facts">
+    <dl>
+      <dt>Santa Clara Building Department</dt>
+      <dd>(435) 673-6712 · Monday to Thursday 8 a.m. to 5 p.m., Friday 8 a.m. to 1 p.m. · Fence Permit Application on the <a href={bldg} rel="noopener">city website</a> (checked September 26, 2026)</dd>
+      <dt>Before you dig</dt>
+      <dd>Call 811 (Blue Stakes of Utah) at least 3 business days ahead.</dd>
+      <dt>The code</dt>
+      <dd><a href={permitCode} rel="noopener">Santa Clara City Code chapter 17.28, fences and walls</a></dd>
+    </dl>
+  </div>
+  <p class="sgfw-note">
+    Summary of Santa Clara City Code chapter 17.28 as published on the city's code library (shown as current through supplement
+    2026 S-25 when read on September 26, 2026). Not legal advice; the city's code and interpretation control.
+  </p>
+</GuideLayout>

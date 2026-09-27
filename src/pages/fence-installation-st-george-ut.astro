@@ -5,7 +5,7 @@
 // come only from src/lib/costs.ts. No pool-barrier height anywhere.
 import GuideLayout from '../components/layout/GuideLayout.astro';
 import CostTable from '../components/sections/CostTable.astro';
-import img from '../assets/images/vinyl-privacy-fence.webp';
+// Photo: Pexels 11903184 (Shazard R., Pexels license), Phase 4 stopgap while Adobe credits are out.
 import { COST_AS_OF, fenceProject, perFoot } from '../lib/costs';
 
 const faq = [
@@ -41,8 +41,6 @@ const faq = [
   answer={`As of ${COST_AS_OF}, installing a fence in St. George, UT typically costs about ${fenceProject.low}–${fenceProject.high} for a standard residential project (median near ${fenceProject.median}). St. George City Code §10-18-1 limits front-yard fences to 4 feet and side and rear-yard fences to 6 feet 4 inches in most zones.`}
   updated="2026-09-26"
   updatedLabel="September 26, 2026"
-  image={img}
-  imageAlt="White vinyl privacy fence running along a residential lawn with houses and trees behind it"
   service={{
     name: 'St. George Elite Fence — Fence Installation Referral',
     serviceType: 'Fence installation referral / contractor matching',
@@ -54,6 +52,8 @@ const faq = [
     { href: '/fence-permit-st-george-ut/', label: 'Fence permit rules', blurb: 'When a St. George permit is required, step by step.' },
     { href: '/hoa-fence-requirements-st-george-ut/', label: 'HOA fence requirements', blurb: 'How HOA approval fits alongside the city rules.' },
     { href: '/block-wall-installation-st-george-ut/', label: 'Block wall installation', blurb: 'CMU and retaining walls, permits, and cost.' },
+    { href: '/washington-county-fence-service-areas/', label: 'Rules in nearby cities', blurb: 'Washington, Hurricane, Ivins, and Santa Clara compared.' },
+    { href: '/licensed-fence-contractor-compare-st-george-ut/', label: 'Check a contractor license', blurb: 'The Utah DOPL lookup, step by step.' },
   ]}
 >
   <p>
@@ -163,7 +163,7 @@ const faq = [
 
   <h2>Vetting checklist before you sign</h2>
   <ul>
-    <li>Look the company up in the <a href="https://dopl.utah.gov/" rel="noopener">Utah Division of Professional Licensing</a> and confirm its license status yourself.</li>
+    <li>Look the company up in the <a href="https://secure.utah.gov/llv/search/index.html" rel="noopener">Utah Division of Professional Licensing license lookup</a> and confirm its license status yourself (<a href="/licensed-fence-contractor-compare-st-george-ut/">how to read the record</a>).</li>
     <li>Ask for a certificate of insurance and confirm it directly with the insurer or agent.</li>
     <li>Get a written scope: material, height, linear feet, gates, post spacing, concrete, removal, cleanup.</li>
     <li>Ask who pulls the permit and who handles HOA paperwork.</li>

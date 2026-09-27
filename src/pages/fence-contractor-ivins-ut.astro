@@ -1,0 +1,130 @@
+---
+// City silo (Phase 4): Ivins, UT. Strongest local differentiator in the
+// county: Ivins City Code 16.11.135 (heights, courtyard walls + permit,
+// CMU "Sandstone"/"Geneva" color on named arterials, prohibited materials)
+// and 16.11.136 (retaining walls), read on codelibrary.amlegal.com
+// 2026-09-26 ("2026 S-11 (current)", Ord. 2020-16). 16.11.135(6) contains a
+// private-pool fence requirement: its HEIGHT IS DELIBERATELY NOT PUBLISHED
+// (site-wide rule: no pool-barrier height until Scott clears it -- see
+// Phase 4 report). Phone from ivinsutah.gov/building-department (street
+// address not listed there -- not published).
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+import { COST_AS_OF, fenceProject, blockWall } from '../lib/costs';
+
+const path = '/fence-contractor-ivins-ut/';
+const fenceCode = 'https://codelibrary.amlegal.com/codes/ivinsut/latest/ivins_ut/0-0-0-7853';
+const wallCode = 'https://codelibrary.amlegal.com/codes/ivinsut/latest/ivins_ut/0-0-0-7931';
+
+const faq = [
+  {
+    question: 'How tall can a fence be in Ivins, UT?',
+    answer: 'Ivins City Code §16.11.135 allows walls and fences up to 6 feet, measured from finish grade, along side and rear property lines outside the front setback. Within the front setback area the limit is 3 feet 6 inches, set back at least 1 foot from the property line, curb, or sidewalk.',
+  },
+  {
+    question: 'What color block wall is required in Ivins?',
+    answer: 'Along Ivins arterial and collector streets, including Snow Canyon Parkway, Old Highway 91, 400 East, 200 East, 400 South, 400 West, Tuacahn Drive, and Snow Canyon Drive, §16.11.135 requires CMU block colored "Sandstone," except on Old Highway 91, where it must be "Geneva."',
+  },
+  {
+    question: 'Do I need a permit for a front courtyard wall in Ivins?',
+    answer: 'Yes. §16.11.135 requires a building permit, with plans, for front yard courtyard walls, which must also meet setback, height, and clear-view rules.',
+  },
+  {
+    question: 'How tall can a retaining wall be in Ivins?',
+    answer: 'Under §16.11.136, a retaining wall over 4 feet may not face a street, walls over 4 feet must be terraced with at least a 3-foot offset, and a wall over 4 feet within 10 feet of a development boundary needs the adjacent owner’s written approval.',
+  },
+];
+
+const rules = [
+  { icon: 'fence', title: '6 feet on side and rear lines', text: 'Measured from finish grade, outside the front setback area (§16.11.135(2)(a)).' },
+  { icon: 'ruler', title: '3 feet 6 inches in the front setback', text: 'And at least 1 foot back from the property line, curb, or sidewalk so landscaping can soften the fence (§16.11.135(2)(b)).' },
+  { icon: 'house', title: 'Corner lots', text: '3 feet 6 inches in front and street-side setbacks and in the 30-foot corner triangle; an open fence such as chain-link or wrought iron may reach 5 feet in a street-facing setback (§16.11.135(3)).' },
+  { icon: 'slope', title: 'Different grades between lots', text: 'On a shared line, 6 feet above grade on either side unless both owners agree in writing; a fence on a retaining wall against a cut may total 9 feet (§16.11.135(2)(c)).' },
+  { icon: 'blocks', title: 'Block color on arterial streets', text: 'CMU colored "Sandstone" (or "Geneva" on Old Highway 91), with a split-face row beneath the cap, along named arterial and collector streets (§16.11.135).' },
+  { icon: 'lock', title: 'Materials not allowed', text: 'Used materials, corrugated metal, plywood, wood pallets, lightweight trellis, and bright colored plastic other than white, among others (§16.11.135).' },
+];
+---
+
+<GuideLayout
+  title="Fence & Wall Rules, Ivins UT"
+  description="Ivins, UT fence and block wall rules: 6-foot and 3-foot-6 limits, courtyard wall permits, Sandstone CMU on arterials, retaining walls, and costs."
+  path={path}
+  eyebrow="Ivins · Washington County, UT"
+  h1="Fence and Block Wall Contractors in Ivins, UT: The Rules Ivins Adds"
+  answer="As of September 2026, Ivins City Code §16.11.135 allows 6-foot fences and walls on side and rear lines, limits the front setback to 3 feet 6 inches, requires a building permit for front courtyard walls, and requires Sandstone-colored CMU block along named arterial and collector streets."
+  updated="2026-09-26"
+  updatedLabel="September 26, 2026"
+  service={{
+    name: 'St. George Elite Fence — Ivins, UT Fence & Wall Referral',
+    serviceType: 'Fence and block wall installation referral / contractor matching',
+    description: 'Connects homeowners in Ivins, UT with independent, third-party fence and block-wall companies. Does not build fences or walls and is not a contractor.',
+    areaServed: ['Ivins'],
+  }}
+  faq={faq}
+  related={[
+    { href: '/washington-county-fence-service-areas/', label: 'All service areas', blurb: 'Rules city by city across the county.' },
+    { href: '/cmu-block-wall-vs-wood-fence-st-george-ut/', label: 'Block wall vs wood fence', blurb: 'Cost, lifespan, and upkeep.' },
+    { href: '/retaining-wall-cost-st-george-ut/', label: 'Retaining wall cost', blurb: 'Engineering, drainage, and height.' },
+    { href: '/hoa-fence-requirements-st-george-ut/', label: 'HOA requirements', blurb: 'When your HOA adds its own rules.' },
+  ]}
+>
+  <p>
+    Ivins writes more design rules into its fence and wall code than its neighbors do. Beyond height limits, it regulates front
+    courtyard walls, block color along its main streets, and which materials are allowed at all. Anyone quoting a fence or wall in
+    Ivins should know these; this page summarizes Ivins City Code §16.11.135 and §16.11.136 as read on September 26, 2026.
+  </p>
+
+  <h2>Ivins fence and wall rules at a glance</h2>
+  <IconList items={rules} />
+
+  <h2>Front courtyard walls</h2>
+  <p>
+    A courtyard wall encloses an open-air patio in the front yard. Ivins allows them, with conditions: they must sit at least 10
+    feet behind the back of the sidewalk (7 feet 6 inches in gated developments), at least 5 feet from the side property line, and
+    front-facing courtyard walls 10 to 15 feet from the front property line are limited to 4 feet 6 inches, with side-facing walls
+    15 feet or more back limited to 5 feet 6 inches. Gates may be up to 6 feet 6 inches. A building permit with a plot plan and
+    elevations is required.
+  </p>
+
+  <h2>Retaining walls in Ivins</h2>
+  <ul>
+    <li>A retaining wall over 4 feet may not have its exposed face toward a public or private street, unless it is hidden by a building, structure, or fencing.</li>
+    <li>Walls over 4 feet must be terraced, with at least a 3-foot offset face to face.</li>
+    <li>Within 10 feet of a development's boundary, a wall over 4 feet above existing grade needs the adjacent owner's written approval.</li>
+    <li>Walls must be built or finished to blend with the surrounding landscape colors.</li>
+  </ul>
+  <p>
+    See the <a href="/retaining-wall-cost-st-george-ut/">retaining wall cost guide</a> for what terracing, drainage, and
+    engineering add to a budget.
+  </p>
+
+  <h2>Pools</h2>
+  <p>
+    §16.11.135 includes its own requirement for fencing around private swimming pools, hot tubs, and similar pools. Read that
+    subsection or ask the city before you choose a pool fence, and see our <a href="/pool-fence-and-gate-st-george-ut/">pool fence
+    guide</a> for the questions to ask.
+  </p>
+
+  <h2>What it costs</h2>
+  <p>
+    No Ivins fence or wall company publishes prices. As of {COST_AS_OF}, typical residential fence projects in the St. George area
+    run about {fenceProject.low}–{fenceProject.high} installed, and CMU block walls about {blockWall.perSqFt} per square foot. If your wall
+    needs Ivins' required block color, a split-face row, or terracing, ask each company to price those items explicitly. The <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a> lists every source.
+  </p>
+
+  <h2>Who to call</h2>
+  <div class="sgfw-facts">
+    <dl>
+      <dt>Ivins Building Department</dt>
+      <dd>(435) 634-9753 · Monday to Friday, 8 a.m. to 5 p.m. (city website, checked September 26, 2026)</dd>
+      <dt>Before you dig</dt>
+      <dd>Call 811 (Blue Stakes of Utah) at least 3 business days ahead.</dd>
+      <dt>The code</dt>
+      <dd><a href={fenceCode} rel="noopener">§16.11.135, fences and walls</a> · <a href={wallCode} rel="noopener">§16.11.136, retaining walls</a></dd>
+    </dl>
+  </div>
+  <p class="sgfw-note">
+    Summary of Ivins City Code as published on the city's code library (shown as current through supplement 2026 S-11 when read
+    on September 26, 2026). Not legal advice; the city's code and interpretation control.
+  </p>
+</GuideLayout>
