@@ -237,6 +237,22 @@ export function itemListSchema(opts: {
   };
 }
 
+// Operating Rule 14 (A)/(B), v1.44 (Phase 7, 2026-09-27, Scott: "Switch"):
+// a page with no Service of its own points WebPage.mainEntity back at its own
+// main content -- the one ItemList with an @id (best-of pages), else the one
+// Article with an @id. The @id is read back off the node itself, so both
+// sides of the link are the same string by construction. Returns undefined
+// when there is no single candidate (caller falls back to the umbrella Service).
+export function defaultMainEntityId(nodes: object[]): string | undefined {
+  const withId = (t: string) =>
+    nodes.filter((n: any) => n && n['@type'] === t && typeof n['@id'] === 'string') as { '@id': string }[];
+  const lists = withId('ItemList');
+  if (lists.length === 1) return lists[0]['@id'];
+  const articles = withId('Article');
+  if (articles.length === 1) return articles[0]['@id'];
+  return undefined;
+}
+
 export function howToSchema(opts: {
   path: string;
   name: string;

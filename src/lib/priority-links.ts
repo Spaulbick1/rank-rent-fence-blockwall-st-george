@@ -63,5 +63,22 @@ export const PRIORITY_LINKS = [
   },
 ] as const;
 
+/**
+ * "Areas & guides" line under the cards (Phase 7, 2026-09-27, Scott: "Add it"). Not priority
+ * pages -- these are the best-of page, the county hub, the city silos and the how-it-works page,
+ * which sat tied with or below /privacy-policy/ on inbound internal links (Phase 6 report, open
+ * item 4). One compact line lifts each by about one link per page. Same rules as above: real
+ * built routes only, descriptive anchors, no prices, no claim that the site does the work.
+ */
+export const SECONDARY_LINKS = [
+  { href: '/best-fence-and-wall-companies-st-george-ut/', label: 'Best fence and wall companies' },
+  { href: '/washington-county-fence-service-areas/', label: 'Washington County service areas' },
+  { href: '/fence-installation-washington-ut/', label: 'Washington, UT fence rules' },
+  { href: '/fence-installation-hurricane-ut/', label: 'Hurricane fence rules' },
+  { href: '/fence-contractor-ivins-ut/', label: 'Ivins fence rules' },
+  { href: '/fence-installation-santa-clara-ut/', label: 'Santa Clara fence rules' },
+  { href: '/how-fence-and-wall-matching-works/', label: 'How matching works' },
+] as const;
+
 /** Pages where the block must not render (legal, utility). Prefix match. */
 export const PRIORITY_EXCLUDE = ['/privacy-policy', '/terms-of-service', '/thank-you', '/404'] as const;

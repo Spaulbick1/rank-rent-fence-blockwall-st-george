@@ -133,9 +133,39 @@ All outbound links carry `rel="noopener"`.
 
 Repo sync: 19 modified + 2 new files, and a byte-compare of `$HOME/fb` vs the repo shows 0 differences. No uncommitted work from other sessions was in these paths (repo was clean at `b9bc3f4` for `src/`).
 
+## Push + live verification (2026-09-27)
+Scott ran `push-phase6.ps1`: commit **`49059a2`**, `b9bc3f4..49059a2 main -> main`, 22 files. The CRLF warnings are Git autocrlf notices only. Live check right after the deploy (no-store fetch):
+- The RelatedServices block is on `/`, `/fence-repair-st-george-ut/`, `/fence-permit-st-george-ut/` and `/licensed-fence-contractor-compare-st-george-ut/`, and absent on `/privacy-policy/`.
+- The skip link and footer `!pb-28` are live.
+- Article `datePublished` = `2026-09-26T00:00:00-06:00`.
+- DOPL links point to `commerce.utah.gov/dopl/`.
+- `/sitemap-0.xml` has 22 `<url>` and 22 `<lastmod>`.
+
+**Rich Results Test re-run on `/fence-permit-st-george-ut/`:** Articles + Breadcrumbs valid, and the 4 datetime non-critical issues are gone.
+
+## Cache purge + PageSpeed Insights (2026-09-27, after `49059a2`)
+Cloudflare → stgeorgeelitefence.com → Caching → **Purge Everything**, done from the dashboard at Scott's request.
+
+PageSpeed Insights, **mobile**, after the purge:
+
+| Page | Perf | A11y | BP | SEO | FCP | LCP | TBT | CLS | SI |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `/` | 99 | 100 | 100 | 100 | 1.5 s | 1.8 s | 0 ms | 0 | 2.5 s |
+| `/fence-installation-st-george-ut/` | 99 | 100 | 100 | 100 | 1.5 s | 1.5 s | 0 ms | 0 | 2.3 s |
+| `/fence-and-block-wall-cost-st-george-ut/` | 100 | 100 | 100 | 100 | 1.5 s | 1.5 s | 0 ms | 0 | 1.5 s |
+
+**Every page meets the targets (Perf 95+ / A11y 100 / BP 95+ / SEO 100); LCP under 2 s on all three.** Informational only: render-blocking CSS ~150 ms; "legacy JavaScript" 11 KiB + a "3rd parties" entry; cache lifetime 4 KiB; homepage image delivery ~52 KiB; 2 long tasks + a DOM-size note on the service page. **Phase 7 finding:** the 11 KiB third-party script is Cloudflare's `static.cloudflareinsights.com/beacon.min.js`, injected at the edge on browser navigations because the zone's RUM / Web Analytics setting is **on** (automatic setup). Rocket Loader is **off**. The site itself ships no third-party JS. Left on (portfolio decision: keep Web Analytics and disclose it; Privacy line live in `e12924d`).
+
+## Phase 6 close-out (done in the Phase 7 session, 2026-09-27)
+- **Live robots/sitemap/key:** `/robots.txt` 200 (allow-all, AI crawlers not blocked, `Sitemap:` line → `sitemap-index.xml`); `/sitemap-index.xml` 200 → `sitemap-0.xml`; `sitemap-0.xml` 22 URLs, 22/22 `<lastmod>` (`2026-09-27T22:29:15.987Z`); `/30a69542c81d43d3cbb37b4ee172adee.txt` 200, 32 bytes, exact key. **Pass.**
+- **"Popular next steps in St. George, UT"** renders once on all 20 non-legal sitemap pages and on neither Privacy nor Terms (live crawl of all 22). **Pass.**
+- **Real-phone hand test:** not done yet (Scott, 2026-09-27). Carried to the Phase 7 checklist as an open item.
+- **Open items 3 and 4 decided by Scott in Phase 7:** switch Article/best-of `WebPage.mainEntity` to the page's own `#article` / `#itemlist` ("Switch"), and add an "Areas & guides" line to RelatedServices ("Add it"). Both built in Phase 7; see `PHASE7_DEPLOYMENT_CHECKLIST.md`.
+- **validator.schema.org remaining URLs:** Google's CAPTCHA returned on the first Phase 7 attempt; see the Phase 7 checklist for the remaining list and the offline vocabulary check.
+
 ## Open items
-1. **Push** with `push-phase6.ps1` (below), then purge the Cloudflare cache.
-2. **PageSpeed / Lighthouse, mobile (Scott):** homepage, `/fence-installation-st-george-ut/` (service page), `/fence-and-block-wall-cost-st-george-ut/` (cost guide). Targets are Perf 95+ / A11y 100 / BP 95+ / SEO 100. Paste the scores and any flagged audits back.
+1. ~~Push~~ Done (`49059a2`). ~~Cache purge~~ Done.
+2. ~~PageSpeed / Lighthouse~~ Done. All targets met (table above).
 3. **Rule 14 question from Phase 5, now answered by the v1.44 rollout:** these pages' `WebPage.mainEntity` points at the sitewide umbrella Service, which v1.44's exception explicitly keeps ("a WebPage that already points at a Service `@id` keeps it", the same as `stgeorgeelitepools.com`, rollout flag #2). No change was made. If you'd rather Article/best-of pages point at their own `#article`/`#itemlist` on both St. George sites, it's one decision covering both. Also, v1.44 is still a proposal and hasn't been saved as the installed skill.
 4. **Rule 18 margin (optional):** the best-of page ties Privacy (27), and the city silos, how-matching and about sit at 24–25. That's allowed, since they aren't priority pages. A cheap lift is an "Areas & guides" line in RelatedServices (the Yuma-fence pattern). This is a Phase 7 decision.
 5. **validator.schema.org on the remaining 16 URLs:** re-run after the push. Google's CAPTCHA blocked automation. Same generators, `audit.py` clean.

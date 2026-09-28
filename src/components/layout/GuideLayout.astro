@@ -21,6 +21,7 @@ import {
   UMBRELLA_SERVICE_ID,
   faqSchema,
   articleSchema,
+  defaultMainEntityId,
 } from '../../lib/schema';
 
 interface Props {
@@ -70,7 +71,6 @@ const servicePath = `${path}#service`;
 const svcNode = service
   ? serviceSchema({ id: servicePath, path, name: service.name, serviceType: service.serviceType, description: service.description, areaServed: service.areaServed })
   : umbrellaServiceSchema();
-const mainEntityId = service ? abs(servicePath) : abs(UMBRELLA_SERVICE_ID);
 
 const nodes: object[] = [
   svcNode,
@@ -80,6 +80,10 @@ const nodes: object[] = [
   ...(faq ? [faqSchema(faq)] : []),
   ...extraNodes,
 ];
+// Rule 14 (v1.44 A/B): a service page's WebPage.mainEntity stays its own
+// Service; otherwise it points at this page's own ItemList (best-of) or
+// Article (dated guides), falling back to the sitewide umbrella Service.
+const mainEntityId = service ? abs(servicePath) : (defaultMainEntityId(nodes) ?? abs(UMBRELLA_SERVICE_ID));
 ---
 
 <BaseLayout

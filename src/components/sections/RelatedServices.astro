@@ -5,7 +5,7 @@
  * the list. Skips the current page so nothing self-links; renders nothing on legal/utility pages.
  * Uses this site's own tokens (river / brass / tint-line / rounded-blk, cap-stone card).
  */
-import { PRIORITY_LINKS, PRIORITY_EXCLUDE } from '../../lib/priority-links';
+import { PRIORITY_LINKS, PRIORITY_EXCLUDE, SECONDARY_LINKS } from '../../lib/priority-links';
 import { site } from '../../lib/site-config';
 import { icons } from '../../lib/icons';
 
@@ -14,6 +14,7 @@ const current = withSlash(Astro.url.pathname);
 const excluded = PRIORITY_EXCLUDE.some((p) => current.startsWith(p));
 const links = PRIORITY_LINKS.filter((l) => l.href !== current);
 const [first, second] = links;
+const more = SECONDARY_LINKS.filter((l) => l.href !== current);
 ---
 
 {!excluded && (
@@ -46,6 +47,23 @@ const [first, second] = links;
           </li>
         ))}
       </ul>
+      <nav aria-label="Areas and guides" class="mt-5 border-t border-tint-line pt-4">
+        <p class="flex items-center gap-2 text-fl-sm font-semibold text-ink">
+          <span class="sgfw-iconlist-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d={icons.pin ?? icons.check} />
+            </svg>
+          </span>
+          Areas &amp; guides
+        </p>
+        <ul class="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-fl-sm">
+          {more.map((l) => (
+            <li>
+              <a href={l.href} class="inline-block py-1 text-river underline underline-offset-2 hover:text-river-dark">{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </div>
   </aside>
 )}

@@ -182,10 +182,25 @@ for r, p in sorted(pages.items()):
         if (sv.get('provider') or {}).get('@id') != SITE + '/#organization': F(r, 'Service.provider not Org @id')
         if not sv.get('@id'): F(r, 'Service without @id')
     me = (wp.get('mainEntity') or {}).get('@id')
-    if services:
+    # Rule 14 (v1.44 A/B, adopted Phase 7): the page's own Service (@id = page#service)
+    # wins; else its one ItemList, else its one Article; else the umbrella Service.
+    own_svc = [n for n in services if n.get('@id') == SITE + r + '#service']
+    lists = [n for n in g if n.get('@type') == 'ItemList' and n.get('@id')]
+    arts = [n for n in g if n.get('@type') == 'Article' and n.get('@id')]
+    if own_svc: want = own_svc[0]['@id']
+    elif len(lists) == 1: want = lists[0]['@id']
+    elif len(arts) == 1: want = arts[0]['@id']
+    elif services: want = 'SERVICE'
+    else: want = None
+    if want == 'SERVICE':
         if not me: F(r, 'page has Service but WebPage.mainEntity missing')
         elif me not in byid or byid[me].get('@type') != 'Service': F(r, f'mainEntity {me} not a Service in graph')
+    elif want:
+        if me != want: F(r, f'WebPage.mainEntity {me} != expected {want} (Rule 14 v1.44)')
+        elif me not in byid: F(r, f'mainEntity {me} dangling')
     elif me and me not in byid: F(r, f'mainEntity {me} dangling')
+    for n in lists + arts:
+        if not n['@id'].startswith(SITE + r + '#'): F(r, f'{n["@type"]} @id {n["@id"]} not on this page')
     for n in g:
         if n.get('@type') == 'Article':
             mo = n.get('mainEntityOfPage')
@@ -238,11 +253,12 @@ except Exception as e: F('sitemap lastmod', str(e))
 PL_SRC = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'src', 'lib', 'priority-links.ts')
 try:
     pl = open(PL_SRC, encoding='utf-8').read()
-    prio = re.findall(r"href: '([^']+)'", pl.split('PRIORITY_EXCLUDE')[0])
+    prio = re.findall(r"href: '([^']+)'", pl.split('export const PRIORITY_LINKS')[1].split('] as const')[0])
+    sec = re.findall(r"href: '([^']+)'", pl.split('export const SECONDARY_LINKS')[1].split('] as const')[0]) if 'SECONDARY_LINKS' in pl else []
     excl = re.findall(r"'([^']+)'", pl.split('export const PRIORITY_EXCLUDE')[1])
     legal = [r for r in pages if r.startswith(('/privacy', '/terms'))]
     if not 6 <= len(prio) <= 8: F('priority-links', f'{len(prio)} entries (want 6-8)')
-    for h in prio:
+    for h in prio + sec:
         if h not in pages: F('priority-links', f'{h} is not a built route')
     cnt = {r: 0 for r in pages}
     for r, p in pages.items():
@@ -258,6 +274,9 @@ try:
     lmax = max(cnt[r] for r in legal) if legal else 0
     for h in prio:
         if h in cnt and cnt[h] <= lmax: F(h, f'priority page inbound {cnt[h]} <= legal max {lmax}')
+    for h in sec:
+        if h in cnt and cnt[h] <= lmax: W(h, f'Areas & guides page inbound {cnt[h]} <= legal max {lmax}')
+    if sec: print('areas & guides inbound: ' + ', '.join(f'{h}={cnt.get(h)}' for h in sec))
     print('rule 18 inbound (occurrences): ' + ', '.join(f'{h}={cnt.get(h)}' for h in prio) + ' | legal: ' + ', '.join(f'{r}={cnt[r]}' for r in sorted(legal)))
 except Exception as e: F('priority-links', repr(e))
 
