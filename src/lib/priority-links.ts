@@ -78,6 +78,10 @@ export const SECONDARY_LINKS = [
   { href: '/fence-contractor-ivins-ut/', label: 'Ivins fence rules' },
   { href: '/fence-installation-santa-clara-ut/', label: 'Santa Clara fence rules' },
   { href: '/how-fence-and-wall-matching-works/', label: 'How matching works' },
+  // Post-launch content spoke (2026-10-12). Added here per OFFPAGE_PLAN's
+  // Rule 18 margin rule: a new spoke joins this line only if it would
+  // otherwise sit at or below /privacy-policy/ on inbound links.
+  { href: '/vinyl-fence-installation-st-george-ut/', label: 'Vinyl fence guide' },
 ] as const;
 
 /** Pages where the block must not render (legal, utility). Prefix match. */

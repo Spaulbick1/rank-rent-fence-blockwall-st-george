@@ -1,0 +1,185 @@
+---
+// Spoke (post-launch content, OFFPAGE_PLAN "content velocity" item 1,
+// built 2026-10-12): vinyl (PVC) fence installation -- material spoke under
+// the fence-installation hub. $ figures from src/lib/costs.ts only (the SAME
+// vinyl per-foot range the hub and cost guide use; HomeBlue 2022 as the
+// local cross-check it already is -- lessons-learned #5). Lifespan from
+// costs.ts `lifespan` (Angi, Jul 2026). Heat: NOAA/NCEI State Climate
+// Extremes Committee report (117 F at St. George, 10 Jul 2021, record-tying);
+// vinyl UV/heat behavior: Ask the Builder "Vinyl Fencing Properties" and
+// the Wikipedia "Synthetic fence" summary of TiO2 UV stabilizers, read
+// 2026-10-12. Local rules: St. George City Code 10-18-1 / 10-18-5 as already
+// cited on the hub (re-verified there 2026-09-26). Umbrella Service.
+// Article + FAQ. Never says the site installs anything (compliance.md 3/6).
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+import CostTable from '../components/sections/CostTable.astro';
+import { COST_AS_OF, perFoot, localCheck2022, fenceStain, lifespan } from '../lib/costs';
+
+const path = '/vinyl-fence-installation-st-george-ut/';
+const vinyl = perFoot.find((r) => r.key === 'vinyl')!;
+const wood = perFoot.find((r) => r.key === 'wood')!;
+const UPDATED = '2026-10-12';
+const UPDATED_LABEL = 'October 12, 2026';
+
+const faq = [
+  {
+    question: 'How much does a vinyl fence cost in St. George?',
+    answer: `As of ${COST_AS_OF}, vinyl privacy fencing runs about ${vinyl.range} per linear foot installed, based on national published ranges. The one St. George-specific source, a June 2022 HomeBlue estimate, put 4-foot vinyl at ${localCheck2022.vinyl} per foot, so expect 6-foot privacy panels to land toward the upper half of the range.`,
+  },
+  {
+    question: 'Does vinyl fencing hold up in St. George heat?',
+    answer: 'Quality vinyl does, with two caveats. PVC softens in extreme heat, and St. George tied the all-time Utah high of 117 degrees in July 2021, so the panels you choose should be UV-stabilized, light in color, and installed with room to expand. Thin, dark, or recycled-content vinyl is where problems show up.',
+  },
+  {
+    question: 'How long does a vinyl fence last?',
+    answer: `Angi estimates ${lifespan.vinyl.range} for a vinyl fence, compared with ${lifespan.wood.range} for wood. Angi also notes that long UV exposure can make vinyl more brittle over time, which is why the formulation and warranty matter more in the desert than in a mild climate.`,
+  },
+  {
+    question: 'Do I need a permit for a vinyl fence in St. George?',
+    answer: 'Only in certain cases. St. George City Code §10-18-5 requires a permit for any fence in a front setback; a side or rear-yard fence that stays within the height limits of §10-18-1 (6 feet 4 inches in most zones) generally does not. Your HOA may require its own approval regardless.',
+  },
+  {
+    question: 'Can I put a solid vinyl privacy fence in my front yard?',
+    answer: 'Usually not. Under §10-18-1, most St. George zones cap front-yard fences at 4 feet, and within 10 feet behind the sidewalk only fences that are at least 50 percent open are allowed. A vinyl picket or ranch-rail style can meet that rule; a solid privacy panel cannot.',
+  },
+  {
+    question: 'Does vinyl fence need maintenance?',
+    answer: `Very little. Vinyl never needs staining or sealing, where HomeGuide says wood needs sealing every 1 to 2 years at about ${fenceStain.perLinearFt} per linear foot. Rinsing off dust and checking gate hardware once a year is the usual routine.`,
+  },
+];
+
+const heatChecklist = [
+  { icon: 'sun', title: 'UV stabilizer in the cap layer', text: 'Ask whether the vinyl is co-extruded with a titanium-dioxide (TiO2) protected outer layer. UV breaks down untreated PVC; TiO2 at the surface is what stops it.' },
+  { icon: 'tag', title: 'Light colors only', text: 'White, tan, and light gray stay cooler. Dark vinyl absorbs heat and can sag in a Phoenix-style summer; St. George summers are in the same class.' },
+  { icon: 'frame', title: 'Virgin or factory-regrind vinyl', text: 'Avoid panels made from recycled vinyl of unknown origin; quality control is hard to hold through recycling, and that is where fading and brittleness start.' },
+  { icon: 'ruler', title: 'Room for thermal movement', text: 'Vinyl expands when hot. Rails should float in the post pockets with a gap at each end; panels pinned tight will bow in July.' },
+  { icon: 'blocks', title: 'Reinforced posts and rails', text: 'On 6-foot privacy runs, ask about aluminum or steel inserts in bottom rails and gate posts. Solid panels catch wind, and the inserts keep them straight.' },
+  { icon: 'doc', title: 'A warranty that names fading and brittleness', text: 'Long warranties are common; read what is excluded. Heat, UV, and wind are the three things to check before you sign.' },
+];
+
+const styles = [
+  { icon: 'fence', title: 'Privacy (solid tongue-and-groove)', text: 'The common 6-foot backyard panel. Best for sound and sight lines; most exposed to wind load.' },
+  { icon: 'frame', title: 'Semi-privacy (lattice or spaced top)', text: 'A solid lower section with an open top that lets wind through and softens the look.' },
+  { icon: 'scroll', title: 'Picket', text: 'Open design that can satisfy the city\'s 50-percent-open rule near the sidewalk, where solid panels are not allowed.' },
+  { icon: 'flat', title: 'Ranch rail (2- or 3-rail)', text: 'Open, low-cost, and common on larger Washington County lots and horse property; no privacy.' },
+];
+
+const compareSteps = [
+  { icon: 'ruler', title: 'Same height, style, and footage on every quote', text: 'A 6-foot privacy price and a 5-foot semi-privacy price are not comparable. Get the linear footage and gate count in writing.' },
+  { icon: 'blocks', title: 'Post depth, spacing, and concrete', text: 'Ask how deep posts are set and how far apart. Wider spacing with no inserts is a lower bid that costs more in the first windstorm.' },
+  { icon: 'doc', title: 'Manufacturer and product line named', text: 'A quote that says "vinyl" without a brand or series tells you nothing about the UV cap or wall thickness.' },
+  { icon: 'house', title: 'HOA and permit handling', text: 'Confirm who submits the HOA application and, if the fence touches a front setback, who pulls the city permit.' },
+  { icon: 'shield', title: 'License and insurance', text: 'Verify Utah license status with DOPL and ask for proof of insurance before any deposit. See the license guide below.' },
+];
+---
+
+<GuideLayout
+  title="Vinyl Fence Guide, St. George UT"
+  description="Vinyl fence installation in St. George, UT: cost per foot, how PVC handles desert heat and UV, styles, city height and permit rules, and comparing quotes."
+  path={path}
+  eyebrow="Material guide · Fences · St. George & Washington County"
+  h1="Vinyl Fence Installation in St. George: Cost, Heat, and the Rules"
+  answer={`As of ${COST_AS_OF}, a vinyl (PVC) privacy fence in St. George, UT costs about ${vinyl.range} per linear foot installed and is estimated to last ${lifespan.vinyl.range} (Angi). In a city that has hit 117 degrees, choose UV-stabilized, light-colored panels installed with room to expand.`}
+  updated={UPDATED}
+  updatedLabel={UPDATED_LABEL}
+  article={{ headline: 'Vinyl Fence Installation in St. George: Cost, Heat, and the Rules', datePublished: UPDATED }}
+  faq={faq}
+  related={[
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation hub', blurb: 'All materials, heights, and permit rules.' },
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Full cost guide', blurb: 'Every range and source.' },
+    { href: '/cmu-block-wall-vs-wood-fence-st-george-ut/', label: 'Block wall vs. wood fence', blurb: 'If you are weighing a wall instead.' },
+    { href: '/hoa-fence-requirements-st-george-ut/', label: 'HOA fence requirements', blurb: 'Color and style approvals.' },
+  ]}
+>
+  <p>
+    Vinyl is the most-requested privacy fence material in newer St. George neighborhoods for a simple reason: it never needs
+    staining, and it looks the same in year ten as it did on day one, if the right product was installed the right way. The
+    desert adds two conditions that a mild-climate buyer never thinks about, heat and ultraviolet light, and those two decide
+    whether a vinyl fence here is a 25-year purchase or a 7-year disappointment. This guide covers what vinyl costs in St.
+    George, what to specify so it survives the summer, which styles the city allows where, and how to compare quotes from
+    independent fence companies.
+  </p>
+
+  <h2>What vinyl fencing costs in St. George</h2>
+  <CostTable
+    caption={`Vinyl fence cost, as of ${COST_AS_OF}`}
+    unit="per linear foot, installed"
+    rows={[
+      { label: 'Vinyl (PVC) privacy, national range', range: vinyl.range, note: vinyl.note },
+      { label: 'Vinyl, 4-foot, St. George (HomeBlue, June 2022)', range: localCheck2022.vinyl, note: 'Older local estimate; cross-check only. Expect 6-foot privacy to run higher.' },
+      { label: 'Wood privacy, for comparison', range: wood.range, note: 'Lower up front; needs sealing every 1 to 2 years.' },
+    ]}
+  />
+  <p>
+    Three things move the price inside that range: height (6-foot privacy panels use roughly half again the material of a
+    4-foot picket), style (solid privacy costs more than ranch rail), and the number of gates, which are priced separately and
+    usually carry the reinforced posts. No St. George fence company publishes prices, so these are dated published ranges, not
+    local quotes; the <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a> lists every source and date.
+  </p>
+
+  <h2>Vinyl in 117-degree heat: what to specify</h2>
+  <p>
+    St. George tied Utah's all-time high of 117 degrees on July 10, 2021, a reading NOAA's State Climate Extremes Committee
+    formally accepted. Ordinary summers run above 100 for weeks. Vinyl is a thermoplastic: it expands as it warms and, by
+    Ask the Builder's description, "performs like taffy" once the material itself reaches about 170 degrees, which a dark
+    panel in direct sun can approach because vinyl stores radiant heat and runs hotter than the air. Ultraviolet light is the
+    second problem; it breaks down untreated PVC, which is why manufacturers co-extrude a titanium-dioxide-rich outer layer
+    to absorb it. None of this makes vinyl a poor choice here. It makes the product specification the whole decision.
+  </p>
+  <IconList items={heatChecklist} cols={2} />
+
+  <h2>Vinyl fence styles and where the city allows them</h2>
+  <IconList items={styles} />
+  <p>
+    Height and openness are governed by St. George City Code
+    <a href="https://stgeorge.municipal.codes/Code/10-18-1" rel="noopener">§10-18-1</a>. In most zones, front-yard fences are
+    capped at 4 feet and side and rear-yard fences at 6 feet 4 inches, and within 10 feet behind the sidewalk only decorative
+    fences that are at least 50 percent open are permitted. That rule is why a vinyl picket works along the street while a
+    solid privacy panel does not. Under
+    <a href="https://stgeorge.municipal.codes/Code/10-18-5" rel="noopener">§10-18-5</a>, any fence in a front setback needs
+    a permit; the <a href="/fence-permit-st-george-ut/">permit guide</a> covers the application. Washington, Hurricane, Ivins,
+    and Santa Clara each have their own code; see the <a href="/washington-county-fence-service-areas/">service area guide</a>.
+  </p>
+
+  <h2>HOA color and style rules</h2>
+  <p>
+    Most newer St. George subdivisions are HOA-governed, and vinyl is where HOA rules bite hardest: many limit fence color to
+    tan or an approved earth tone rather than white, cap height below the city's maximum, and require architectural approval
+    before installation. Get the HOA's written fence standard before you get quotes, because a white 6-foot privacy fence that
+    the city allows may still have to come down if the HOA did not approve it. The
+    <a href="/hoa-fence-requirements-st-george-ut/">HOA fence guide</a> explains how HOA rules sit on top of city code.
+  </p>
+
+  <h2>Vinyl vs. wood over the life of the fence</h2>
+  <p>
+    Wood costs less up front at {wood.range} per foot, but HomeGuide says it needs sealing every 1 to 2 years at roughly
+    {fenceStain.perLinearFt} per linear foot ({fenceStain.typical} for a typical 100 to 150 foot fence), and Angi puts its life
+    at {lifespan.wood.range}. Vinyl at {vinyl.range} per foot needs no finish and is estimated at {lifespan.vinyl.range}. In the
+    desert the gap tilts further toward vinyl, because unfinished wood dries, grays, and splits faster in low humidity and
+    intense sun. If you are also considering a masonry wall, the
+    <a href="/cmu-block-wall-vs-wood-fence-st-george-ut/">block wall vs. wood comparison</a> adds the third option.
+  </p>
+
+  <h2>How to compare vinyl fence quotes</h2>
+  <IconList items={compareSteps} />
+  <p>
+    Confirm the company's Utah license status with the
+    <a href="https://secure.utah.gov/llv/search/index.html" rel="noopener">DOPL license lookup</a> and ask for proof of
+    insurance; the <a href="/licensed-fence-contractor-compare-st-george-ut/">license guide</a> explains what the record
+    shows and the small-project exemption. If you want help finding independent local companies to quote, the
+    <a href="/contact/">contact page</a> describes how matching works.
+  </p>
+
+  <p class="sgfw-note">
+    Sources: NerdWallet, <a href="https://www.nerdwallet.com/home-ownership/home-improvement/learn/cost-to-install-a-fence" rel="noopener">"Cost to Install a Fence"</a> (updated July 10, 2025);
+    HomeBlue, <a href="https://www.homeblue.com/fence-installation/saint-george-ut-fence-cost.htm" rel="noopener">"Fence Cost in Saint George, Utah"</a> (June 28, 2022; cross-check only);
+    Angi, <a href={lifespan.vinyl.url} rel="noopener">"How Long Does a Vinyl Fence Last?"</a> ({lifespan.vinyl.date}) and
+    <a href={lifespan.wood.url} rel="noopener">"How Long Does a Wood Fence Last?"</a> ({lifespan.wood.date});
+    HomeGuide, <a href="https://homeguide.com/costs/cost-to-stain-paint-fence" rel="noopener">"Cost to Stain or Paint a Fence"</a> (updated February 4, 2026);
+    NOAA NCEI, <a href="https://www.ncei.noaa.gov/monitoring-content/extremes/scec/reports/20220708-Utah-Maximum-Temperature.pdf" rel="noopener">State Climate Extremes Committee report, Utah maximum temperature</a> (July 2022);
+    Ask the Builder, <a href="https://www.askthebuilder.com/vinyl-fencing-properties" rel="noopener">"Vinyl Fencing Properties"</a> (read October 12, 2026);
+    St. George City Code <a href="https://stgeorge.municipal.codes/Code/10-18-1" rel="noopener">§10-18-1</a> and
+    <a href="https://stgeorge.municipal.codes/Code/10-18-5" rel="noopener">§10-18-5</a> (checked September 26, 2026).
+  </p>
+</GuideLayout>
