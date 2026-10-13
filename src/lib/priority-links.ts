@@ -82,6 +82,7 @@ export const SECONDARY_LINKS = [
   // Rule 18 margin rule: a new spoke joins this line only if it would
   // otherwise sit at or below /privacy-policy/ on inbound links.
   { href: '/vinyl-fence-installation-st-george-ut/', label: 'Vinyl fence guide' },
+  { href: '/wood-privacy-fence-st-george-ut/', label: 'Wood privacy fence guide' }, // 2026-10-13 spoke, same rule
 ] as const;
 
 /** Pages where the block must not render (legal, utility). Prefix match. */
