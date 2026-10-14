@@ -1,0 +1,252 @@
+---
+// Spoke (post-launch content, OFFPAGE_PLAN "content velocity" item 3,
+// KEYWORD_RESEARCH.md section 5 planned URL, built 2026-10-14): chain-link
+// fence -- material spoke under the fence-installation hub. $ figures from
+// src/lib/costs.ts only: the SAME chain-link per-foot range the hub and cost
+// guide use (`perFoot`), HomeBlue 2022 as the local cross-check it already
+// is (`localCheck2022`), repair ranges via `repair`, and the by-height /
+// coating / slats / gate / lifespan figures added to costs.ts this run from
+// HomeGuide (`chainLink`, byline August 4, 2025, read 2026-10-14). Heat:
+// NOAA/NCEI State Climate Extremes Committee report (117 F at St. George,
+// 10 Jul 2021) as already cited on the vinyl and wood spokes. Local rules:
+// St. George City Code 10-18-1 / 10-18-5 as already cited on the hub
+// (re-verified there 2026-09-26). Umbrella Service. Article + FAQ. Never
+// says the site installs anything (compliance.md 3/6). No hero image:
+// nothing in src/assets fits chain-link.
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+import CostTable from '../components/sections/CostTable.astro';
+import { COST_AS_OF, perFoot, localCheck2022, chainLink, lifespan, repair } from '../lib/costs';
+
+const path = '/chain-link-fence-st-george-ut/';
+const chain = perFoot.find((r) => r.key === 'chain-link')!;
+const wood = perFoot.find((r) => r.key === 'wood')!;
+const vinyl = perFoot.find((r) => r.key === 'vinyl')!;
+const iron = perFoot.find((r) => r.key === 'iron')!;
+const UPDATED = '2026-10-14';
+const UPDATED_LABEL = 'October 14, 2026';
+
+const faq = [
+  {
+    question: 'How much does a chain-link fence cost in St. George?',
+    answer: `As of ${COST_AS_OF}, a chain-link fence runs about ${chain.range} per linear foot installed, based on national published ranges; HomeGuide puts galvanized at ${chainLink.galvanized} per foot and vinyl-coated at ${chainLink.vinylCoated}. The one St. George-specific source, a June 2022 HomeBlue estimate, put 4-foot chain-link at ${localCheck2022.chainLink} per foot.`,
+  },
+  {
+    question: 'How long does a chain-link fence last in the St. George climate?',
+    answer: `HomeGuide estimates ${chainLink.lifespan} for a chain-link fence. Dry heat is easier on galvanized steel than on wood, so a fence here tends to fail at the posts, the tension wire, and the gate hinges before the mesh itself wears out.`,
+  },
+  {
+    question: 'Galvanized or vinyl-coated chain-link for a St. George yard?',
+    answer: `HomeGuide puts galvanized at ${chainLink.galvanized} per foot installed and vinyl-coated at ${chainLink.vinylCoated}. Galvanized is the budget choice and holds up well in dry air; black or green coated mesh looks less industrial, hides better against desert landscaping, and is what many HOAs require if they allow chain-link at all.`,
+  },
+  {
+    question: 'Can I add privacy slats to a chain-link fence?',
+    answer: `Yes. HomeGuide prices privacy slats at ${chainLink.slats} per linear foot. In St. George the tradeoff is wind: slats turn an open mesh into a solid panel, so the posts and footings need to be sized for the load, and a slatted fence along the street may no longer meet the city's 50-percent-open rule near the sidewalk.`,
+  },
+  {
+    question: 'Do I need a permit for a chain-link fence in St. George?',
+    answer: 'Only in certain cases. St. George City Code §10-18-5 requires a permit for any fence in a front setback; a side or rear-yard chain-link fence within the height limits of §10-18-1 (6 feet 4 inches in most zones) generally does not. HOA approval is a separate step, and HOAs are more likely to restrict chain-link than any other material.',
+  },
+  {
+    question: 'Is chain-link allowed in a St. George front yard?',
+    answer: 'Often, yes, where an HOA does not prohibit it. Under §10-18-1 most zones cap front-yard fences at 4 feet, and within 10 feet behind the sidewalk only fences that are at least 50 percent open are allowed. Bare chain-link is open mesh, so a 4-foot galvanized or coated fence can meet that rule where a solid panel cannot; add slats and it may not.',
+  },
+];
+
+const mesh = [
+  { icon: 'fence', title: 'Galvanized steel', text: 'Zinc-coated wire and framework, the standard silver chain-link. Lowest cost, long life in dry air, and the most utilitarian look. Fine for side yards, pet runs, and larger lots.' },
+  { icon: 'frame', title: 'Vinyl-coated (black, green, brown)', text: 'Galvanized wire with a bonded polymer coating over it. Costs more, disappears visually against trees and dark landscaping, and is the version most HOAs that allow chain-link specify. Black is the common St. George choice.' },
+  { icon: 'ruler', title: 'Gauge and mesh size', text: 'Residential mesh is usually 11 or 11.5 gauge with a 2-inch diamond; 9 gauge is heavier, stiffer, and harder to climb or bend. A quote that does not name the gauge leaves the biggest material variable open.' },
+  { icon: 'blocks', title: 'Framework and fittings', text: 'Terminal posts, line posts, top rail, tension wire, bands, and caps. Heavier-wall posts and a bottom tension wire are what keep the mesh tight and the fence from sagging over time.' },
+];
+
+const desertSpec = [
+  { icon: 'sun', title: 'Coating that stands up to sun', text: 'Galvanized steel is largely indifferent to dry heat. The polymer on coated mesh is not: ask for a UV-stabilized, fused-and-bonded coating rather than a thin extruded sleeve that can crack and chalk after a few summers.' },
+  { icon: 'blocks', title: 'Posts in concrete, caps on every post', text: 'Chain-link fails at the posts first. Terminal and gate posts set in concrete, line posts at consistent spacing, and a cap on every post so the hollow pipe does not fill with irrigation water and rust from the inside.' },
+  { icon: 'wrench', title: 'Bottom tension wire or bottom rail', text: 'Without one, the mesh lifts at the bottom, pets push under it, and wind flexes it until the ties loosen. A bottom tension wire is standard; a bottom rail is the stiffer upgrade.' },
+  { icon: 'drop', title: 'Keep sprinklers off the fence line', text: 'The one wet spot on a desert lot is the irrigation along the fence. Mesh that is sprayed daily and bakes dry every afternoon is where rust shows first, even on galvanized wire.' },
+  { icon: 'flat', title: 'Size posts for slats before adding them', text: 'Open mesh sheds wind; a slatted panel catches it. If privacy slats are in the plan, say so before the posts go in so the company can set heavier posts and deeper footings.' },
+  { icon: 'shield', title: 'Gate posts heavier than line posts', text: 'Gates take the load and the abuse. Gate posts should be a larger diameter than the line posts, set deeper, with adjustable hinges so a sagging gate can be re-hung instead of rebuilt.' },
+];
+
+const uses = [
+  { icon: 'house', title: 'Side and rear yards', text: 'The standard use: a boundary and pet containment at the lowest price per foot, where privacy is not the goal or a block wall already provides it on the other sides.' },
+  { icon: 'fence', title: 'Larger lots and acreage', text: 'On the bigger lots in Washington County, chain-link is often the only material that makes a full perimeter affordable. The county guide covers the outlying communities.' },
+  { icon: 'scroll', title: 'Front yards under the open-fence rule', text: 'Within 10 feet behind the sidewalk, St. George only allows fences that are at least 50 percent open. Bare chain-link qualifies; a 4-foot coated fence is a practical answer where a picket is not wanted.' },
+  { icon: 'poolfence', title: 'Pool enclosures, with care', text: 'Chain-link is climbable, and pool-barrier rules address climbability, mesh size, and gate hardware. Read the pool fence guide and confirm the current rule with the city before choosing it for a pool.' },
+];
+
+const compareSteps = [
+  { icon: 'ruler', title: 'Same height, gauge, coating, and footage on every quote', text: 'A 4-foot 11.5-gauge galvanized price and a 6-foot 9-gauge black price are different fences. Get linear footage, height, gauge, mesh size, and gate count in writing.' },
+  { icon: 'blocks', title: 'Post sizes, depth, spacing, and concrete', text: 'Ask the diameter and wall thickness of terminal, line, and gate posts, how deep they are set, how far apart, and whether every post gets concrete. Low bids save money here first.' },
+  { icon: 'wrench', title: 'Top rail, bottom wire, and fittings named', text: 'Confirm a top rail and a bottom tension wire are included, and whether fittings and caps are galvanized or aluminum. These are the parts that keep the fence tight.' },
+  { icon: 'doc', title: 'Gates priced separately', text: `HomeGuide lists a walk gate at ${chainLink.walkGate} and a double driveway gate at ${chainLink.driveGate} before installation. A quote should show each gate as its own line, with hinge and latch type.` },
+  { icon: 'house', title: 'HOA and permit handling', text: 'Confirm the HOA allows chain-link at all and in which color, who submits the application, and, if the fence touches a front setback, who pulls the city permit.' },
+  { icon: 'shield', title: 'License and insurance', text: 'Verify Utah license status with DOPL and ask for proof of insurance before any deposit. See the license guide below.' },
+];
+---
+
+<GuideLayout
+  title="Chain-Link Fence, St. George UT"
+  description="Chain-link fence in St. George, UT: cost per foot, galvanized vs. coated, privacy slats, desert sun and wind, where the city allows it, and HOA rules."
+  path={path}
+  eyebrow="Material guide · Fences · St. George & Washington County"
+  h1="Chain-Link Fence in St. George: Cost, Coatings, and Where It Is Allowed"
+  answer={`As of ${COST_AS_OF}, a chain-link fence in St. George, UT costs about ${chain.range} per linear foot installed and is estimated to last ${chainLink.lifespan} (HomeGuide), with vinyl-coated mesh at ${chainLink.vinylCoated} per foot against ${chainLink.galvanized} for galvanized. It is the lowest-cost fence here, it handles 117-degree heat better than wood, and the main limits on it are HOA rules and wind if you add slats.`}
+  updated={UPDATED}
+  updatedLabel={UPDATED_LABEL}
+  article={{ headline: 'Chain-Link Fence in St. George: Cost, Coatings, and Where It Is Allowed', datePublished: UPDATED }}
+  faq={faq}
+  related={[
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation hub', blurb: 'All materials, heights, and permit rules.' },
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Full cost guide', blurb: 'Every range and source.' },
+    { href: '/vinyl-fence-installation-st-george-ut/', label: 'Vinyl fence guide', blurb: 'The privacy alternative.' },
+    { href: '/wood-privacy-fence-st-george-ut/', label: 'Wood privacy fence guide', blurb: 'Lowest-cost solid privacy.' },
+    { href: '/fence-repair-st-george-ut/', label: 'Fence repair', blurb: 'Sagging mesh, leaning posts, bent gates.' },
+  ]}
+>
+  <p>
+    Chain-link is the least expensive fence you can put around a St. George lot, and in the desert it has a quiet advantage
+    over wood: galvanized steel does not shrink, check, or gray in the sun. What it does not do is give privacy, and what it
+    does not always pass is the HOA. This guide covers what a chain-link fence costs in St. George, the difference between
+    galvanized and coated mesh, what to specify for heat, irrigation, and wind, where the city allows it and at what height,
+    the slats question, and how to compare quotes from independent fence companies.
+  </p>
+
+  <h2>What a chain-link fence costs in St. George</h2>
+  <CostTable
+    caption={`Chain-link fence cost, as of ${COST_AS_OF}`}
+    unit="per linear foot, installed"
+    rows={[
+      { label: 'Chain-link, national range', range: chain.range, note: chain.note },
+      { label: 'Chain-link, 4-foot, St. George (HomeBlue, June 2022)', range: localCheck2022.chainLink, note: 'Older local estimate; cross-check only.' },
+      { label: 'Galvanized (HomeGuide)', range: chainLink.galvanized, note: 'Standard silver mesh and framework.' },
+      { label: 'Vinyl-coated, black or green (HomeGuide)', range: chainLink.vinylCoated, note: `Custom colors add a ${chainLink.colorPremium} premium.` },
+      { label: '4-foot height (HomeGuide)', range: chainLink.height4ft, note: 'The front-yard maximum in most St. George zones.' },
+      { label: '6-foot height (HomeGuide)', range: chainLink.height6ft, note: 'Taller mesh, heavier posts, more concrete.' },
+      { label: 'Privacy slats, added (HomeGuide)', range: chainLink.slats, note: 'Turns open mesh into a wind-catching panel; see below.' },
+      { label: 'Wood privacy, for comparison', range: wood.range, note: 'Needs sealing every 1 to 2 years in this climate.' },
+      { label: 'Vinyl (PVC) privacy, for comparison', range: vinyl.range, note: 'Solid privacy, no finish.' },
+    ]}
+  />
+  <p>
+    Three things move the price inside that range: coating (coated mesh costs well over galvanized), height (a 6-foot fence
+    uses more mesh and heavier posts than a 4-foot one), and gates, which HomeGuide prices separately at {chainLink.walkGate}
+    for a walk gate and {chainLink.driveGate} for a double driveway gate before installation. Gauge matters too, with 9-gauge
+    mesh costing more than the lighter residential 11 or 11.5 gauge. If an old fence has to come out first, HomeGuide puts
+    removal at {chainLink.removal} per linear foot. No St. George fence company publishes prices, so these are dated published
+    ranges, not local quotes; the <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a> lists every source and
+    date. For a full perimeter, chain-link at {chain.range} per foot against ornamental iron at {iron.range} is the gap that
+    keeps it the default on larger lots.
+  </p>
+
+  <h2>Galvanized, coated, gauge: what you are buying</h2>
+  <IconList items={mesh} cols={2} />
+  <p>
+    The common St. George combination for a visible fence is black vinyl-coated mesh on black framework, 11-gauge, 2-inch
+    diamond, 4 feet in front and up to 6 feet in back. Against red rock, desert plantings, and a dark house trim it reads as
+    a thin line rather than a fence. Plain galvanized is the right call where the fence will not be seen from the street or
+    where the budget is the whole point, and it lasts as long or longer because there is no coating to fail. Whatever the
+    choice, the gauge and the post sizes decide how the fence feels in five years, not the color.
+  </p>
+
+  <h2>Heat, irrigation, and wind: what to specify</h2>
+  <p>
+    St. George tied Utah's all-time high of 117 degrees on July 10, 2021, a reading NOAA's State Climate Extremes Committee
+    formally accepted, and ordinary summers run above 100 for weeks. Steel shrugs that off; a galvanized fence here will
+    outlive a wood fence that was never sealed. The desert does find chain-link's weak points, though. Cheap polymer
+    coatings chalk and crack under years of ultraviolet light. Hollow posts left uncapped fill with sprinkler water and rust
+    from the inside out. And the mesh that is sprayed every morning by the irrigation line and bakes dry every afternoon is
+    where corrosion shows first. None of that rules chain-link out; it makes the specification the decision.
+  </p>
+  <IconList items={desertSpec} cols={2} />
+  <p>
+    Wind is the other design load, and chain-link is unusual in that it can go either way. Open mesh lets wind through, which
+    is why a well-set chain-link fence survives a storm that blows wood panels out of their rails. Add privacy slats or a
+    windscreen and the same fence becomes a solid panel on posts that were sized for an open one. The
+    <a href="/fence-repair-st-george-ut/">repair guide</a> describes what that looks like after the fact: mesh sagging where
+    posts lean and the tension wire has loosened. If slats are in the plan, say so before the post holes are dug.
+  </p>
+
+  <h2>Where chain-link makes sense in St. George</h2>
+  <IconList items={uses} />
+
+  <h2>Height, openness, and permits under city code</h2>
+  <p>
+    Height and openness are governed by St. George City Code
+    <a href="https://stgeorge.municipal.codes/Code/10-18-1" rel="noopener">§10-18-1</a>. In most zones, front-yard fences are
+    capped at 4 feet and side and rear-yard fences at 6 feet 4 inches, and within 10 feet behind the sidewalk only decorative
+    fences that are at least 50 percent open are permitted. Bare chain-link is open mesh, so a 4-foot fence along the street
+    can meet that rule where a solid privacy panel cannot. Slats change the answer: a slatted fence is no longer 50 percent
+    open, so keep slats to side and rear runs or to the part of the lot behind the 10-foot line. Under
+    <a href="https://stgeorge.municipal.codes/Code/10-18-5" rel="noopener">§10-18-5</a>, any fence in a front setback needs a
+    permit; the <a href="/fence-permit-st-george-ut/">permit guide</a> covers the application. Washington, Hurricane, Ivins,
+    and Santa Clara each have their own code; see the <a href="/washington-county-fence-service-areas/">service area guide</a>.
+    Before any post holes are dug, the company should call Blue Stakes of Utah to locate buried utilities.
+  </p>
+
+  <h2>HOA rules: the real limit on chain-link</h2>
+  <p>
+    Chain-link is the material St. George HOAs restrict most often. Many newer subdivisions prohibit it outright on any lot
+    line visible from a street, golf course, or open space, and some prohibit it everywhere. Where it is allowed, the typical
+    condition is black or green vinyl-coated mesh with matching framework, a height cap, and no slats. It varies by HOA, so
+    confirm your own CC&amp;Rs and get the HOA's written fence standard before you get quotes. The
+    <a href="/hoa-fence-requirements-st-george-ut/">HOA fence guide</a> explains how HOA rules sit on top of city code and
+    what the approval process usually involves. On an older lot in town with no HOA, the city code above is the only rule.
+  </p>
+
+  <h2>Privacy slats and windscreens</h2>
+  <p>
+    Slats are the usual answer when a chain-link budget meets a wish for privacy. HomeGuide prices them at {chainLink.slats}
+    per linear foot added to the fence, and they come in vinyl or aluminum, in colors, and in styles from simple vertical
+    slats to woven or hedge-style inserts. Two cautions apply here more than elsewhere. First, the wind load described above:
+    slats should be planned before the posts are set. Second, sun: inexpensive slats fade and go brittle after a few St.
+    George summers, so ask for a UV-rated product. If privacy is the main goal from the start, compare the slatted total
+    against the <a href="/wood-privacy-fence-st-george-ut/">wood privacy fence</a> and
+    <a href="/vinyl-fence-installation-st-george-ut/">vinyl fence</a> guides, since a slatted chain-link fence can approach
+    the price of a wood fence that was built for privacy.
+  </p>
+
+  <h2>Lifespan and upkeep: chain-link against the alternatives</h2>
+  <p>
+    HomeGuide estimates {chainLink.lifespan} for a chain-link fence. That sits below Angi's {lifespan.wood.range} for wood
+    and {lifespan.vinyl.range} for vinyl on paper, but the comparison hides the upkeep. Wood reaches its long end only with
+    sealing every 1 to 2 years; chain-link needs almost nothing beyond re-tensioning the mesh, re-hanging a gate, and keeping
+    sprinklers off the fence line. In practice a galvanized fence on well-set, capped posts often outlasts the published
+    range in dry climates, and a coated fence lives as long as its coating. What ends a chain-link fence is usually damage,
+    not age: a vehicle, a fallen limb, or a post that rusted at the ground.
+  </p>
+
+  <h2>Repair or replace an older chain-link fence?</h2>
+  <p>
+    Chain-link is the most repairable fence material. A sagging run is usually a loose tension wire or a leaning post, a bent
+    section can be cut out and re-woven, and a gate that drags is re-hung. HomeGuide's published repair ranges start at
+    {repair.minor} for minor work, with a single post replacement around {repair.post} and gate repair at {repair.gate}. When
+    several posts have rusted through at the ground or the mesh is rusting along its whole length, a new fence on new posts is
+    the better spend. The <a href="/fence-repair-st-george-ut/">fence repair guide</a> walks through the repair-versus-replace
+    decision and what each type of damage looks like.
+  </p>
+
+  <h2>How to compare chain-link quotes</h2>
+  <IconList items={compareSteps} />
+  <p>
+    Confirm the company's Utah license status with the
+    <a href="https://secure.utah.gov/llv/search/index.html" rel="noopener">DOPL license lookup</a> and ask for proof of
+    insurance; the <a href="/licensed-fence-contractor-compare-st-george-ut/">license guide</a> explains what the record
+    shows and the small-project exemption, which a short chain-link job can fall under. If you want help finding independent
+    local companies to quote, the <a href="/contact/">contact page</a> describes how matching works.
+  </p>
+
+  <p class="sgfw-note">
+    Sources: NerdWallet, <a href="https://www.nerdwallet.com/home-ownership/home-improvement/learn/cost-to-install-a-fence" rel="noopener">"Cost to Install a Fence"</a> (updated July 10, 2025);
+    HomeGuide, <a href={chainLink.url} rel="noopener">"How Much Does a Chain-Link Fence Cost?"</a> ({chainLink.date}; read October 14, 2026) and
+    <a href="https://homeguide.com/costs/fence-repair-cost" rel="noopener">"Fence Repair Cost"</a> (updated February 20, 2026);
+    HomeBlue, <a href="https://www.homeblue.com/fence-installation/saint-george-ut-fence-cost.htm" rel="noopener">"Fence Cost in Saint George, Utah"</a> (June 28, 2022; cross-check only);
+    Angi, <a href={lifespan.wood.url} rel="noopener">"How Long Does a Wood Fence Last?"</a> ({lifespan.wood.date}) and
+    <a href={lifespan.vinyl.url} rel="noopener">"How Long Does a Vinyl Fence Last?"</a> ({lifespan.vinyl.date});
+    NOAA NCEI, <a href="https://www.ncei.noaa.gov/monitoring-content/extremes/scec/reports/20220708-Utah-Maximum-Temperature.pdf" rel="noopener">State Climate Extremes Committee report, Utah maximum temperature</a> (July 2022);
+    Blue Stakes of Utah, <a href="https://www.bluestakes.org/" rel="noopener">bluestakes.org</a>;
+    St. George City Code <a href="https://stgeorge.municipal.codes/Code/10-18-1" rel="noopener">§10-18-1</a> and
+    <a href="https://stgeorge.municipal.codes/Code/10-18-5" rel="noopener">§10-18-5</a> (checked September 26, 2026).
+  </p>
+</GuideLayout>

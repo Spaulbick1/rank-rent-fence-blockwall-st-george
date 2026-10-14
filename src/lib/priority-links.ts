@@ -83,6 +83,7 @@ export const SECONDARY_LINKS = [
   // otherwise sit at or below /privacy-policy/ on inbound links.
   { href: '/vinyl-fence-installation-st-george-ut/', label: 'Vinyl fence guide' },
   { href: '/wood-privacy-fence-st-george-ut/', label: 'Wood privacy fence guide' }, // 2026-10-13 spoke, same rule
+  { href: '/chain-link-fence-st-george-ut/', label: 'Chain-link fence guide' }, // 2026-10-14 spoke, same rule
 ] as const;
 
 /** Pages where the block must not render (legal, utility). Prefix match. */

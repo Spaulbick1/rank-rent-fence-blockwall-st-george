@@ -70,6 +70,27 @@ export const fenceStain = {
   typical: '$300–$2,800', // typical 100-150 ft fence
 };
 
+// Post-launch content (chain-link spoke, 2026-10-14): HomeGuide "How Much
+// Does a Chain-Link Fence Cost?", byline August 4, 2025, read 2026-10-14.
+// The site's headline chain-link per-foot range stays `perFoot` (NerdWallet);
+// these are the by-height / coating / add-on figures the spoke needs.
+export const chainLink = {
+  overall: '$10–$40', // per linear foot installed, HomeGuide national
+  height4ft: '$10–$20+',
+  height6ft: '$13–$30+',
+  galvanized: '$10–$40',
+  vinylCoated: '$30–$60',
+  colorPremium: '10% to 20%', // custom colors over standard cost
+  slats: '$5–$18', // privacy slats, per linear foot
+  walkGate: '$80–$200', // single swing, 3-6 ft wide, before installation
+  driveGate: '$175–$500', // double swing, 8-12 ft wide, before installation
+  removal: '$3–$5', // old fence removal, per linear foot
+  lifespan: '15 to 20 years',
+  source: 'HomeGuide, "How Much Does a Chain-Link Fence Cost?"',
+  url: 'https://homeguide.com/costs/chain-link-fence-cost',
+  date: 'August 4, 2025',
+} as const;
+
 export const repair = {
   minor: '$100–$300',
   standard: '$300–$900',
@@ -127,6 +148,12 @@ export const costSources = [
     url: 'https://homeguide.com/costs/cost-to-stain-paint-fence',
     date: 'Updated February 4, 2026',
     used: 'Wood fence staining and sealing cost',
+  },
+  {
+    name: 'HomeGuide — How Much Does a Chain-Link Fence Cost?',
+    url: 'https://homeguide.com/costs/chain-link-fence-cost',
+    date: 'August 4, 2025 (read October 14, 2026)',
+    used: 'Chain-link cost by height and coating, privacy slats, gates, removal, lifespan',
   },
   {
     name: 'HomeBlue — Fence Cost in Saint George, Utah',
