@@ -46,7 +46,7 @@ const {
 } = Astro.props;
 
 const canonical = new URL(path, site.url).toString();
-const ga4Id = import.meta.env.PUBLIC_GA4_ID;
+const ga4Id = (import.meta.env.PUBLIC_GA4_ID || 'G-824C7RQD5C');
 // Cloudflare Pages serves this same static 404.html for EVERY unmatched URL --
 // a self-referential canonical here would tell crawlers every missing URL's
 // "real" location is /404/. Skip it only here; every other noindex page
