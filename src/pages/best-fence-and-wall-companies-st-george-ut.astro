@@ -69,7 +69,7 @@ const faq = [
   path={path}
   eyebrow="Local companies · St. George & Washington County"
   h1="Fence and Block Wall Companies Serving St. George, UT"
-  answer="As of September 2026, local fence and wall businesses that come up for St. George include Kirklands Fence & Garden, St George Deck and Fence, Taylor Made Fencing, Robinson Fencing, and, for block walls, Modern Stone and Masonry. This list is alphabetical and drawn from each company's own website; it is not a ranking or an endorsement."
+  answer="To choose a fence or block wall company in St. George, verify the license on Utah's DOPL lookup, give every company the same written scope, and compare two or three itemized quotes. Below: how to choose, then the companies. As of September 2026, local fence and wall businesses that come up for St. George include Kirklands Fence & Garden, St George Deck and Fence, Taylor Made Fencing, Robinson Fencing, and, for block walls, Modern Stone and Masonry. This list is alphabetical and drawn from each company's own website; it is not a ranking or an endorsement."
   updated="2026-09-26"
   updatedLabel="September 26, 2026"
   faq={faq}
@@ -77,7 +77,7 @@ const faq = [
     itemListSchema({
       path,
       name: 'Fence and block wall companies serving St. George, UT',
-      items: companies.map((c) => ({ name: c.name, url: c.url, description: `${c.where}. ${c.blurb}` })),
+      items: companies.map((c) => ({ name: c.name, description: `${c.where}. ${c.blurb}` })),
     }),
   ]}
   related={[
@@ -95,22 +95,7 @@ const faq = [
     licenses, or verified their claims, and this is not a complete list of every company in the area.
   </p>
 
-  <h2>Companies, in alphabetical order</h2>
-  <ul>
-    {companies.map((c) => (
-      <li>
-        <strong><a href={c.url} rel="noopener">{c.name}</a></strong> — {c.where}. {c.blurb}
-      </li>
-    ))}
-  </ul>
-
-  <div class="sgfw-callout">
-    <strong>How this list was built.</strong> Listings are not paid placements, and none of these companies has any
-    arrangement with this site as of the update date above. Order is alphabetical, not ranked, and we show no ratings or
-    reviews because we have none of our own to verify. If that changes, this page will say so.
-  </div>
-
-  <h2>How to choose between them</h2>
+  <h2>How to choose a fence company in St. George</h2>
   <ol>
     <li><strong>Price the same scope.</strong> Write down material, height, total feet, gates, removal, and cleanup, and give the same list to each company.</li>
     <li><strong>Verify the license yourself.</strong> Search each company in the <a href="https://secure.utah.gov/llv/search/index.html" rel="noopener">Utah Division of Professional Licensing</a> lookup (<a href="/licensed-fence-contractor-compare-st-george-ut/">step-by-step guide</a>). Do not rely on a website's claim, ours or theirs.</li>
@@ -120,6 +105,26 @@ const faq = [
     <li><strong>Compare warranties in writing,</strong> covering workmanship and materials separately.</li>
     <li><strong>Check specialty fit.</strong> A company that mostly does chain-link may not be the right pick for a reinforced block retaining wall, and a masonry company may not do wood privacy fences. Ask.</li>
   </ol>
+
+  <div class="card p-5 my-6">
+    <p><strong>Rather not call around?</strong> Tell us what you need and we'll match you with an independent local pro, free.</p>
+    <a href="/contact/#lead-form" class="btn-quote mt-3">Get a Free Quote</a>
+  </div>
+
+  <h2>Companies, in alphabetical order</h2>
+  <ul>
+    {companies.map((c) => (
+      <li>
+        <strong>{c.name}</strong> — {c.where}. {c.blurb}
+      </li>
+    ))}
+  </ul>
+
+  <div class="sgfw-callout">
+    <strong>How this list was built.</strong> Listings are not paid placements, and none of these companies has any
+    arrangement with this site as of the update date above. Order is alphabetical, not ranked, and we show no ratings or
+    reviews because we have none of our own to verify. If that changes, this page will say so.
+  </div>
 
   <h2>Questions to ask every company</h2>
   <ul>
