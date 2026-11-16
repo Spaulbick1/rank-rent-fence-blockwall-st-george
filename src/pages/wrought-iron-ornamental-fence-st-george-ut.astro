@@ -1,0 +1,189 @@
+---
+// Spoke (Lane A content velocity, 2026-11-16; KEYWORD_RESEARCH.md section 5
+// planned URL, OFFPAGE_PLAN content-velocity "wrought iron / ornamental
+// fence"): material spoke under the fence-installation hub. $ figures from
+// src/lib/costs.ts only: the ornamental/wrought-iron per-foot range already on
+// the hub and cost guide (`perFoot` key 'iron', HomeAdvisor wrought-iron page,
+// updated June 19, 2026), the other materials for comparison, and `repair`.
+// Heat: NOAA/NCEI SCEC 117 F report, as cited on the vinyl/wood/chain-link
+// spokes. Local rules: St. George City Code 10-18-1 / 10-18-5 as already
+// cited on the hub and the chain-link spoke (checked 2026-09-26) -- carried,
+// not re-read. Pool barriers: link only, no rule restated. Written around:
+// iron lifespan figures (no source in costs.ts), powder-coat warranty terms,
+// steel-vs-aluminum price split (no sourced split). No hero image.
+import GuideLayout from '../components/layout/GuideLayout.astro';
+import IconList from '../components/sections/IconList.astro';
+import CostTable from '../components/sections/CostTable.astro';
+import { COST_AS_OF, perFoot, repair } from '../lib/costs';
+
+const path = '/wrought-iron-ornamental-fence-st-george-ut/';
+const iron = perFoot.find((r) => r.key === 'iron')!;
+const chain = perFoot.find((r) => r.key === 'chain-link')!;
+const wood = perFoot.find((r) => r.key === 'wood')!;
+const vinyl = perFoot.find((r) => r.key === 'vinyl')!;
+const UPDATED = '2026-11-16';
+const UPDATED_LABEL = 'November 16, 2026';
+
+const faq = [
+  {
+    question: 'How much does a wrought iron or ornamental fence cost in St. George?',
+    answer: `As of ${COST_AS_OF}, an ornamental or wrought-iron style fence runs about ${iron.range} per linear foot installed, based on HomeAdvisor's national published range; custom scrollwork, heavier pickets and gates push it higher. No St. George fence company publishes ornamental prices, so treat that as a bracket for comparing written quotes.`,
+  },
+  {
+    question: 'Is it real wrought iron, steel, or aluminum?',
+    answer: 'Almost always steel or aluminum. True hand-forged wrought iron is rare in residential work; "wrought iron fence" in a quote usually means welded steel pickets, and "ornamental" often means aluminum. Ask the company to name the metal, the picket and rail sizes, and the finish.',
+  },
+  {
+    question: 'Steel or aluminum for a St. George yard?',
+    answer: 'Steel is heavier, stiffer and harder to bend or climb, and it rusts wherever the finish is broken. Aluminum does not rust, weighs less, and suits pool and decorative runs, but it dents more easily. In dry heat both last well if the finish is good and sprinklers stay off the fence line.',
+  },
+  {
+    question: 'Can an ornamental fence go in a St. George front yard?',
+    answer: 'Often, yes. Under St. George City Code §10-18-1, most zones cap front-yard fences at 4 feet, and within 10 feet behind the sidewalk only fences that are at least 50 percent open are allowed. An open picket fence can meet that rule where a solid panel cannot. Any fence in a front setback needs a permit under §10-18-5, and your HOA may have its own rules.',
+  },
+  {
+    question: 'Is an ornamental fence a good pool fence?',
+    answer: 'It is a common choice, but pool barriers have their own rules on height, gaps between pickets, climbable rails and self-closing, self-latching gates. Read the pool fence guide and confirm the current rule with the city before you order a pool run.',
+  },
+];
+
+const metals = [
+  { icon: 'fence', title: 'Welded steel ("wrought iron")', text: 'The heavy, rigid option and what most quotes mean by wrought iron. Strong against impact and hard to climb; it depends entirely on its finish to keep rust out.' },
+  { icon: 'frame', title: 'Aluminum ("ornamental")', text: 'Lighter and rust-free, sold in standard picket styles and colors. Easier to install on a slope and common around pools; thinner sections bend more easily than steel.' },
+  { icon: 'scroll', title: 'Custom and decorative work', text: 'Scrollwork, finials, arched tops and custom gates are where the price climbs above the standard range. They are also where quotes differ most, so ask for a drawing.' },
+  { icon: 'blocks', title: 'Iron on a block wall', text: 'A common St. George look: ornamental panels set on top of or between block columns. Price the masonry and the metal as separate lines.' },
+];
+
+const desertSpec = [
+  { icon: 'sun', title: 'Finish rated for sun', text: 'Ask for a powder-coated finish (or primer plus powder coat on steel) rather than paint alone, and ask how the company handles touch-up after installation cuts and welds.' },
+  { icon: 'drop', title: 'Keep sprinklers off the metal', text: 'Daily spray followed by a hot afternoon is where rust starts on steel and where mineral spots build up on any finish. Aim the irrigation away from the fence line.' },
+  { icon: 'blocks', title: 'Posts set in concrete, with caps', text: 'Posts set in concrete and capped so they do not fill with water. On steel, the base of the post is where rust ends a fence.' },
+  { icon: 'shield', title: 'Gates on heavy posts and good hinges', text: 'A metal gate is heavy. Gate posts should be stouter than line posts, with adjustable hinges and a latch suited to how the gate is used.' },
+  { icon: 'ruler', title: 'Slope handled on purpose', text: 'Many lots here slope. Ask whether panels will be stepped or racked to follow the grade, and how gaps under the bottom rail will be kept even.' },
+];
+
+const compareSteps = [
+  { icon: 'ruler', title: 'Same footage, height and style on every quote', text: 'Get linear footage, height, picket spacing and style in writing, so you are comparing the same fence.' },
+  { icon: 'fence', title: 'Metal, gauge and picket size named', text: 'Steel or aluminum, the picket and rail dimensions, and the post size. A quote that just says "wrought iron" leaves the biggest variable open.' },
+  { icon: 'sun', title: 'Finish and warranty in writing', text: 'Powder coat or paint, how field cuts are sealed, and what the finish warranty covers.' },
+  { icon: 'doc', title: 'Gates as separate lines', text: 'Each walk and drive gate priced separately, with hinge and latch type, and any automation quoted on its own.' },
+  { icon: 'house', title: 'HOA and permit handling', text: 'Who submits the HOA application, and who pulls the city permit if the fence touches a front setback.' },
+  { icon: 'shield', title: 'License and insurance', text: 'Verify Utah license status with DOPL and ask for proof of insurance before any deposit.' },
+];
+---
+
+<GuideLayout
+  title="Wrought Iron Fence, St. George UT"
+  description="Wrought iron and ornamental fences in St. George, UT: cost per foot, steel vs. aluminum, finishes for desert sun, front-yard rules, and comparing quotes."
+  path={path}
+  eyebrow="Material guide · Fences · St. George & Washington County"
+  h1="Wrought Iron and Ornamental Fences in St. George: Cost, Metals, and Rules"
+  answer={`As of ${COST_AS_OF}, a wrought iron or ornamental metal fence in St. George, UT costs about ${iron.range} per linear foot installed, based on national published ranges, against ${chain.range} for chain-link and ${vinyl.range} for vinyl. Most "wrought iron" quoted today is welded steel or aluminum; it gives an open, decorative fence that can meet the city's front-yard openness rule, and its life depends on the finish.`}
+  updated={UPDATED}
+  updatedLabel={UPDATED_LABEL}
+  article={{ headline: 'Wrought Iron and Ornamental Fences in St. George: Cost, Metals, and Rules', datePublished: UPDATED }}
+  faq={faq}
+  related={[
+    { href: '/fence-installation-st-george-ut/', label: 'Fence installation hub', blurb: 'All materials, heights, and permit rules.' },
+    { href: '/fence-and-block-wall-cost-st-george-ut/', label: 'Full cost guide', blurb: 'Every range and source.' },
+    { href: '/pool-fence-and-gate-st-george-ut/', label: 'Pool fence and gates', blurb: 'Barrier rules before you order.' },
+    { href: '/block-wall-installation-st-george-ut/', label: 'Block walls', blurb: 'Iron panels on block columns.' },
+    { href: '/fence-repair-st-george-ut/', label: 'Fence repair', blurb: 'Rust, bent pickets, sagging gates.' },
+  ]}
+>
+  <p>
+    An ornamental metal fence is the decorative option in St. George: it marks a boundary, frames a view of the red rock,
+    and stays open where a solid fence would block the breeze and the sightline. It costs more per foot than chain-link
+    and does not give privacy. This guide covers what it costs, what "wrought iron" actually means in a quote, what to
+    specify for sun and sprinklers, where the city allows it, and how to compare quotes from independent fence companies.
+  </p>
+
+  <h2>What an ornamental fence costs in St. George</h2>
+  <CostTable
+    caption={`Ornamental fence cost against other materials, as of ${COST_AS_OF}`}
+    unit="per linear foot, installed"
+    rows={[
+      { label: 'Ornamental / wrought iron (HomeAdvisor, national)', range: iron.range, note: iron.note },
+      { label: 'Chain-link, for comparison', range: chain.range, note: 'Open and cheapest; utilitarian look.' },
+      { label: 'Wood privacy, for comparison', range: wood.range, note: 'Solid privacy; needs sealing in this climate.' },
+      { label: 'Vinyl (PVC) privacy, for comparison', range: vinyl.range, note: 'Solid privacy, no finish to maintain.' },
+    ]}
+  />
+  <p>
+    Inside the ornamental range, the price moves with the metal, the picket and rail sizes, the height, and how much
+    decoration there is. Gates are usually priced on their own and can be a large share of a short run, especially a
+    double drive gate or an automated one. No St. George fence company publishes ornamental prices, so these are dated
+    published ranges, not local quotes; the <a href="/fence-and-block-wall-cost-st-george-ut/">cost guide</a> lists every
+    source and date.
+  </p>
+
+  <h2>Steel, aluminum, or custom: what you are buying</h2>
+  <IconList items={metals} cols={2} />
+  <p>
+    The word "wrought" is mostly a style name now. What decides how the fence performs is the metal, the size of the
+    pickets and rails, and the finish. A quote that names all three is one you can compare; a quote that just says
+    "wrought iron fence, 100 feet" is not.
+  </p>
+
+  <h2>Sun, sprinklers, and slopes: what to specify</h2>
+  <p>
+    St. George tied Utah's all-time high of 117 degrees on July 10, 2021, a reading NOAA's State Climate Extremes
+    Committee accepted. Metal does not shrink or warp in that heat the way wood does, but the finish takes years of
+    ultraviolet light, and a dark fence gets hot to the touch. The places an ornamental fence fails here are predictable:
+    the finish where it was cut or scratched, the base of steel posts, and anywhere the irrigation hits every day.
+  </p>
+  <IconList items={desertSpec} cols={2} />
+
+  <h2>Front yards, height, and permits under city code</h2>
+  <p>
+    Height and openness are governed by St. George City Code
+    <a href="https://stgeorge.municipal.codes/Code/10-18-1" rel="noopener">§10-18-1</a>. In most zones, front-yard fences
+    are capped at 4 feet and side and rear-yard fences at 6 feet 4 inches, and within 10 feet behind the sidewalk only
+    decorative fences that are at least 50 percent open are allowed. An open picket fence is the classic way to meet that
+    rule, so ornamental metal is often the material that lets a front yard be fenced at all. Check the actual spacing of
+    the pickets you are buying. Under <a href="https://stgeorge.municipal.codes/Code/10-18-5" rel="noopener">§10-18-5</a>,
+    any fence in a front setback needs a permit; the <a href="/fence-permit-st-george-ut/">permit guide</a> covers the
+    application. Washington, Hurricane, Ivins and Santa Clara have their own codes; see the
+    <a href="/washington-county-fence-service-areas/">service area guide</a>. Before any post holes are dug, the company
+    should call Blue Stakes of Utah to locate buried utilities.
+  </p>
+
+  <h2>HOAs and pools</h2>
+  <p>
+    Many St. George HOAs favor ornamental metal for lot lines that face a street, golf course or open space, because it
+    keeps views open, and they commonly set the color and style. Get your HOA's written fence standard before you get
+    quotes; the <a href="/hoa-fence-requirements-st-george-ut/">HOA fence guide</a> explains how those rules sit on top of
+    city code. Around a pool, an ornamental fence has to meet pool-barrier rules on height, picket gaps, climbable rails
+    and gate hardware. Read the <a href="/pool-fence-and-gate-st-george-ut/">pool fence and gate guide</a> and confirm
+    the current rule with the city before you order a pool run.
+  </p>
+
+  <h2>Repairing an ornamental fence</h2>
+  <p>
+    Bent pickets can often be straightened or replaced individually, a sagging gate re-hung, and surface rust treated and
+    refinished before it spreads. HomeGuide's published repair ranges start at {repair.minor} for minor work, with a
+    single post around {repair.post} and gate repair at {repair.gate}. When steel posts have rusted through at the ground
+    along a whole run, new posts or a new fence is the better spend. The
+    <a href="/fence-repair-st-george-ut/">fence repair guide</a> walks through that decision.
+  </p>
+
+  <h2>How to compare ornamental fence quotes</h2>
+  <IconList items={compareSteps} />
+  <p>
+    Confirm the company's Utah license status with the
+    <a href="https://secure.utah.gov/llv/search/index.html" rel="noopener">DOPL license lookup</a> and ask for proof of
+    insurance; the <a href="/licensed-fence-contractor-compare-st-george-ut/">license guide</a> explains what the record
+    shows. If you want help finding independent local companies to quote, the <a href="/contact/">contact page</a>
+    describes how matching works.
+  </p>
+
+  <p class="sgfw-note">
+    Sources: HomeAdvisor, <a href="https://www.homeadvisor.com/cost/fencing/install-a-wrought-iron-fence/" rel="noopener">"Wrought Iron Fence Cost"</a> (updated June 19, 2026);
+    NerdWallet, <a href="https://www.nerdwallet.com/home-ownership/home-improvement/learn/cost-to-install-a-fence" rel="noopener">"Cost to Install a Fence"</a> (updated July 10, 2025);
+    HomeGuide, <a href="https://homeguide.com/costs/fence-repair-cost" rel="noopener">"Fence Repair Cost"</a> (updated February 20, 2026);
+    NOAA NCEI, <a href="https://www.ncei.noaa.gov/monitoring-content/extremes/scec/reports/20220708-Utah-Maximum-Temperature.pdf" rel="noopener">State Climate Extremes Committee report, Utah maximum temperature</a> (July 2022);
+    Blue Stakes of Utah, <a href="https://www.bluestakes.org/" rel="noopener">bluestakes.org</a>;
+    St. George City Code <a href="https://stgeorge.municipal.codes/Code/10-18-1" rel="noopener">§10-18-1</a> and
+    <a href="https://stgeorge.municipal.codes/Code/10-18-5" rel="noopener">§10-18-5</a> (checked September 26, 2026).
+  </p>
+</GuideLayout>
